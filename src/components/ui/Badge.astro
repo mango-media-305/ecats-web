@@ -1,0 +1,72 @@
+---
+import type { HTMLAttributes } from "astro/types";
+
+interface Props extends HTMLAttributes<"span"> {
+    variant?: "default" | "blue" | "navy" | "soft" | "success" | "warning" | "outline";
+    size?: "sm" | "md";
+    icon?: any;
+    glow?: boolean;
+}
+
+const {
+    variant = "default",
+    size = "md",
+    icon: Icon,
+    glow = false,
+    class: className = "",
+    ...attrs
+} = Astro.props;
+
+const baseClasses =
+    "inline-flex w-fit items-center justify-center gap-2 rounded-full border font-inter font-extrabold leading-none";
+
+const sizeClasses = {
+    sm: "px-3 py-1.5 text-[0.68rem] tracking-[0.08em]",
+    md: "px-4 py-2 text-[0.74rem] tracking-[0.09em]",
+};
+
+const variantClasses = {
+    default:
+        "border-[rgb(var(--color-border)/0.72)] bg-[rgb(var(--color-surface)/0.74)] text-[rgb(var(--color-heading))]",
+    blue:
+        "border-[rgb(var(--color-secondary)/0.28)] bg-[rgb(var(--color-secondary)/0.1)] text-[rgb(var(--color-secondary))]",
+    navy:
+        "border-[rgb(var(--color-primary)/0.18)] bg-[rgb(var(--color-primary)/0.08)] text-[rgb(var(--color-primary))] dark:text-[rgb(var(--color-heading))]",
+    soft:
+        "border-[rgb(var(--color-border)/0.6)] bg-[rgb(var(--color-bg-soft)/0.72)] text-[rgb(var(--color-text-soft))]",
+    success:
+        "border-[rgb(var(--color-success)/0.28)] bg-[rgb(var(--color-success)/0.1)] text-[rgb(var(--color-success))]",
+    warning:
+        "border-[rgb(var(--color-warning)/0.28)] bg-[rgb(var(--color-warning)/0.1)] text-[rgb(var(--color-warning))]",
+    outline:
+        "border-[rgb(var(--color-secondary)/0.34)] bg-transparent text-[rgb(var(--color-secondary))]",
+};
+
+const glowClasses = glow
+    ? "shadow-[0_0_40px_rgb(var(--color-secondary)/0.16)]"
+    : "";
+---
+
+<span
+    class:list={[
+        baseClasses,
+        sizeClasses[size],
+        variantClasses[variant],
+        glowClasses,
+        className,
+    ]}
+    {...attrs}
+>
+    {
+        Icon && (
+        <Icon
+            class:list={[
+            size === "sm" ? "h-3.5 w-3.5" : "h-4 w-4",
+            "shrink-0",
+            ]}
+        />
+        )
+    }
+
+    <slot />
+</span>

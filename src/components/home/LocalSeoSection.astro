@@ -1,0 +1,405 @@
+---
+import {
+    ArrowUpRight,
+    Building2,
+    Clock3,
+    Mail,
+    MapPin,
+    Phone,
+    Sparkles,
+} from "@lucide/astro";
+
+import SectionHeading from "../ui/SectionHeading.astro";
+import CTAButton from "../ui/CTAButton.astro";
+import Badge from "../ui/Badge.astro";
+import { homeLocalSeoSection } from "../../data/home";
+---
+
+<section class="section-shell accounting-grid relative isolate overflow-hidden">
+    <!-- Ambient background -->
+    <div class="pointer-events-none absolute inset-0 -z-10">
+        <div
+        class="absolute left-[-12rem] top-20 h-[28rem] w-[28rem] rounded-full bg-[rgb(var(--color-secondary)/0.12)] blur-3xl"
+        >
+        </div>
+
+        <div
+        class="absolute bottom-[-12rem] right-[-10rem] h-[30rem] w-[30rem] rounded-full bg-[rgb(var(--color-primary)/0.13)] blur-3xl"
+        >
+        </div>
+
+        <div
+        class="absolute inset-x-0 bottom-0 h-48 bg-[linear-gradient(to_top,rgb(var(--color-bg)),transparent)]"
+        >
+        </div>
+    </div>
+
+    <div class="container-wide">
+        <div class="grid gap-12 lg:grid-cols-[0.9fr_1.1fr] lg:items-start">
+        <!-- Left content -->
+        <div class="lg:sticky lg:top-32">
+            <SectionHeading
+            eyebrow={homeLocalSeoSection.eyebrow}
+            title={homeLocalSeoSection.title}
+            highlight="Miami-Dade County"
+            description={homeLocalSeoSection.description}
+            />
+
+            <div class="mt-8 grid gap-4">
+            {
+                homeLocalSeoSection.highlights.map((item) => {
+                const Icon = item.icon;
+
+                return (
+                    <article class="group rounded-[1.5rem] border border-[rgb(var(--color-border)/0.72)] bg-[rgb(var(--color-surface)/0.72)] p-5 shadow-soft backdrop-blur transition duration-300 hover:-translate-y-1 hover:border-[rgb(var(--color-secondary)/0.42)] hover:bg-[rgb(var(--color-secondary)/0.065)]">
+                    <div class="flex gap-4">
+                        <span class="flex h-12 w-12 shrink-0 items-center justify-center rounded-[1.1rem] bg-[rgb(var(--color-secondary)/0.1)] text-[rgb(var(--color-secondary))] transition duration-300 group-hover:scale-105 group-hover:bg-[rgb(var(--color-secondary)/0.16)]">
+                        <Icon class="h-6 w-6" />
+                        </span>
+
+                        <div>
+                        <h3 class="font-inter text-lg font-extrabold tracking-[-0.04em] text-[rgb(var(--color-heading))]">
+                            {item.title}
+                        </h3>
+
+                        <p class="mt-2 text-sm leading-7 text-[rgb(var(--color-text-soft))]">
+                            {item.description}
+                        </p>
+                        </div>
+                    </div>
+                    </article>
+                );
+                })
+            }
+            </div>
+        </div>
+
+        <!-- Right map/service area experience -->
+        <div class="relative">
+            <div
+            class="glass-panel relative overflow-hidden rounded-[2.25rem] p-4 sm:p-6"
+            >
+            <div
+                class="pointer-events-none absolute inset-x-10 top-0 h-px bg-[linear-gradient(90deg,transparent,rgb(var(--color-secondary)/0.8),transparent)]"
+            >
+            </div>
+
+            <!-- Office Card -->
+            <div
+                class="relative overflow-hidden rounded-[1.85rem] bg-[linear-gradient(135deg,rgb(var(--color-primary))_0%,rgb(var(--color-secondary))_100%)] p-6 text-white shadow-blue"
+            >
+                <div
+                class="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_18%_0%,rgba(255,255,255,0.3),transparent_34%),radial-gradient(circle_at_92%_100%,rgba(255,255,255,0.16),transparent_34%)]"
+                >
+                </div>
+
+                <div
+                class="relative grid gap-6 md:grid-cols-[1fr_auto] md:items-start"
+                >
+                <div>
+                    <Badge
+                    variant="outline"
+                    class="border-white/25 bg-white/10 text-white"
+                    icon={Sparkles}
+                    >
+                    Miami Office
+                    </Badge>
+
+                    <h3
+                    class="mt-5 max-w-xl font-inter text-3xl font-extrabold tracking-[-0.06em] text-white md:text-4xl"
+                    >
+                    {homeLocalSeoSection.officeCard.title}
+                    </h3>
+
+                    <div class="mt-5 grid gap-3">
+                    <a
+                        href={homeLocalSeoSection.officeCard.mapHref}
+                        target="_blank"
+                        rel="noreferrer"
+                        class="group flex items-start gap-3 text-sm font-bold leading-6 text-white/82 transition hover:text-white"
+                    >
+                        <MapPin class="mt-0.5 h-4.5 w-4.5 shrink-0" />
+                        <span>
+                        {homeLocalSeoSection.officeCard.address}
+                        <ArrowUpRight
+                            class="ml-1 inline h-3.5 w-3.5 transition group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+                        />
+                        </span>
+                    </a>
+
+                    <div
+                        class="flex items-center gap-3 text-sm font-bold text-white/82"
+                    >
+                        <Clock3 class="h-4.5 w-4.5 shrink-0" />
+                        {homeLocalSeoSection.officeCard.hours}
+                    </div>
+
+                    <a
+                        href={`tel:${homeLocalSeoSection.officeCard.phone.replace(/[^0-9+]/g, "")}`}
+                        class="flex items-center gap-3 text-sm font-bold text-white/82 transition hover:text-white"
+                    >
+                        <Phone class="h-4.5 w-4.5 shrink-0" />
+                        {homeLocalSeoSection.officeCard.phone}
+                    </a>
+
+                    <a
+                        href={`mailto:${homeLocalSeoSection.officeCard.email}`}
+                        class="flex items-center gap-3 text-sm font-bold text-white/82 transition hover:text-white"
+                    >
+                        <Mail class="h-4.5 w-4.5 shrink-0" />
+                        {homeLocalSeoSection.officeCard.email}
+                    </a>
+                    </div>
+                </div>
+
+                <a
+                    href={homeLocalSeoSection.officeCard.mapHref}
+                    target="_blank"
+                    rel="noreferrer"
+                    class="group hidden h-28 w-28 shrink-0 items-center justify-center rounded-[2rem] border border-white/20 bg-white/12 text-white backdrop-blur transition duration-300 hover:-translate-y-1 hover:bg-white/18 md:flex"
+                    aria-label="Open office location in Google Maps"
+                >
+                    <MapPin class="h-10 w-10 transition group-hover:scale-110" />
+                </a>
+                </div>
+            </div>
+
+            <!-- Abstract service area map -->
+            <div
+                class="mt-5 overflow-hidden rounded-[1.85rem] border border-[rgb(var(--color-border)/0.72)] bg-[rgb(var(--color-bg)/0.52)] p-5 backdrop-blur"
+            >
+                <div class="flex items-center justify-between gap-4">
+                <div>
+                    <p
+                    class="font-inter text-xs font-extrabold uppercase tracking-[0.14em] text-[rgb(var(--color-secondary))]"
+                    >
+                    Service Area Network
+                    </p>
+                    <h3
+                    class="mt-1 font-inter text-2xl font-extrabold tracking-[-0.055em] text-[rgb(var(--color-heading))]"
+                    >
+                    Miami-Dade coverage map
+                    </h3>
+                </div>
+
+                <span
+                    class="flex h-12 w-12 items-center justify-center rounded-2xl bg-[rgb(var(--color-secondary)/0.1)] text-[rgb(var(--color-secondary))]"
+                >
+                    <Building2 class="h-6 w-6" />
+                </span>
+                </div>
+
+                <!-- Stylized map board -->
+                <div
+                class="relative mt-6 min-h-[24rem] overflow-hidden rounded-[1.5rem] border border-[rgb(var(--color-border)/0.65)] bg-[radial-gradient(circle_at_50%_50%,rgb(var(--color-secondary)/0.12),transparent_34%),linear-gradient(135deg,rgb(var(--color-surface)/0.72),rgb(var(--color-bg-soft)/0.72))]"
+                >
+                <div
+                    class="absolute inset-0 opacity-70"
+                    style="background-image: linear-gradient(var(--grid-color) 1px, transparent 1px), linear-gradient(90deg, var(--grid-color) 1px, transparent 1px); background-size: 34px 34px;"
+                >
+                </div>
+
+                <!-- Connection lines -->
+                <svg
+                    class="absolute inset-0 h-full w-full"
+                    viewBox="0 0 800 460"
+                    fill="none"
+                    aria-hidden="true"
+                >
+                    <path
+                    d="M400 225 C300 170 240 140 165 120"
+                    stroke="rgb(var(--color-secondary) / 0.35)"
+                    stroke-width="2"
+                    stroke-dasharray="8 8"></path>
+                    <path
+                    d="M400 225 C490 145 585 115 675 92"
+                    stroke="rgb(var(--color-secondary) / 0.35)"
+                    stroke-width="2"
+                    stroke-dasharray="8 8"></path>
+                    <path
+                    d="M400 225 C305 285 230 330 145 365"
+                    stroke="rgb(var(--color-secondary) / 0.35)"
+                    stroke-width="2"
+                    stroke-dasharray="8 8"></path>
+                    <path
+                    d="M400 225 C510 280 610 320 690 370"
+                    stroke="rgb(var(--color-secondary) / 0.35)"
+                    stroke-width="2"
+                    stroke-dasharray="8 8"></path>
+                    <path
+                    d="M400 225 C435 170 470 120 505 72"
+                    stroke="rgb(var(--color-secondary) / 0.35)"
+                    stroke-width="2"
+                    stroke-dasharray="8 8"></path>
+                    <path
+                    d="M400 225 C385 295 365 350 330 405"
+                    stroke="rgb(var(--color-secondary) / 0.35)"
+                    stroke-width="2"
+                    stroke-dasharray="8 8"></path>
+                </svg>
+
+                <!-- Central office marker -->
+                <div
+                    class="absolute left-1/2 top-1/2 z-10 -translate-x-1/2 -translate-y-1/2"
+                >
+                    <div class="relative">
+                    <span
+                        class="absolute inset-0 animate-ping rounded-full bg-[rgb(var(--color-secondary)/0.35)]"
+                    ></span>
+                    <div
+                        class="relative flex h-24 w-24 items-center justify-center rounded-full border border-[rgb(var(--color-secondary)/0.38)] bg-[rgb(var(--color-surface)/0.88)] p-3 shadow-blue backdrop-blur"
+                    >
+                        <div
+                        class="flex h-full w-full items-center justify-center rounded-full bg-[rgb(var(--color-secondary))] text-white dark:text-[rgb(3_11_29)]"
+                        >
+                        <MapPin class="h-8 w-8" />
+                        </div>
+                    </div>
+                    </div>
+
+                    <p
+                    class="mt-3 rounded-full border border-[rgb(var(--color-border)/0.72)] bg-[rgb(var(--color-surface)/0.88)] px-4 py-2 text-center font-inter text-xs font-extrabold text-[rgb(var(--color-heading))] shadow-soft backdrop-blur"
+                    >
+                    East Coast Accounting
+                    </p>
+                </div>
+
+                <!-- Location pills -->
+                <div class="absolute left-[8%] top-[14%] z-10">
+                    <a href="/locations/coral-gables-fl" class="location-pill">
+                    Coral Gables
+                    </a>
+                </div>
+
+                <div class="absolute right-[7%] top-[10%] z-10">
+                    <a href="/locations/doral-fl" class="location-pill"> Doral </a>
+                </div>
+
+                <div class="absolute left-[8%] bottom-[14%] z-10">
+                    <a href="/locations/kendall-fl" class="location-pill">
+                    Kendall
+                    </a>
+                </div>
+
+                <div class="absolute right-[6%] bottom-[14%] z-10">
+                    <a href="/locations/hialeah-fl" class="location-pill">
+                    Hialeah
+                    </a>
+                </div>
+
+                <div class="absolute right-[31%] top-[8%] z-10">
+                    <a
+                    href="/locations/west-miami-fl"
+                    class="location-pill hidden sm:inline-flex"
+                    >
+                    West Miami
+                    </a>
+                </div>
+
+                <div class="absolute bottom-[7%] left-[39%] z-10">
+                    <a
+                    href="/locations/homestead-fl"
+                    class="location-pill hidden sm:inline-flex"
+                    >
+                    Homestead
+                    </a>
+                </div>
+                </div>
+            </div>
+
+            <!-- Service area cards -->
+            <div class="mt-5 grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
+                {
+                homeLocalSeoSection.serviceAreas.map((area) => {
+                    const Icon = area.icon;
+
+                    return (
+                    <a
+                        href={area.href}
+                        class="group relative overflow-hidden rounded-[1.5rem] border border-[rgb(var(--color-border)/0.68)] bg-[rgb(var(--color-surface)/0.68)] p-5 shadow-soft backdrop-blur transition duration-300 hover:-translate-y-1 hover:border-[rgb(var(--color-secondary)/0.42)] hover:bg-[rgb(var(--color-secondary)/0.065)]"
+                    >
+                        <div class="pointer-events-none absolute right-[-2rem] top-[-2rem] h-24 w-24 rounded-full bg-[rgb(var(--color-secondary)/0.1)] blur-2xl opacity-0 transition group-hover:opacity-100" />
+
+                        <div class="relative flex items-start justify-between gap-4">
+                        <span class="flex h-11 w-11 items-center justify-center rounded-2xl bg-[rgb(var(--color-secondary)/0.1)] text-[rgb(var(--color-secondary))] transition group-hover:scale-105">
+                            <Icon class="h-5 w-5" />
+                        </span>
+
+                        <ArrowUpRight class="h-4.5 w-4.5 text-[rgb(var(--color-text-soft))] transition group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-[rgb(var(--color-secondary))]" />
+                        </div>
+
+                        <h3 class="relative mt-4 font-inter text-lg font-extrabold tracking-[-0.045em] text-[rgb(var(--color-heading))]">
+                        {area.city}, {area.state}
+                        </h3>
+
+                        <p class="relative mt-2 line-clamp-3 text-sm leading-6 text-[rgb(var(--color-text-soft))]">
+                        {area.seoDescription}
+                        </p>
+                    </a>
+                    );
+                })
+                }
+            </div>
+
+            <!-- CTA strip -->
+            <div
+                class="mt-5 grid gap-5 rounded-[1.75rem] border border-[rgb(var(--color-border)/0.72)] bg-[rgb(var(--color-surface)/0.72)] p-5 shadow-soft backdrop-blur lg:grid-cols-[1fr_auto] lg:items-center"
+            >
+                <div>
+                <p
+                    class="font-inter text-xl font-extrabold tracking-[-0.045em] text-[rgb(var(--color-heading))]"
+                >
+                    Looking for tax or accounting help near Miami?
+                </p>
+                <p
+                    class="mt-1 text-sm leading-6 text-[rgb(var(--color-text-soft))]"
+                >
+                    Start with the contact form and our office will help guide you
+                    toward the right service.
+                </p>
+                </div>
+
+                <CTAButton href="/contact"> Contact Our Office </CTAButton>
+            </div>
+            </div>
+        </div>
+        </div>
+    </div>
+</section>
+
+<style>
+    .location-pill {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        border: 1px solid rgb(var(--color-border) / 0.72);
+        border-radius: 999px;
+        background: rgb(var(--color-surface) / 0.88);
+        color: rgb(var(--color-heading));
+        box-shadow: var(--shadow-soft);
+        backdrop-filter: blur(14px);
+        -webkit-backdrop-filter: blur(14px);
+        padding: 0.65rem 0.9rem;
+        font-family: var(--font-inter);
+        font-size: 0.72rem;
+        font-weight: 800;
+        letter-spacing: -0.01em;
+        white-space: nowrap;
+        transition:
+        transform 200ms ease,
+        border-color 200ms ease,
+        background 200ms ease,
+        color 200ms ease;
+    }
+
+    .location-pill:hover {
+        transform: translateY(-3px);
+        border-color: rgb(var(--color-secondary) / 0.48);
+        background: rgb(var(--color-secondary));
+        color: white;
+    }
+
+    :root[data-theme="dark"] .location-pill:hover {
+        color: rgb(3 11 29);
+    }
+</style>

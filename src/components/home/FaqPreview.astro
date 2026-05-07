@@ -1,0 +1,227 @@
+---
+import { ArrowUpRight, ChevronDown, CircleHelp, MessageCircleQuestion, Sparkles } from "@lucide/astro";
+
+import SectionHeading from "../ui/SectionHeading.astro";
+import CTAButton from "../ui/CTAButton.astro";
+import Badge from "../ui/Badge.astro";
+import { homeFaqSection } from "../../data/home";
+---
+
+<section class="section-shell relative overflow-hidden">
+    <!-- Background accents -->
+    <div class="pointer-events-none absolute inset-0 -z-10">
+        <div
+        class="absolute left-[-12rem] top-16 h-[28rem] w-[28rem] rounded-full bg-[rgb(var(--color-secondary)/0.1)] blur-3xl"
+        >
+        </div>
+
+        <div
+        class="absolute right-[-12rem] bottom-10 h-[30rem] w-[30rem] rounded-full bg-[rgb(var(--color-primary)/0.09)] blur-3xl"
+        >
+        </div>
+
+        <div
+        class="absolute inset-x-0 top-0 h-px bg-[linear-gradient(90deg,transparent,rgb(var(--color-secondary)/0.38),transparent)]"
+        >
+        </div>
+    </div>
+
+    <div class="container-wide">
+        <div class="grid gap-12 lg:grid-cols-[0.86fr_1.14fr] lg:items-start">
+        <!-- Left content -->
+        <div class="lg:sticky lg:top-32">
+            <SectionHeading
+            eyebrow={homeFaqSection.eyebrow}
+            title={homeFaqSection.title}
+            highlight="Questions"
+            description={homeFaqSection.description}
+            />
+
+            <div class="mt-8 overflow-hidden rounded-[2rem] border border-[rgb(var(--color-border)/0.72)] bg-[linear-gradient(135deg,rgb(var(--color-primary))_0%,rgb(var(--color-secondary))_100%)] p-6 text-white shadow-blue">
+            <div
+                class="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_18%_0%,rgba(255,255,255,0.26),transparent_34%),radial-gradient(circle_at_92%_100%,rgba(255,255,255,0.14),transparent_34%)]"
+            >
+            </div>
+
+            <div class="relative">
+                <Badge variant="outline" class="border-white/25 bg-white/10 text-white" icon={Sparkles}>
+                Helpful Guidance
+                </Badge>
+
+                <h3 class="mt-5 font-inter text-3xl font-extrabold tracking-[-0.055em] text-white">
+                Clear answers before you even contact the office.
+                </h3>
+
+                <p class="mt-4 text-sm leading-7 text-white/78">
+                A strong FAQ section helps visitors understand the process, improves
+                local SEO, and gives potential clients more confidence before they submit
+                the contact form.
+                </p>
+
+                <div class="mt-6 grid gap-3">
+                {
+                    [
+                    "Tax preparation questions",
+                    "Bookkeeping and payroll questions",
+                    "Business accounting questions",
+                    "Miami service-area questions",
+                    ].map((item) => (
+                    <div class="flex items-center gap-3 rounded-2xl border border-white/15 bg-white/10 p-3 backdrop-blur">
+                        <span class="flex h-8 w-8 items-center justify-center rounded-xl bg-white/12 text-white">
+                        <CircleHelp class="h-4 w-4" />
+                        </span>
+                        <span class="font-inter text-sm font-bold text-white/86">
+                        {item}
+                        </span>
+                    </div>
+                    ))
+                }
+                </div>
+
+                <div class="mt-7">
+                <CTAButton href={homeFaqSection.cta.href} variant="light" icon={ArrowUpRight}>
+                    {homeFaqSection.cta.label}
+                </CTAButton>
+                </div>
+            </div>
+            </div>
+        </div>
+
+        <!-- FAQ accordion -->
+        <div class="relative">
+            <div class="glass-panel overflow-hidden rounded-[2.25rem] p-4 sm:p-5">
+            <div
+                class="pointer-events-none absolute inset-x-10 top-0 h-px bg-[linear-gradient(90deg,transparent,rgb(var(--color-secondary)/0.8),transparent)]"
+            >
+            </div>
+
+            <div class="mb-4 flex items-center justify-between gap-4 rounded-[1.5rem] border border-[rgb(var(--color-border)/0.64)] bg-[rgb(var(--color-surface)/0.64)] p-4">
+                <div>
+                <p class="font-inter text-xs font-extrabold uppercase tracking-[0.14em] text-[rgb(var(--color-secondary))]">
+                    Client Questions
+                </p>
+                <h3 class="mt-1 font-inter text-2xl font-extrabold tracking-[-0.055em] text-[rgb(var(--color-heading))]">
+                    Fast answers, easy next steps.
+                </h3>
+                </div>
+
+                <span class="hidden h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-[rgb(var(--color-secondary)/0.1)] text-[rgb(var(--color-secondary))] sm:flex">
+                <MessageCircleQuestion class="h-6 w-6" />
+                </span>
+            </div>
+
+            <div class="grid gap-3" data-faq-list>
+                {
+                homeFaqSection.faqs.map((faq, index) => (
+                    <article
+                    class="faq-item overflow-hidden rounded-[1.5rem] border border-[rgb(var(--color-border)/0.68)] bg-[rgb(var(--color-surface)/0.68)] shadow-soft backdrop-blur transition duration-300"
+                    data-faq-item
+                    >
+                    <button
+                        type="button"
+                        class="flex w-full items-start justify-between gap-4 p-5 text-left transition hover:bg-[rgb(var(--color-secondary)/0.055)]"
+                        aria-expanded={index === 0 ? "true" : "false"}
+                        data-faq-trigger
+                    >
+                        <span class="flex gap-4">
+                        <span class="flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl bg-[rgb(var(--color-secondary)/0.1)] font-inter text-xs font-extrabold text-[rgb(var(--color-secondary))]">
+                            {String(index + 1).padStart(2, "0")}
+                        </span>
+
+                        <span>
+                            <span class="block font-inter text-lg font-extrabold tracking-[-0.04em] text-[rgb(var(--color-heading))]">
+                            {faq.question}
+                            </span>
+                        </span>
+                        </span>
+
+                        <span class="mt-1 flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-[rgb(var(--color-border)/0.72)] bg-[rgb(var(--color-bg)/0.42)] text-[rgb(var(--color-secondary))] transition duration-300" data-faq-icon-wrap>
+                        <ChevronDown class="h-4.5 w-4.5 transition duration-300" data-faq-icon />
+                        </span>
+                    </button>
+
+                    <div
+                        class:list={[
+                        "faq-panel grid transition-all duration-300 ease-out",
+                        index === 0 ? "grid-rows-[1fr]" : "grid-rows-[0fr]",
+                        ]}
+                        data-faq-panel
+                    >
+                        <div class="overflow-hidden">
+                        <div class="px-5 pb-5 pl-[5.25rem]">
+                            <p class="text-sm leading-7 text-[rgb(var(--color-text-soft))]">
+                            {faq.answer}
+                            </p>
+                        </div>
+                        </div>
+                    </div>
+                    </article>
+                ))
+                }
+            </div>
+
+            <!-- Bottom CTA -->
+            <a
+                href="/contact"
+                class="group mt-4 flex items-center justify-between gap-4 rounded-[1.5rem] border border-[rgb(var(--color-border)/0.72)] bg-[rgb(var(--color-bg)/0.46)] p-4 transition hover:-translate-y-1 hover:border-[rgb(var(--color-secondary)/0.42)] hover:bg-[rgb(var(--color-secondary)/0.07)]"
+            >
+                <div>
+                <p class="font-inter text-sm font-extrabold text-[rgb(var(--color-heading))]">
+                    Still have a question?
+                </p>
+                <p class="mt-1 text-sm text-[rgb(var(--color-text-soft))]">
+                    Send a message through the contact form.
+                </p>
+                </div>
+
+                <span class="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-[rgb(var(--color-secondary))] text-white transition group-hover:scale-105 dark:text-[rgb(3_11_29)]">
+                <ArrowUpRight class="h-5 w-5" />
+                </span>
+            </a>
+            </div>
+
+            <!-- Floating badge -->
+            <div class="glass-panel absolute -right-4 top-10 hidden rounded-full px-4 py-3 shadow-card xl:flex">
+            <span class="mr-2 flex h-7 w-7 items-center justify-center rounded-full bg-[rgb(var(--color-secondary)/0.1)] text-[rgb(var(--color-secondary))]">
+                <Sparkles class="h-3.5 w-3.5" />
+            </span>
+            <span class="font-inter text-xs font-extrabold uppercase tracking-[0.12em] text-[rgb(var(--color-heading))]">
+                SEO FAQ Ready
+            </span>
+            </div>
+        </div>
+        </div>
+    </div>
+</section>
+
+<script>
+    const faqItems = document.querySelectorAll("[data-faq-item]");
+
+    faqItems.forEach((item) => {
+        const trigger = item.querySelector("[data-faq-trigger]");
+        const panel = item.querySelector("[data-faq-panel]");
+        const icon = item.querySelector("[data-faq-icon]");
+
+        trigger?.addEventListener("click", () => {
+        const isOpen = trigger.getAttribute("aria-expanded") === "true";
+
+        faqItems.forEach((otherItem) => {
+            const otherTrigger = otherItem.querySelector("[data-faq-trigger]");
+            const otherPanel = otherItem.querySelector("[data-faq-panel]");
+            const otherIcon = otherItem.querySelector("[data-faq-icon]");
+
+            otherTrigger?.setAttribute("aria-expanded", "false");
+            otherPanel?.classList.remove("grid-rows-[1fr]");
+            otherPanel?.classList.add("grid-rows-[0fr]");
+            otherIcon?.classList.remove("rotate-180");
+        });
+
+        if (!isOpen) {
+            trigger.setAttribute("aria-expanded", "true");
+            panel?.classList.remove("grid-rows-[0fr]");
+            panel?.classList.add("grid-rows-[1fr]");
+            icon?.classList.add("rotate-180");
+        }
+        });
+    });
+</script>

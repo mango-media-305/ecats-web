@@ -1,0 +1,39 @@
+---
+import MainLayout from "../layouts/MainLayout.astro";
+
+import HeroSection from "../components/home/HeroSection.astro";
+import TrustBar from "../components/home/TrustBar.astro";
+import ServicesPreview from "../components/home/ServicesPreview.astro";
+import WhyChooseUs from "../components/home/WhyChooseUs.astro";
+import ProcessSection from "../components/home/ProcessSection.astro";
+import IndustriesPreview from "../components/home/IndustriesPreview.astro";
+import LocalSeoSection from "../components/home/LocalSeoSection.astro";
+import FinancialClarity from "../components/home/FinancialClarity.astro";
+import FaqPreview from "../components/home/FaqPreview.astro";
+import FinalCTA from "../components/home/FinalCTA.astro";
+
+import { homePageData } from "../data/home";
+import { getFaqSchema } from "../data/seo";
+
+const faqSchema = getFaqSchema(homePageData.faqs.faqs);
+
+const homeSchema = [homePageData.schema, faqSchema];
+---
+
+<MainLayout
+    title={homePageData.meta.title}
+    description={homePageData.meta.description}
+    image={homePageData.meta.image}
+    schema={homeSchema}
+>
+    <HeroSection />
+    <TrustBar />
+    <ServicesPreview />
+    <WhyChooseUs />
+    <ProcessSection />
+    <IndustriesPreview />
+    <LocalSeoSection />
+    <FinancialClarity />
+    <FaqPreview />
+    <FinalCTA />
+</MainLayout>

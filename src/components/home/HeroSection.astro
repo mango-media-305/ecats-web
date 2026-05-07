@@ -1,0 +1,429 @@
+---
+import {
+    ArrowUpRight,
+    BookOpenCheck,
+    Calculator,
+    CheckCircle2,
+    Languages,
+    MapPin,
+    ReceiptText,
+    ShieldCheck,
+    Sparkles,
+    WalletCards,
+} from "@lucide/astro";
+
+import CTAButton from "../ui/CTAButton.astro";
+import Badge from "../ui/Badge.astro";
+import { homeHero } from "../../data/home";
+import { siteConfig } from "../../data/site";
+---
+
+<section class="accounting-grid relative isolate overflow-hidden py-16 sm:py-20 lg:min-h-[calc(100vh-76px)] lg:py-16">
+    <!-- Ambient visual system -->
+    <div class="pointer-events-none absolute inset-0 -z-10 overflow-hidden">
+        <div class="financial-orb orb-blue left-[-8rem] top-24 h-72 w-72 animate-pulse-glow"></div>
+        <div class="financial-orb orb-navy right-[-7rem] top-10 h-80 w-80 animate-float-soft"></div>
+
+        <div
+            class="absolute left-1/2 top-10 h-[32rem] w-[32rem] -translate-x-1/2 rounded-full bg-[radial-gradient(circle,rgb(var(--color-secondary)/0.12),transparent_68%)] blur-2xl"
+        >
+        </div>
+
+        <div
+            class="absolute bottom-0 left-0 right-0 h-48 bg-[linear-gradient(to_top,rgb(var(--color-bg)),transparent)]"
+        >
+        </div>
+    </div>
+
+    <div class="container-wide flex min-h-full items-center">
+        <div class="grid w-full items-center gap-10 lg:grid-cols-[0.92fr_1.08fr] lg:gap-12 xl:gap-16">
+            <!-- Left Content -->
+            <div class="relative z-10 mx-auto max-w-2xl text-center lg:mx-0 lg:text-left">
+                <div class="flex justify-center lg:justify-start">
+                    <Badge variant="blue" icon={Sparkles} glow>
+                        {homeHero.eyebrow}
+                    </Badge>
+                </div>
+
+                <h1
+                    class="mt-6 text-balance font-inter text-4xl font-extrabold tracking-[-0.055em] text-[rgb(var(--color-heading))] sm:text-5xl lg:text-6xl xl:text-[4.45rem]"
+                >
+                    {homeHero.title}
+                    <span class="mt-2 block gradient-text text-2xl uppercase tracking-normal">
+                        {homeHero.highlightedText}.
+                    </span>
+                </h1>
+
+                <p class="mx-auto mt-6 max-w-2xl text-base leading-8 text-[rgb(var(--color-text-soft))] sm:text-lg lg:mx-0">
+                    {homeHero.description}
+                </p>
+
+                <div class="mt-8 flex flex-col justify-center gap-3 sm:flex-row sm:flex-wrap lg:justify-start">
+                    <CTAButton href={homeHero.primaryCta.href} icon={homeHero.primaryCta.icon} size="lg">
+                        {homeHero.primaryCta.label}
+                    </CTAButton>
+
+                    <CTAButton
+                        href={homeHero.secondaryCta.href}
+                        icon={homeHero.secondaryCta.icon}
+                        iconPosition="left"
+                        variant="secondary"
+                        size="lg"
+                    >
+                        {homeHero.secondaryCta.label}
+                    </CTAButton>
+                </div>
+
+                <!-- <div class="mt-8 flex flex-wrap justify-center gap-3 lg:justify-start">
+                    {
+                        homeHero.trustPoints.map((point) => {
+                            const Icon = point.icon;
+
+                            return (
+                                <div class="glass-panel inline-flex items-center gap-2 rounded-full px-4 py-2">
+                                    <span class="flex h-7 w-7 items-center justify-center rounded-full bg-[rgb(var(--color-secondary)/0.1)] text-[rgb(var(--color-secondary))]">
+                                        <Icon class="h-3.5 w-3.5" />
+                                    </span>
+                                    <span class="font-inter text-sm font-bold text-[rgb(var(--color-heading))]">
+                                        {point.label}
+                                    </span>
+                                </div>
+                            );
+                        })
+                    }
+                </div> -->
+
+                <!-- Micro SEO/location line -->
+                <div class="mx-auto mt-8 flex max-w-xl items-start gap-3 rounded-[1.5rem] border border-[rgb(var(--color-border)/0.72)] bg-[rgb(var(--color-surface)/0.62)] p-4 text-left shadow-soft backdrop-blur lg:mx-0">
+                    <span class="mt-1 flex h-9 w-9 shrink-0 items-center justify-center rounded-2xl bg-[rgb(var(--color-secondary)/0.1)] text-[rgb(var(--color-secondary))]">
+                        <CheckCircle2 class="h-4.5 w-4.5" />
+                    </span>
+
+                    <p class="text-sm leading-6 text-[rgb(var(--color-text-soft))]">
+                        Serving individuals and businesses across
+                        <strong> Miami, Miami-Dade County, and nearby South Florida communities</strong>
+                        with tax preparation, bookkeeping, payroll, and accounting support.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Right Visual Experience -->
+            <div class="relative mx-auto w-full max-w-2xl self-stretch lg:mx-0">
+                <!-- Ambient shapes -->
+                
+                <div class="pointer-events-none absolute -right-6 bottom-16 hidden h-40 w-40 rounded-full bg-[rgb(var(--color-secondary)/0.16)] blur-3xl lg:block"></div>
+
+                <div class="pointer-events-none absolute left-1/2 top-1/2 h-[34rem] w-[34rem] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[radial-gradient(circle,rgb(var(--color-secondary)/0.13),transparent_62%)] blur-2xl"></div>
+
+                
+                    <!-- Top shine -->
+                    <div class="pointer-events-none absolute inset-x-10 top-0 h-px bg-[linear-gradient(90deg,transparent,rgb(var(--color-secondary)/0.85),transparent)]"></div>
+
+                    <!-- Background grid inside card -->
+                    <div
+                        class="pointer-events-none absolute inset-0 opacity-60"
+                        style="background-image: linear-gradient(var(--grid-color) 1px, transparent 1px), linear-gradient(90deg, var(--grid-color) 1px, transparent 1px); background-size: 38px 38px;"
+                    >
+                    </div>
+
+                    <div class="relative min-h-[42rem] overflow-hidden rounded-[1.85rem] border border-[rgb(var(--color-border)/0.66)] bg-[radial-gradient(circle_at_50%_38%,rgb(var(--color-secondary)/0.16),transparent_34%),linear-gradient(135deg,rgb(var(--color-surface)/0.78),rgb(var(--color-bg-soft)/0.58))] p-5 sm:min-h-[44rem] sm:p-6 lg:min-h-[46rem] xl:min-h-[48rem]">
+                        <!-- Orbit rings -->
+                        <div class="pointer-events-none absolute left-1/2 top-[38%] h-[27rem] w-[27rem] -translate-x-1/2 -translate-y-1/2 rounded-full border border-[rgb(var(--color-secondary)/0.18)]"></div>
+                        <div class="pointer-events-none absolute left-1/2 top-[38%] h-[19rem] w-[19rem] -translate-x-1/2 -translate-y-1/2 rounded-full border border-dashed border-[rgb(var(--color-secondary)/0.28)]"></div>
+                        <div class="pointer-events-none absolute left-1/2 top-[38%] h-[12rem] w-[12rem] -translate-x-1/2 -translate-y-1/2 rounded-full border border-[rgb(var(--color-border)/0.75)]"></div>
+
+                        <!-- Header strip -->
+                        <div class="relative z-20 flex items-center justify-between gap-4 rounded-[1.35rem] border border-[rgb(var(--color-border)/0.68)] bg-[rgb(var(--color-surface)/0.72)] p-4 shadow-soft backdrop-blur">
+                            <div>
+                                <p class="font-inter text-[0.68rem] font-extrabold uppercase tracking-[0.16em] text-[rgb(var(--color-secondary))]">
+                                    Financial Support tailored to you
+                                </p>
+                                <h2 class="mt-1 font-inter text-lg font-extrabold tracking-[-0.045em] text-[rgb(var(--color-heading))] sm:text-xl">
+                                    Taxes, books, payroll, clarity.
+                                </h2>
+                            </div>
+
+                            <span class="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-[rgb(var(--color-secondary)/0.12)] text-[rgb(var(--color-secondary))]">
+                                <Sparkles class="h-5.5 w-5.5" />
+                            </span>
+                        </div>
+
+                        <!-- Central brand orb -->
+                        <div class="absolute left-1/2 top-[38%] z-20 -translate-x-1/2 -translate-y-1/2">
+                            <div class="relative">
+                                <span class="logo-light-fade absolute inset-[-1.35rem] rounded-full bg-[radial-gradient(circle,rgb(var(--color-secondary)/0.32),rgb(var(--color-secondary)/0.12)_38%,transparent_72%)] blur-md"></span>
+
+                                <span class="logo-light-fade-delayed absolute inset-[-2.25rem] rounded-full bg-[radial-gradient(circle,rgb(var(--color-secondary)/0.18),transparent_68%)] blur-xl"></span>
+
+                                <div class="relative flex h-36 w-36 items-center justify-center rounded-full border border-[rgb(var(--color-secondary)/0.28)] bg-[rgb(var(--color-surface)/0.84)] p-5 shadow-blue backdrop-blur sm:h-60 sm:w-60">
+                                    <div class="flex h-full w-full items-center justify-center rounded-full border border-[rgb(var(--color-border)/0.72)] bg-[rgb(var(--color-bg)/0.7)] p-4">
+                                        <img
+                                            src={siteConfig.logos.dark}
+                                            alt=""
+                                            width="160"
+                                            height="160"
+                                            class="logo-for-light h-full w-full object-contain"
+                                            loading="eager"
+                                        />
+                                        <img
+                                            src={siteConfig.logos.light}
+                                            alt=""
+                                            width="160"
+                                            height="160"
+                                            class="logo-for-dark h-full w-full object-contain"
+                                            loading="eager"
+                                        />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Floating service cards -->
+                        <div class="absolute left-5 top-[15%] z-20 hidden sm:block">
+                            <a
+                                href="/services/tax-preparation"
+                                class="group flex w-44 items-center gap-3 rounded-[1.25rem] border border-[rgb(var(--color-border)/0.68)] bg-[rgb(var(--color-surface)/0.82)] p-3 shadow-soft backdrop-blur transition duration-300 hover:-translate-y-1 hover:border-[rgb(var(--color-secondary)/0.44)]"
+                            >
+                                <span class="flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl bg-[rgb(var(--color-secondary)/0.1)] text-[rgb(var(--color-secondary))]">
+                                    <ReceiptText class="h-5 w-5" />
+                                </span>
+                                <span>
+                                    <span class="block font-inter text-sm font-extrabold text-[rgb(var(--color-heading))]">
+                                        Taxes
+                                    </span>
+                                    <span class="block text-xs text-[rgb(var(--color-text-soft))]">
+                                        Individual & business
+                                    </span>
+                                </span>
+                            </a>
+                        </div>
+
+                        <div class="absolute right-5 top-[27%] z-20 hidden sm:block">
+                            <a
+                                href="/services/bookkeeping"
+                                class="group flex w-48 items-center gap-3 rounded-[1.25rem] border border-[rgb(var(--color-border)/0.68)] bg-[rgb(var(--color-surface)/0.82)] p-3 shadow-soft backdrop-blur transition duration-300 hover:-translate-y-1 hover:border-[rgb(var(--color-secondary)/0.44)]"
+                            >
+                                <span class="flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl bg-[rgb(var(--color-secondary)/0.1)] text-[rgb(var(--color-secondary))]">
+                                    <BookOpenCheck class="h-5 w-5" />
+                                </span>
+                                <span>
+                                    <span class="block font-inter text-sm font-extrabold text-[rgb(var(--color-heading))]">
+                                        Bookkeeping
+                                    </span>
+                                    <span class="block text-xs text-[rgb(var(--color-text-soft))]">
+                                        Clean records
+                                    </span>
+                                </span>
+                            </a>
+                        </div>
+
+                        <div class="absolute bottom-[48%] left-8 z-20 hidden sm:block">
+                            <a
+                                href="/services/payroll"
+                                class="group flex w-44 items-center gap-3 rounded-[1.25rem] border border-[rgb(var(--color-border)/0.68)] bg-[rgb(var(--color-surface)/0.82)] p-3 shadow-soft backdrop-blur transition duration-300 hover:-translate-y-1 hover:border-[rgb(var(--color-secondary)/0.44)]"
+                            >
+                                <span class="flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl bg-[rgb(var(--color-secondary)/0.1)] text-[rgb(var(--color-secondary))]">
+                                    <WalletCards class="h-5 w-5" />
+                                </span>
+                                <span>
+                                    <span class="block font-inter text-sm font-extrabold text-[rgb(var(--color-heading))]">
+                                        Payroll
+                                    </span>
+                                    <span class="block text-xs text-[rgb(var(--color-text-soft))]">
+                                        Employer support
+                                    </span>
+                                </span>
+                            </a>
+                        </div>
+
+                        <div class="absolute bottom-[38%] right-8 z-20 hidden sm:block">
+                            <a
+                                href="/services/accounting"
+                                class="group flex w-44 items-center gap-3 rounded-[1.25rem] border border-[rgb(var(--color-border)/0.68)] bg-[rgb(var(--color-surface)/0.82)] p-3 shadow-soft backdrop-blur transition duration-300 hover:-translate-y-1 hover:border-[rgb(var(--color-secondary)/0.44)]"
+                            >
+                                <span class="flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl bg-[rgb(var(--color-secondary)/0.1)] text-[rgb(var(--color-secondary))]">
+                                    <Calculator class="h-5 w-5" />
+                                </span>
+                                <span>
+                                    <span class="block font-inter text-sm font-extrabold text-[rgb(var(--color-heading))]">
+                                        Accounting
+                                    </span>
+                                    <span class="block text-xs text-[rgb(var(--color-text-soft))]">
+                                        Clear numbers
+                                    </span>
+                                </span>
+                            </a>
+                        </div>
+
+                        <!-- Document stack / filing visual -->
+                        <div class="absolute bottom-6 left-5 right-5 z-20 sm:left-6 sm:right-6">
+                            <div class="grid gap-3 sm:grid-cols-[1fr_0.78fr]">
+                                <div class="rounded-[1.5rem] border border-[rgb(var(--color-border)/0.68)] bg-[rgb(var(--color-surface)/0.78)] p-4 shadow-soft backdrop-blur">
+                                    <div class="flex items-start justify-between gap-4">
+                                        <div>
+                                            <h3 class="mt-1 font-inter text-xl font-extrabold tracking-[-0.05em] text-[rgb(var(--color-heading))]">
+                                                Organized from first contact.
+                                            </h3>
+                                        </div>
+
+                                        <span class="flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl bg-[rgb(var(--color-secondary)/0.1)] text-[rgb(var(--color-secondary))]">
+                                            <CheckCircle2 class="h-5 w-5" />
+                                        </span>
+                                    </div>
+
+                                    <div class="mt-4 grid gap-2">
+                                        {
+                                            [
+                                                "Tax documents",
+                                                "Business records",
+                                                "Payroll details",
+                                            ].map((item) => (
+                                                <div class="flex items-center gap-3 rounded-2xl border border-[rgb(var(--color-border)/0.55)] bg-[rgb(var(--color-bg)/0.42)] px-3 py-2">
+                                                    <span class="h-2 w-2 rounded-full bg-[rgb(var(--color-secondary))]"></span>
+                                                    <span class="font-inter text-xs font-bold text-[rgb(var(--color-text-soft))]">
+                                                        {item}
+                                                    </span>
+                                                </div>
+                                            ))
+                                        }
+                                    </div>
+                                </div>
+
+                                <div class="rounded-[1.5rem] border border-[rgb(var(--color-border)/0.68)] bg-[linear-gradient(135deg,rgb(var(--color-primary))_0%,rgb(var(--color-secondary))_100%)] p-4 text-white dark:text-white shadow-blue">
+                                    <span class="font-inter text-[0.68rem] font-extrabold uppercase tracking-[0.14em] text-white dark:text-white">
+                                        Service Area
+                                    </span>
+
+                                    <div class="mt-4 grid gap-3">
+                                        <div class="flex items-center gap-3">
+                                            <span class="flex h-9 w-9 items-center justify-center rounded-xl bg-white/12 text-white">
+                                                <MapPin class="h-4.5 w-4.5" />
+                                            </span>
+                                            <span class="font-inter text-sm font-extrabold text-white">
+                                                Miami-Dade
+                                            </span>
+                                        </div>
+
+                                        <div class="flex items-center gap-3">
+                                            <span class="flex h-9 w-9 items-center justify-center rounded-xl bg-white/12 text-white">
+                                                <Languages class="h-4.5 w-4.5" />
+                                            </span>
+                                            <span class="font-inter text-sm font-extrabold text-white">
+                                                EN / ES
+                                            </span>
+                                        </div>
+
+                                        <div class="flex items-center gap-3">
+                                            <span class="flex h-9 w-9 items-center justify-center rounded-xl bg-white/12 text-white">
+                                                <ShieldCheck class="h-4.5 w-4.5" />
+                                            </span>
+                                            <span class="font-inter text-sm font-extrabold text-white">
+                                                Year-round
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Mobile simplified service pills -->
+                        <div class="relative z-20 mt-52 hidden gap-3 max-sm:grid" aria-label="Mobile service quick links">
+                            {
+                                [
+                                    {
+                                        label: "Tax Preparation",
+                                        href: "/services/tax-preparation",
+                                        icon: ReceiptText,
+                                    },
+                                    {
+                                        label: "Bookkeeping",
+                                        href: "/services/bookkeeping",
+                                        icon: BookOpenCheck,
+                                    },
+                                    {
+                                        label: "Payroll",
+                                        href: "/services/payroll",
+                                        icon: WalletCards,
+                                    },
+                                ].map((item) => {
+                                    const Icon = item.icon;
+
+                                    return (
+                                        <a
+                                            href={item.href}
+                                            class="flex items-center justify-between gap-4 rounded-[1.25rem] border border-[rgb(var(--color-border)/0.68)] bg-[rgb(var(--color-surface)/0.78)] p-3 shadow-soft backdrop-blur"
+                                        >
+                                            <span class="flex items-center gap-3">
+                                                <span class="flex h-10 w-10 items-center justify-center rounded-2xl bg-[rgb(var(--color-secondary)/0.1)] text-[rgb(var(--color-secondary))]">
+                                                    <Icon class="h-5 w-5" />
+                                                </span>
+
+                                                <span class="font-inter text-sm font-extrabold text-[rgb(var(--color-heading))]">
+                                                    {item.label}
+                                                </span>
+                                            </span>
+
+                                            <ArrowUpRight class="h-4.5 w-4.5 text-[rgb(var(--color-secondary))]" />
+                                        </a>
+                                    );
+                                })
+                            }
+                        </div>
+                    </div>
+                
+
+                <!-- Floating contact card -->
+                <a
+                    href="/contact"
+                    class="glass-panel group absolute -bottom-15 left-6 right-6 hidden items-center justify-between gap-4 rounded-[1.5rem] p-4 transition hover:-translate-y-1 hover:border-[rgb(var(--color-secondary)/0.42)] lg:flex"
+                >
+                    <div>
+                        <p class="font-inter text-sm font-extrabold text-[rgb(var(--color-heading))]">
+                            Ready to get organized?
+                        </p>
+                        <p class="text-sm text-[rgb(var(--color-text-soft))]">
+                            Start with the contact form.
+                        </p>
+                    </div>
+
+                    <span class="flex h-10 w-10 items-center justify-center rounded-full bg-[rgb(var(--color-secondary))] text-white transition group-hover:scale-105 dark:text-[rgb(3_11_29)]">
+                        <ArrowUpRight class="h-5 w-5" />
+                    </span>
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<style>
+    @keyframes logo-light-fade {
+        0%,
+        100% {
+            opacity: 0.28;
+            transform: scale(0.96);
+        }
+
+        50% {
+            opacity: 0.78;
+            transform: scale(1.04);
+        }
+    }
+
+    .logo-light-fade {
+        animation: logo-light-fade 4.8s ease-in-out infinite;
+    }
+
+    .logo-light-fade-delayed {
+        animation: logo-light-fade 6.8s ease-in-out infinite;
+        animation-delay: 1.2s;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        .logo-light-fade,
+        .logo-light-fade-delayed {
+            animation: none;
+            opacity: 0.42;
+            transform: none;
+        }
+    }
+</style>

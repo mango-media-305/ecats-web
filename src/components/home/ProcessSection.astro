@@ -1,0 +1,211 @@
+---
+import {
+    ArrowRight,
+    CheckCircle2,
+    Clock3,
+    FileText,
+    Sparkles,
+} from "@lucide/astro";
+
+import SectionHeading from "../ui/SectionHeading.astro";
+import CTAButton from "../ui/CTAButton.astro";
+import Badge from "../ui/Badge.astro";
+import { homeProcess } from "../../data/home";
+---
+
+<section class="section-shell relative overflow-hidden">
+    <!-- Background visual layers -->
+    <div class="pointer-events-none absolute inset-0 -z-10">
+        <div
+        class="absolute inset-x-0 top-1/2 h-px bg-[linear-gradient(90deg,transparent,rgb(var(--color-secondary)/0.38),transparent)]"
+        >
+        </div>
+
+        <div
+        class="absolute left-[-10rem] top-20 h-96 w-96 rounded-full bg-[rgb(var(--color-secondary)/0.09)] blur-3xl"
+        >
+        </div>
+
+        <div
+        class="absolute right-[-12rem] bottom-20 h-96 w-96 rounded-full bg-[rgb(var(--color-primary)/0.09)] blur-3xl"
+        >
+        </div>
+    </div>
+
+    <div class="container-wide">
+        <div class="grid gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:items-end">
+        <SectionHeading
+            eyebrow={homeProcess.eyebrow}
+            title={homeProcess.title}
+            highlight="clear process"
+            description={homeProcess.description}
+        />
+
+        <div class="flex justify-start lg:justify-end">
+            <CTAButton href="/contact" variant="secondary">
+            Start With the Contact Form
+            </CTAButton>
+        </div>
+        </div>
+
+        <!-- Desktop timeline -->
+        <div class="relative mt-14 hidden lg:block">
+        <div
+            class="absolute left-0 right-0 top-[5.5rem] h-px bg-[linear-gradient(90deg,transparent,rgb(var(--color-border)),transparent)]"
+        >
+        </div>
+
+        <div class="grid gap-5 lg:grid-cols-4">
+            {
+            homeProcess.steps.map((step, index) => {
+                const Icon = step.icon;
+
+                return (
+                <article
+                    class:list={[
+                    "group relative",
+                    index % 2 === 1 ? "pt-12" : "",
+                    ]}
+                >
+                    <div class="relative z-10">
+                    <div class="mx-auto mb-5 flex h-14 w-14 items-center justify-center rounded-full border border-[rgb(var(--color-secondary)/0.38)] bg-[rgb(var(--color-surface)/0.9)] text-[rgb(var(--color-secondary))] shadow-blue backdrop-blur transition duration-300 group-hover:scale-110 group-hover:bg-[rgb(var(--color-secondary))] group-hover:text-white dark:group-hover:text-[rgb(3_11_29)]">
+                        <Icon class="h-6 w-6" />
+                    </div>
+
+                    <div class="glow-card card-hover min-h-[22rem] p-6">
+                        <div class="relative z-10">
+                        <div class="flex items-center justify-between gap-4">
+                            <span class="font-inter text-5xl font-extrabold tracking-[-0.08em] text-[rgb(var(--color-secondary)/0.22)]">
+                            {step.number}
+                            </span>
+
+                            <Badge variant="soft" size="sm">
+                            Step {index + 1}
+                            </Badge>
+                        </div>
+
+                        <h3 class="mt-6 font-inter text-2xl font-extrabold tracking-[-0.055em] text-[rgb(var(--color-heading))]">
+                            {step.title}
+                        </h3>
+
+                        <p class="mt-3 text-sm leading-7 text-[rgb(var(--color-text-soft))]">
+                            {step.description}
+                        </p>
+
+                        <div class="mt-6 flex items-center gap-3 rounded-2xl border border-[rgb(var(--color-border)/0.62)] bg-[rgb(var(--color-bg)/0.42)] p-3">
+                            <span class="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-[rgb(var(--color-secondary)/0.1)] text-[rgb(var(--color-secondary))]">
+                            <CheckCircle2 class="h-4.5 w-4.5" />
+                            </span>
+
+                            <span class="text-xs font-bold leading-5 text-[rgb(var(--color-text-soft))]">
+                            Designed to keep your next step clear and organized.
+                            </span>
+                        </div>
+                        </div>
+                    </div>
+                    </div>
+
+                    {
+                    index < homeProcess.steps.length - 1 && (
+                        <div class="absolute right-[-1.25rem] top-[4.8rem] z-20 hidden h-9 w-9 items-center justify-center rounded-full border border-[rgb(var(--color-border)/0.72)] bg-[rgb(var(--color-surface)/0.92)] text-[rgb(var(--color-secondary))] shadow-soft lg:flex">
+                        <ArrowRight class="h-4 w-4" />
+                        </div>
+                    )
+                    }
+                </article>
+                );
+            })
+            }
+        </div>
+        </div>
+
+        <!-- Mobile timeline -->
+        <div class="mt-12 grid gap-5 lg:hidden">
+        {
+            homeProcess.steps.map((step, index) => {
+            const Icon = step.icon;
+
+            return (
+                <article class="glass-panel relative overflow-hidden p-5">
+                <div class="pointer-events-none absolute right-[-2rem] top-[-2rem] h-28 w-28 rounded-full bg-[rgb(var(--color-secondary)/0.1)] blur-2xl"></div>
+
+                <div class="relative flex gap-4">
+                    <div class="flex flex-col items-center">
+                    <span class="flex h-12 w-12 items-center justify-center rounded-2xl bg-[rgb(var(--color-secondary)/0.1)] text-[rgb(var(--color-secondary))]">
+                        <Icon class="h-5.5 w-5.5" />
+                    </span>
+
+                    {
+                        index < homeProcess.steps.length - 1 && (
+                        <span class="mt-3 h-full min-h-12 w-px bg-[rgb(var(--color-border))]"></span>
+                        )
+                    }
+                    </div>
+
+                    <div class="pb-4">
+                    <span class="font-inter text-xs font-extrabold uppercase tracking-[0.14em] text-[rgb(var(--color-secondary))]">
+                        {step.number}
+                    </span>
+
+                    <h3 class="mt-2 font-inter text-xl font-extrabold tracking-[-0.045em] text-[rgb(var(--color-heading))]">
+                        {step.title}
+                    </h3>
+
+                    <p class="mt-2 text-sm leading-7 text-[rgb(var(--color-text-soft))]">
+                        {step.description}
+                    </p>
+                    </div>
+                </div>
+                </article>
+            );
+            })
+        }
+        </div>
+
+        <!-- Bottom feature strip -->
+        <div
+        class="mt-14 overflow-hidden rounded-[2rem] border border-[rgb(var(--color-border)/0.72)] bg-[linear-gradient(135deg,rgb(var(--color-primary))_0%,rgb(var(--color-secondary))_100%)] p-6 text-white shadow-blue md:p-8"
+        >
+        <div class="pointer-events-none absolute inset-0"></div>
+
+        <div class="relative grid gap-8 lg:grid-cols-[1fr_auto] lg:items-center">
+            <div>
+            <Badge variant="outline" class="border-white/25 bg-white/10 text-white">
+                <Sparkles class="h-3.5 w-3.5" />
+                Simple, guided, organized
+            </Badge>
+
+            <h3 class="mt-5 max-w-3xl font-inter text-3xl font-extrabold tracking-[-0.055em] text-white md:text-4xl">
+                A better experience for people who do not want accounting to feel confusing.
+            </h3>
+
+            <p class="mt-4 max-w-3xl text-sm leading-7 text-white/78 md:text-base">
+                From your first message to document review and ongoing support, the goal is to make taxes, bookkeeping, payroll, and accounting easier to understand.
+            </p>
+            </div>
+
+            <div class="grid gap-3 sm:grid-cols-2 lg:w-[24rem]">
+            <div class="rounded-2xl border border-white/15 bg-white/10 p-4 backdrop-blur">
+                <Clock3 class="h-5 w-5 text-white" />
+                <p class="mt-3 font-inter text-sm font-extrabold text-white">
+                Year-round support
+                </p>
+                <p class="mt-1 text-xs leading-5 text-white/72">
+                Not only during tax season.
+                </p>
+            </div>
+
+            <div class="rounded-2xl border border-white/15 bg-white/10 p-4 backdrop-blur">
+                <FileText class="h-5 w-5 text-white" />
+                <p class="mt-3 font-inter text-sm font-extrabold text-white">
+                Document clarity
+                </p>
+                <p class="mt-1 text-xs leading-5 text-white/72">
+                Know what is needed next.
+                </p>
+            </div>
+            </div>
+        </div>
+        </div>
+    </div>
+</section>

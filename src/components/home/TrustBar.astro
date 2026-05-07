@@ -1,0 +1,91 @@
+---
+import { homeTrustBar, homeStats } from "../../data/home";
+---
+
+<section class="relative z-20 block pb-10 sm:hidden">
+    <div class="container-wide">
+        <div
+        class="glass-panel relative overflow-hidden rounded-[2rem] p-3 shadow-card"
+        >
+        <!-- Top glow line -->
+        <div
+            class="pointer-events-none absolute inset-x-8 top-0 h-px bg-[linear-gradient(90deg,transparent,rgb(var(--color-secondary)/0.75),transparent)]"
+        >
+        </div>
+
+        <div class="grid gap-3 lg:grid-cols-[1.35fr_0.65fr]">
+            <!-- Service Trust Items -->
+            <div class="grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
+            {
+                homeTrustBar.map((item) => {
+                const Icon = item.icon;
+
+                return (
+                    <article class="group relative overflow-hidden rounded-[1.5rem] border border-[rgb(var(--color-border)/0.62)] bg-[rgb(var(--color-surface)/0.62)] p-5 transition duration-300 hover:-translate-y-1 hover:border-[rgb(var(--color-secondary)/0.42)] hover:bg-[rgb(var(--color-secondary)/0.07)]">
+                    <div class="pointer-events-none absolute right-[-2rem] top-[-2rem] h-24 w-24 rounded-full bg-[rgb(var(--color-secondary)/0.1)] blur-2xl transition group-hover:bg-[rgb(var(--color-secondary)/0.18)]" />
+
+                    <span class="relative flex h-12 w-12 items-center justify-center rounded-2xl bg-[rgb(var(--color-secondary)/0.1)] text-[rgb(var(--color-secondary))] transition duration-300 group-hover:scale-105 group-hover:bg-[rgb(var(--color-secondary)/0.16)]">
+                        <Icon class="h-6 w-6" />
+                    </span>
+
+                    <h2 class="relative mt-4 font-inter text-base font-extrabold tracking-[-0.035em] text-[rgb(var(--color-heading))]">
+                        {item.title}
+                    </h2>
+
+                    <p class="relative mt-2 text-sm leading-6 text-[rgb(var(--color-text-soft))]">
+                        {item.description}
+                    </p>
+                    </article>
+                );
+                })
+            }
+            </div>
+
+            <!-- Stats Panel -->
+            <div
+            class="relative overflow-hidden rounded-[1.5rem] border border-[rgb(var(--color-border)/0.62)] bg-[linear-gradient(135deg,rgb(var(--color-primary))_0%,rgb(var(--color-secondary))_100%)] p-5 text-white shadow-blue"
+            >
+            <div
+                class="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_20%_0%,rgba(255,255,255,0.28),transparent_34%),radial-gradient(circle_at_90%_100%,rgba(255,255,255,0.16),transparent_30%)]"
+            >
+            </div>
+
+            <div class="relative">
+
+                <span class="mt-2 max-w-sm font-inter text-2xl font-extrabold tracking-[-0.055em] text-white dark:text-white">
+                    Local, bilingual, and built for year-round support.
+                </span>
+
+                <div class="mt-5 grid gap-3 sm:grid-cols-2 lg:grid-cols-1 xl:grid-cols-2">
+                {
+                    homeStats.map((stat) => {
+                    const Icon = stat.icon;
+
+                    return (
+                        <div class="rounded-2xl border border-white/15 bg-white/10 p-4 backdrop-blur">
+                        <div class="flex items-center gap-3">
+                            <span class="flex h-11 w-11 items-center justify-center rounded-xl bg-white/14 text-white">
+                            <Icon class="h-6 w-6" />
+                            </span>
+
+                            <div>
+                            <span class="font-inter text-lg font-extrabold leading-none tracking-[-0.04em] text-white">
+                                {stat.value}
+                            </span>
+                            <br />
+                            <span class="text-xs leading-5 text-white/74">
+                                {stat.label}
+                            </span>
+                            </div>
+                        </div>
+                        </div>
+                    );
+                    })
+                }
+                </div>
+            </div>
+            </div>
+        </div>
+        </div>
+    </div>
+</section>
