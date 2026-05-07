@@ -1,0 +1,292 @@
+---
+import {
+    ChevronDown,
+    Mail,
+    Menu,
+    Moon,
+    Phone,
+    Send,
+    Sun,
+    X,
+} from "@lucide/astro";
+
+import { mainNavigation } from "../../data/navigation";
+import { siteConfig } from "../../data/site";
+import {
+    getLanguageFromUrl,
+    getTranslations,
+    localizedPath,
+    type LanguageCode,
+} from "../../data/i18n";
+
+const currentLanguage = getLanguageFromUrl(Astro.url.pathname);
+const t = getTranslations(currentLanguage);
+
+const currentPath = Astro.url.pathname;
+
+const isActive = (href: string) => {
+    if (href === "/") return currentPath === "/" || currentPath === "/es";
+    return currentPath.startsWith(href) || currentPath.startsWith(`/es${href}`);
+};
+
+const getHref = (href: string) =>
+    localizedPath(href, currentLanguage as LanguageCode);
+---
+
+<header class="header-blur sticky top-0 z-50">
+    <div class="container-wide">
+        <!-- Top Utility Bar -->
+        <div
+        class="hidden items-center justify-between border-b border-[rgb(var(--color-border)/0.58)] py-2 text-sm lg:flex"
+        >
+        <p
+            class="font-inter text-[0.78rem] font-semibold text-[rgb(var(--color-text-soft))]"
+        >
+            {t.misc.bilingual} · {siteConfig.hours.label}
+        </p>
+
+        <div class="flex items-center gap-4">
+            <a
+            href={siteConfig.contact.phoneHref}
+            class="group inline-flex items-center gap-2 font-inter text-[0.78rem] font-bold text-[rgb(var(--color-text-soft))] transition hover:text-[rgb(var(--color-secondary))]"
+            >
+            <Phone class="h-3.5 w-3.5 transition group-hover:scale-110" />
+            {siteConfig.contact.phone}
+            </a>
+
+            <a
+            href={siteConfig.contact.emailHref}
+            class="group inline-flex items-center gap-2 font-inter text-[0.78rem] font-bold text-[rgb(var(--color-text-soft))] transition hover:text-[rgb(var(--color-secondary))]"
+            >
+            <Mail class="h-3.5 w-3.5 transition group-hover:scale-110" />
+            {siteConfig.contact.email}
+            </a>
+        </div>
+        </div>
+
+        <!-- Main Header -->
+        <div class="flex min-h-[76px] items-center justify-between gap-4 py-3">
+        <!-- Logo -->
+        <a
+            href={getHref("/")}
+            aria-label={`${siteConfig.name} home`}
+            class="group flex items-center gap-3"
+        >
+            <span
+            class="flex h-12 w-12 items-center justify-center overflow-hidden rounded-2xl border border-[rgb(var(--color-border)/0.78)] bg-[rgb(var(--color-surface)/0.78)] p-2 shadow-soft transition group-hover:-translate-y-0.5 group-hover:border-[rgb(var(--color-secondary)/0.45)]"
+            >
+            <img
+                src={siteConfig.logos.dark}
+                alt=""
+                width="96"
+                height="96"
+                class="logo-for-light h-full w-full object-contain"
+                loading="eager"
+            />
+            <img
+                src={siteConfig.logos.light}
+                alt=""
+                width="96"
+                height="96"
+                class="logo-for-dark h-full w-full object-contain"
+                loading="eager"
+            />
+            </span>
+
+            <span class="hidden leading-tight sm:block">
+            <span
+                class="block font-inter text-sm font-extrabold tracking-[-0.03em] text-[rgb(var(--color-heading))]"
+            >
+                East Coast
+            </span>
+            <span
+                class="block font-inter text-[0.74rem] font-bold uppercase tracking-[0.12em] text-[rgb(var(--color-secondary))]"
+            >
+                Accounting & Tax Services
+            </span>
+            </span>
+        </a>
+
+        <!-- Desktop Nav -->
+        <nav
+            class="hidden items-center gap-1 xl:flex"
+            aria-label="Main navigation"
+        >
+            {
+            mainNavigation.map((item) => {
+                const Icon = item.icon;
+                const hasChildren = "children" in item && item.children?.length;
+
+                return (
+                <div class="group/nav relative">
+                    <a
+                    href={getHref(item.href)}
+                    class="nav-link inline-flex items-center gap-2 rounded-full px-3 py-2"
+                    aria-current={isActive(item.href) ? "page" : undefined}
+                    >
+                    <Icon class="h-4 w-4" />
+                    {item.label}
+
+                    {hasChildren && (
+                        <ChevronDown class="h-3.5 w-3.5 transition duration-200 group-hover/nav:rotate-180" />
+                    )}
+                    </a>
+
+                    {hasChildren && (
+                    <div class="pointer-events-none absolute left-1/2 top-full w-[760px] -translate-x-1/2 translate-y-4 opacity-0 transition duration-200 group-hover/nav:pointer-events-auto group-hover/nav:translate-y-3 group-hover/nav:opacity-100">
+                        <div class="glass-panel overflow-hidden p-3">
+                        <div class="grid grid-cols-2 gap-2">
+                            {item.children.map((child) => {
+                            const ChildIcon = child.icon;
+
+                            return (
+                                <a
+                                href={getHref(child.href)}
+                                class="group/item rounded-[1.25rem] border border-transparent p-4 transition hover:border-[rgb(var(--color-secondary)/0.32)] hover:bg-[rgb(var(--color-secondary)/0.08)]"
+                                >
+                                <span class="mb-3 flex h-10 w-10 items-center justify-center rounded-2xl bg-[rgb(var(--color-secondary)/0.1)] text-[rgb(var(--color-secondary))] transition group-hover/item:scale-105 group-hover/item:bg-[rgb(var(--color-secondary)/0.16)]">
+                                    <ChildIcon class="h-5 w-5" />
+                                </span>
+
+                                <span class="block font-inter text-sm font-extrabold text-[rgb(var(--color-heading))]">
+                                    {child.label}
+                                </span>
+
+                                <span class="mt-1 block text-sm leading-6 text-[rgb(var(--color-text-soft))]">
+                                    {child.description}
+                                </span>
+                                </a>
+                            );
+                            })}
+                        </div>
+                        </div>
+                    </div>
+                    )}
+                </div>
+                );
+            })
+            }
+        </nav>
+
+        <!-- Actions -->
+        <div class="flex items-center gap-2">
+            <!-- Theme Toggle -->
+            <button
+            type="button"
+            class="inline-flex h-11 w-11 items-center justify-center rounded-full border border-[rgb(var(--color-border)/0.78)] bg-[rgb(var(--color-surface)/0.78)] text-[rgb(var(--color-heading))] shadow-soft transition hover:-translate-y-0.5 hover:border-[rgb(var(--color-secondary)/0.45)] hover:bg-[rgb(var(--color-secondary)/0.08)]"
+            aria-label={t.theme.toggle}
+            data-theme-toggle
+            >
+            <Sun data-theme-icon="light" class="h-4.5 w-4.5" />
+            <Moon data-theme-icon="dark" class="hidden h-4.5 w-4.5" />
+            <span class="sr-only" data-theme-label>{t.theme.light}</span>
+            </button>
+
+            <a
+            href={getHref(siteConfig.ctas.primary.href)}
+            class="btn btn-primary hidden lg:inline-flex"
+            >
+            <Send class="h-4 w-4" />
+            {t.cta.contact}
+            </a>
+
+            <!-- Mobile Menu Button -->
+            <button
+            type="button"
+            class="inline-flex h-11 w-11 items-center justify-center rounded-full border border-[rgb(var(--color-border)/0.78)] bg-[rgb(var(--color-surface)/0.78)] text-[rgb(var(--color-heading))] shadow-soft transition hover:border-[rgb(var(--color-secondary)/0.45)] hover:bg-[rgb(var(--color-secondary)/0.08)] xl:hidden"
+            aria-label={t.navigation.open}
+            aria-expanded="false"
+            data-mobile-menu-button
+            >
+            <Menu class="h-5 w-5" data-menu-icon="open" />
+            <X class="hidden h-5 w-5" data-menu-icon="close" />
+            </button>
+        </div>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div
+        class="hidden border-t border-[rgb(var(--color-border)/0.62)] pb-5 pt-3 xl:hidden"
+        data-mobile-menu
+        >
+        <nav class="grid gap-2" aria-label="Mobile navigation">
+            {
+            mainNavigation.map((item) => {
+                const Icon = item.icon;
+                const hasChildren = "children" in item && item.children?.length;
+
+                return (
+                <div class="rounded-[1.25rem] border border-[rgb(var(--color-border)/0.58)] bg-[rgb(var(--color-surface)/0.68)]">
+                    <a
+                    href={getHref(item.href)}
+                    class="flex items-center justify-between gap-3 px-4 py-3 font-inter text-sm font-extrabold text-[rgb(var(--color-heading))]"
+                    aria-current={isActive(item.href) ? "page" : undefined}
+                    >
+                    <span class="flex items-center gap-3">
+                        <span class="flex h-9 w-9 items-center justify-center rounded-2xl bg-[rgb(var(--color-secondary)/0.1)] text-[rgb(var(--color-secondary))]">
+                        <Icon class="h-4.5 w-4.5" />
+                        </span>
+                        {item.label}
+                    </span>
+                    </a>
+
+                    {hasChildren && (
+                    <div class="grid gap-1 px-4 pb-4">
+                        {item.children.map((child) => {
+                        const ChildIcon = child.icon;
+
+                        return (
+                            <a
+                            href={getHref(child.href)}
+                            class="flex gap-3 rounded-2xl px-3 py-2.5 transition hover:bg-[rgb(var(--color-secondary)/0.08)]"
+                            >
+                            <ChildIcon class="mt-1 h-4 w-4 shrink-0 text-[rgb(var(--color-secondary))]" />
+                            <span>
+                                <span class="block font-inter text-sm font-bold text-[rgb(var(--color-heading))]">
+                                {child.label}
+                                </span>
+                                <span class="block text-sm leading-5 text-[rgb(var(--color-text-soft))]">
+                                {child.description}
+                                </span>
+                            </span>
+                            </a>
+                        );
+                        })}
+                    </div>
+                    )}
+                </div>
+                );
+            })
+            }
+        </nav>
+
+        <div class="mt-4 grid gap-2 sm:grid-cols-2">
+            <a href={siteConfig.contact.phoneHref} class="btn btn-secondary">
+            <Phone class="h-4 w-4" />
+            {t.cta.callNow}
+            </a>
+
+            <a href={getHref("/contact")} class="btn btn-primary">
+            <Send class="h-4 w-4" />
+            {t.cta.contact}
+            </a>
+        </div>
+        </div>
+    </div>
+</header>
+
+<script>
+    const mobileMenuButton = document.querySelector("[data-mobile-menu-button]");
+    const mobileMenu = document.querySelector("[data-mobile-menu]");
+    const openIcon = document.querySelector("[data-menu-icon='open']");
+    const closeIcon = document.querySelector("[data-menu-icon='close']");
+
+    mobileMenuButton?.addEventListener("click", () => {
+        const isOpen = mobileMenuButton.getAttribute("aria-expanded") === "true";
+
+        mobileMenuButton.setAttribute("aria-expanded", String(!isOpen));
+        mobileMenu?.classList.toggle("hidden", isOpen);
+        openIcon?.classList.toggle("hidden", !isOpen);
+        closeIcon?.classList.toggle("hidden", isOpen);
+    });
+</script>

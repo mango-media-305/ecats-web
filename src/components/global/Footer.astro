@@ -1,0 +1,295 @@
+---
+import {
+    ArrowUpRight,
+    Clock3,
+    Languages,
+    Mail,
+    MapPin,
+    Phone,
+    ShieldCheck,
+} from "@lucide/astro";
+
+import {
+    footerNavigation,
+    languageNavigation,
+    utilityNavigation,
+} from "../../data/navigation";
+import { siteConfig } from "../../data/site";
+import {
+    alternateLanguagePath,
+    getLanguageFromUrl,
+    getTranslations,
+    type LanguageCode,
+} from "../../data/i18n";
+
+const currentLanguage = getLanguageFromUrl(Astro.url.pathname);
+const t = getTranslations(currentLanguage);
+const year = new Date().getFullYear();
+
+const footerColumns = [
+    footerNavigation.services,
+    footerNavigation.company,
+    footerNavigation.locations,
+    footerNavigation.legal,
+];
+
+const getColumnTitle = (title: string) => {
+    if (title === "Services") return t.footer.servicesTitle;
+    if (title === "Company") return t.footer.companyTitle;
+    if (title === "Service Areas") return t.footer.serviceAreasTitle;
+    if (title === "Legal") return t.footer.legalTitle;
+    return title;
+};
+
+const localizeFooterHref = (href: string) => {
+    if (currentLanguage === "en") return href;
+    if (href === "/") return "/es";
+    return `/es${href}`;
+};
+
+const getLanguageHref = (code: string) =>
+    alternateLanguagePath(Astro.url.pathname, code as LanguageCode);
+---
+
+<footer
+    class="relative overflow-hidden border-t border-[rgb(var(--color-border)/0.72)] bg-[rgb(var(--color-bg-soft)/0.68)]"
+>
+    <div class="pointer-events-none absolute inset-0 -z-10">
+        <div
+        class="absolute left-[-10%] top-0 h-72 w-72 rounded-full bg-[rgb(var(--color-secondary)/0.12)] blur-3xl"
+        >
+        </div>
+        <div
+        class="absolute bottom-[-18%] right-[-8%] h-80 w-80 rounded-full bg-[rgb(var(--color-primary)/0.14)] blur-3xl"
+        >
+        </div>
+    </div>
+
+    <div class="container-wide py-14 lg:py-18">
+        <div class="grid gap-10 lg:grid-cols-[1.2fr_1.8fr]">
+        <!-- Brand Block -->
+        <div>
+            <a
+            href={currentLanguage === "es" ? "/es" : "/"}
+            aria-label={`${siteConfig.name} home`}
+            class="inline-flex items-center gap-4"
+            >
+            <span
+                class="flex h-14 w-14 items-center justify-center overflow-hidden rounded-2xl border border-[rgb(var(--color-border)/0.78)] bg-[rgb(var(--color-surface)/0.78)] p-2.5 shadow-soft"
+            >
+                <img
+                src={siteConfig.logos.dark}
+                alt=""
+                width="112"
+                height="112"
+                class="logo-for-light h-full w-full object-contain"
+                loading="lazy"
+                />
+                <img
+                src={siteConfig.logos.light}
+                alt=""
+                width="112"
+                height="112"
+                class="logo-for-dark h-full w-full object-contain"
+                loading="lazy"
+                />
+            </span>
+
+            <span class="leading-tight">
+                <span
+                class="block font-inter text-lg font-extrabold tracking-[-0.04em] text-[rgb(var(--color-heading))]"
+                >
+                East Coast
+                </span>
+                <span
+                class="block font-inter text-xs font-bold uppercase tracking-[0.12em] text-[rgb(var(--color-secondary))]"
+                >
+                Accounting & Tax Services
+                </span>
+            </span>
+            </a>
+
+            <p class="mt-5 max-w-md text-pretty text-[rgb(var(--color-text-soft))]">
+            {siteConfig.description}
+            </p>
+
+            <div class="mt-6 grid gap-3">
+            <a
+                href={siteConfig.contact.phoneHref}
+                class="group flex items-center gap-3 text-sm font-bold text-[rgb(var(--color-text-soft))] transition hover:text-[rgb(var(--color-secondary))]"
+            >
+                <span
+                class="flex h-10 w-10 items-center justify-center rounded-2xl bg-[rgb(var(--color-secondary)/0.1)] text-[rgb(var(--color-secondary))]"
+                >
+                <Phone class="h-4.5 w-4.5" />
+                </span>
+                {siteConfig.contact.phone}
+            </a>
+
+            <a
+                href={siteConfig.contact.emailHref}
+                class="group flex items-center gap-3 text-sm font-bold text-[rgb(var(--color-text-soft))] transition hover:text-[rgb(var(--color-secondary))]"
+            >
+                <span
+                class="flex h-10 w-10 items-center justify-center rounded-2xl bg-[rgb(var(--color-secondary)/0.1)] text-[rgb(var(--color-secondary))]"
+                >
+                <Mail class="h-4.5 w-4.5" />
+                </span>
+                {siteConfig.contact.email}
+            </a>
+
+            <a
+                href="https://www.google.com/maps/search/?api=1&query=6874%20SW%208th%20St%2C%20Miami%2C%20FL%2033144"
+                target="_blank"
+                rel="noreferrer"
+                class="group flex items-start gap-3 text-sm font-bold text-[rgb(var(--color-text-soft))] transition hover:text-[rgb(var(--color-secondary))]"
+            >
+                <span
+                class="flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl bg-[rgb(var(--color-secondary)/0.1)] text-[rgb(var(--color-secondary))]"
+                >
+                <MapPin class="h-4.5 w-4.5" />
+                </span>
+                <span>
+                {siteConfig.address.full}
+                <ArrowUpRight class="ml-1 inline h-3.5 w-3.5" />
+                </span>
+            </a>
+
+            <div
+                class="flex items-center gap-3 text-sm font-bold text-[rgb(var(--color-text-soft))]"
+            >
+                <span
+                class="flex h-10 w-10 items-center justify-center rounded-2xl bg-[rgb(var(--color-secondary)/0.1)] text-[rgb(var(--color-secondary))]"
+                >
+                <Clock3 class="h-4.5 w-4.5" />
+                </span>
+                {siteConfig.hours.label}
+            </div>
+            </div>
+
+            <div class="mt-6 flex flex-wrap gap-2">
+            <span class="section-kicker normal-case tracking-normal">
+                <ShieldCheck class="h-3.5 w-3.5" />
+                {t.misc.miamiBased}
+            </span>
+
+            <span class="section-kicker normal-case tracking-normal">
+                <Languages class="h-3.5 w-3.5" />
+                {t.misc.bilingual}
+            </span>
+            </div>
+        </div>
+
+        <!-- Footer Links -->
+        <div class="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
+            {
+            footerColumns.map((column) => (
+                <div>
+                <h2 class="font-inter text-sm font-extrabold uppercase tracking-[0.12em] text-[rgb(var(--color-heading))]">
+                    {getColumnTitle(column.title)}
+                </h2>
+
+                <ul class="mt-4 grid gap-3">
+                    {column.links.map((link) => (
+                    <li>
+                        <a
+                        href={localizeFooterHref(link.href)}
+                        class="footer-link inline-flex text-sm font-bold"
+                        >
+                        {link.label}
+                        </a>
+                    </li>
+                    ))}
+                </ul>
+                </div>
+            ))
+            }
+        </div>
+        </div>
+
+        <!-- Contact CTA Strip -->
+        <div
+        class="mt-12 grid gap-4 rounded-[2rem] border border-[rgb(var(--color-border)/0.72)] bg-[rgb(var(--color-surface)/0.72)] p-4 shadow-soft backdrop-blur md:grid-cols-[1fr_auto]"
+        >
+        <div>
+            <p
+            class="font-inter text-lg font-extrabold tracking-[-0.035em] text-[rgb(var(--color-heading))]"
+            >
+            {t.cta.contactOffice}
+            </p>
+            <p class="mt-1 text-sm text-[rgb(var(--color-text-soft))]">
+            {siteConfig.tagline}
+            </p>
+        </div>
+
+        <div class="flex flex-wrap gap-2">
+            {
+            utilityNavigation.map((item) => {
+                const Icon = item.icon;
+
+                return (
+                <a
+                    href={item.href}
+                    target={item.external ? "_blank" : undefined}
+                    rel={item.external ? "noreferrer" : undefined}
+                    class="btn btn-secondary min-h-11 px-4 text-sm"
+                >
+                    <Icon class="h-4 w-4" />
+                    {item.label}
+                </a>
+                );
+            })
+            }
+        </div>
+        </div>
+
+        <!-- Bottom Bar -->
+        <div
+        class="mt-8 flex flex-col gap-5 border-t border-[rgb(var(--color-border)/0.72)] pt-6 lg:flex-row lg:items-center lg:justify-between"
+        >
+        <div>
+            <p class="text-sm text-[rgb(var(--color-text-soft))]">
+            © {year}
+            {siteConfig.name}. {t.footer.rights}
+            </p>
+            <p class="mt-1 text-xs text-[rgb(var(--color-muted))]">
+            {t.footer.builtFor}
+            </p>
+        </div>
+
+        <!-- Language Switcher -->
+        <div class="flex flex-wrap items-center gap-3">
+            <span
+            class="font-inter text-xs font-extrabold uppercase tracking-[0.12em] text-[rgb(var(--color-text-soft))]"
+            >
+            {t.footer.languageSwitcherTitle}
+            </span>
+
+            <div
+            class="flex rounded-full border border-[rgb(var(--color-border)/0.78)] bg-[rgb(var(--color-surface)/0.72)] p-1 shadow-soft"
+            aria-label={t.language.switcherLabel}
+            >
+            {
+                languageNavigation.map((language) => {
+                const isCurrent = language.code === currentLanguage;
+
+                return (
+                    <a
+                    href={getLanguageHref(language.code)}
+                    aria-current={isCurrent ? "true" : undefined}
+                    class={`rounded-full px-4 py-2 font-inter text-xs font-extrabold transition ${
+                        isCurrent
+                        ? "bg-[rgb(var(--color-secondary))] text-white"
+                        : "text-[rgb(var(--color-text-soft))] hover:bg-[rgb(var(--color-secondary)/0.08)] hover:text-[rgb(var(--color-heading))]"
+                    }`}
+                    >
+                    {language.label}
+                    </a>
+                );
+                })
+            }
+            </div>
+        </div>
+        </div>
+    </div>
+</footer>
