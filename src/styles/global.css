@@ -869,3 +869,19 @@ hr {
 :root[data-theme="dark"] .theme-icon-dark {
     display: block;
 }
+
+/* ----------------------------- */
+/* Mobile menu icon visibility   */
+/* ----------------------------- */
+
+.mobile-menu-toggle [data-menu-icon="close"] {
+    display: none;
+}
+
+.mobile-menu-toggle[aria-expanded="true"] [data-menu-icon="open"] {
+    display: none;
+}
+
+.mobile-menu-toggle[aria-expanded="true"] [data-menu-icon="close"] {
+    display: block;
+}

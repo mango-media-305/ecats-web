@@ -183,23 +183,23 @@ const getHref = (href: string) =>
             </button>
 
             <a
-            href={getHref(siteConfig.ctas.primary.href)}
-            class="btn btn-primary hidden lg:inline-flex"
+                href={getHref(siteConfig.ctas.primary.href)}
+                class="btn btn-primary hidden lg:inline-flex"
             >
-            <Send class="h-4 w-4" />
-            {t.cta.contact}
+                <Send class="h-4 w-4" />
+                {t.cta.contact}
             </a>
 
             <!-- Mobile Menu Button -->
             <button
-            type="button"
-            class="inline-flex h-11 w-11 items-center justify-center rounded-full border border-[rgb(var(--color-border)/0.78)] bg-[rgb(var(--color-surface)/0.78)] text-[rgb(var(--color-heading))] shadow-soft transition hover:border-[rgb(var(--color-secondary)/0.45)] hover:bg-[rgb(var(--color-secondary)/0.08)] xl:hidden"
-            aria-label={t.navigation.open}
-            aria-expanded="false"
-            data-mobile-menu-button
+                type="button"
+                class="mobile-menu-toggle inline-flex h-11 w-11 items-center justify-center rounded-full border border-[rgb(var(--color-border)/0.78)] bg-[rgb(var(--color-surface)/0.78)] text-[rgb(var(--color-heading))] shadow-soft transition hover:border-[rgb(var(--color-secondary)/0.45)] hover:bg-[rgb(var(--color-secondary)/0.08)] xl:hidden"
+                aria-label={t.navigation.open}
+                aria-expanded="false"
+                data-mobile-menu-button
             >
-            <Menu class="h-5 w-5" data-menu-icon="open" />
-            <X class="hidden h-5 w-5" data-menu-icon="close" />
+                <Menu class="h-5 w-5" data-menu-icon="open" />
+                <X class="h-5 w-5" data-menu-icon="close" />
             </button>
         </div>
         </div>
@@ -278,15 +278,11 @@ const getHref = (href: string) =>
 <script>
     const mobileMenuButton = document.querySelector("[data-mobile-menu-button]");
     const mobileMenu = document.querySelector("[data-mobile-menu]");
-    const openIcon = document.querySelector("[data-menu-icon='open']");
-    const closeIcon = document.querySelector("[data-menu-icon='close']");
 
     mobileMenuButton?.addEventListener("click", () => {
         const isOpen = mobileMenuButton.getAttribute("aria-expanded") === "true";
 
         mobileMenuButton.setAttribute("aria-expanded", String(!isOpen));
         mobileMenu?.classList.toggle("hidden", isOpen);
-        openIcon?.classList.toggle("hidden", !isOpen);
-        closeIcon?.classList.toggle("hidden", isOpen);
     });
 </script>
