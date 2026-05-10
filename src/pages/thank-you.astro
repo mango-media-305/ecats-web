@@ -1,0 +1,130 @@
+---
+import {
+    ArrowLeft,
+    CheckCircle2,
+    Mail,
+    Phone,
+    Send,
+    Sparkles,
+} from "@lucide/astro";
+
+import MainLayout from "../layouts/MainLayout.astro";
+import CTAButton from "../components/ui/CTAButton.astro";
+import Badge from "../components/ui/Badge.astro";
+import { siteConfig } from "../data/site";
+
+const title = "Thank You";
+const description =
+    "Thank you for contacting East Coast Accounting & Tax Services. Our Miami office will review your message and follow up as soon as possible.";
+---
+
+<MainLayout title={title} description={description} noindex={true}>
+    <section class="section-shell accounting-grid relative isolate overflow-hidden">
+        <!-- Background effects -->
+        <div class="pointer-events-none absolute inset-0 -z-10">
+            <div
+                class="absolute left-1/2 top-28 h-[34rem] w-[34rem] -translate-x-1/2 rounded-full bg-[radial-gradient(circle,rgb(var(--color-secondary)/0.16),transparent_68%)] blur-2xl"
+            >
+            </div>
+
+            <div
+                class="absolute left-[-12rem] bottom-[-10rem] h-[30rem] w-[30rem] rounded-full bg-[rgb(var(--color-primary)/0.12)] blur-3xl"
+            >
+            </div>
+
+            <div
+                class="absolute right-[-12rem] top-[-10rem] h-[30rem] w-[30rem] rounded-full bg-[rgb(var(--color-secondary)/0.12)] blur-3xl"
+            >
+            </div>
+        </div>
+
+        <div class="container-narrow">
+            <div
+                class="glass-panel relative overflow-hidden rounded-[2.5rem] p-5 text-center shadow-card sm:p-8 lg:p-10"
+            >
+                <div
+                    class="pointer-events-none absolute inset-x-10 top-0 h-px bg-[linear-gradient(90deg,transparent,rgb(var(--color-secondary)/0.8),transparent)]"
+                >
+                </div>
+
+                <div
+                    class="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,rgb(var(--color-secondary)/0.1),transparent_34rem)]"
+                >
+                </div>
+
+                <div class="relative mx-auto flex max-w-3xl flex-col items-center">
+
+                    <div
+                        class="mt-8 flex h-24 w-24 items-center justify-center rounded-full border border-[rgb(var(--color-secondary)/0.28)] bg-[rgb(var(--color-secondary)/0.1)] text-[rgb(var(--color-secondary))] shadow-blue"
+                    >
+                        <CheckCircle2 class="h-12 w-12" />
+                    </div>
+
+                    <h1
+                        class="mt-8 text-balance font-inter text-4xl font-extrabold tracking-[-0.065em] text-[rgb(var(--color-heading))] sm:text-5xl lg:text-6xl"
+                    >
+                        Thank you for contacting East Coast Accounting & Tax Services.
+                    </h1>
+
+                    <p class="lead-text mt-6 text-center">
+                        Your message was submitted successfully. Our Miami office will review your request and follow up as soon as possible.
+                    </p>
+
+                    <div
+                        class="mt-8 grid w-full gap-4 rounded-[2rem] border border-[rgb(var(--color-border)/0.72)] bg-[rgb(var(--color-surface)/0.72)] p-4 shadow-soft backdrop-blur sm:grid-cols-2"
+                    >
+                        <a
+                            href={siteConfig.contact.phoneHref}
+                            class="group flex items-center gap-4 rounded-[1.5rem] border border-[rgb(var(--color-border)/0.6)] bg-[rgb(var(--color-bg)/0.42)] p-4 text-left transition hover:-translate-y-1 hover:border-[rgb(var(--color-secondary)/0.42)] hover:bg-[rgb(var(--color-secondary)/0.07)]"
+                        >
+                            <span class="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-[rgb(var(--color-secondary)/0.1)] text-[rgb(var(--color-secondary))]">
+                                <Phone class="h-5.5 w-5.5" />
+                            </span>
+
+                            <span>
+                                <span class="block font-inter text-sm font-extrabold text-[rgb(var(--color-heading))]">
+                                    Need faster help?
+                                </span>
+                                <span class="mt-1 block text-sm text-[rgb(var(--color-text-soft))]">
+                                    {siteConfig.contact.phone}
+                                </span>
+                            </span>
+                        </a>
+
+                        <a
+                            href={siteConfig.contact.emailHref}
+                            class="group flex items-center gap-4 rounded-[1.5rem] border border-[rgb(var(--color-border)/0.6)] bg-[rgb(var(--color-bg)/0.42)] p-4 text-left transition hover:-translate-y-1 hover:border-[rgb(var(--color-secondary)/0.42)] hover:bg-[rgb(var(--color-secondary)/0.07)]"
+                        >
+                            <span class="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-[rgb(var(--color-secondary)/0.1)] text-[rgb(var(--color-secondary))]">
+                                <Mail class="h-5.5 w-5.5" />
+                            </span>
+
+                            <span>
+                                <span class="block font-inter text-sm font-extrabold text-[rgb(var(--color-heading))]">
+                                    Prefer email?
+                                </span>
+                                <span class="mt-1 block text-sm text-[rgb(var(--color-text-soft))]">
+                                    {siteConfig.contact.email}
+                                </span>
+                            </span>
+                        </a>
+                    </div>
+
+                    <div class="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:justify-center items-center">
+                        <CTAButton href="/" variant="secondary" icon={ArrowLeft} iconPosition="left">
+                            Back to Home
+                        </CTAButton>
+
+                        <CTAButton href="/services" icon={Send}>
+                            Explore Services
+                        </CTAButton>
+                    </div>
+
+                    <p class="mt-8 max-w-xl text-sm leading-7 text-[rgb(var(--color-text-soft))]">
+                        Office hours: {siteConfig.hours.label}. If your request was sent outside regular business hours, the team will follow up during the next business day.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+</MainLayout>

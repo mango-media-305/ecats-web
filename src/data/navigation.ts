@@ -127,55 +127,6 @@ export const mainNavigation = [
         ],
     },
     {
-        label: "Locations",
-        href: "/locations",
-        icon: MapPin,
-        children: [
-            {
-                label: "Miami",
-                href: "/locations/miami-fl",
-                description:
-                    "Tax and accounting services for individuals and businesses in Miami, FL.",
-                icon: MapPin,
-            },
-            {
-                label: "Doral",
-                href: "/locations/doral-fl",
-                description:
-                    "Bookkeeping, payroll, and tax support for Doral businesses and residents.",
-                icon: MapPin,
-            },
-            {
-                label: "Kendall",
-                href: "/locations/kendall-fl",
-                description:
-                    "Accounting and tax preparation services for Kendall and nearby communities.",
-                icon: MapPin,
-            },
-            {
-                label: "Coral Gables",
-                href: "/locations/coral-gables-fl",
-                description:
-                    "Professional tax and accounting support near Coral Gables, FL.",
-                icon: MapPin,
-            },
-            {
-                label: "Hialeah",
-                href: "/locations/hialeah-fl",
-                description:
-                    "Tax preparation, bookkeeping, and payroll services for Hialeah clients.",
-                icon: MapPin,
-            },
-            {
-                label: "Homestead",
-                href: "/locations/homestead-fl",
-                description:
-                    "Tax and bookkeeping services for Homestead and South Miami-Dade.",
-                icon: MapPin,
-            },
-        ],
-    },
-    {
         label: "Resources",
         href: "/resources",
         icon: Newspaper,

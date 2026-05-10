@@ -61,158 +61,221 @@ import { siteConfig } from "../../data/site";
             </Badge>
 
             <h2
-                class="mt-6 max-w-4xl text-balance font-inter text-4xl font-extrabold tracking-[-0.065em] text-white sm:text-5xl lg:text-6xl"
+                class="mt-6 max-w-4xl text-balance font-inter text-4xl font-extrabold tracking-[-0.065em] !text-white sm:text-5xl lg:text-6xl"
             >
                 {homeFinalCta.title}
             </h2>
 
-            <p class="mt-6 max-w-2xl text-base leading-8 text-white/78 sm:text-lg">
+            <p class="mt-6 max-w-2xl text-base leading-8 !text-white/78 sm:text-lg">
                 {homeFinalCta.description}
             </p>
 
             <div class="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
                 <CTAButton
-                href={homeFinalCta.primaryCta.href}
-                variant="light"
-                size="lg"
-                icon={homeFinalCta.primaryCta.icon}
-                >
-                {homeFinalCta.primaryCta.label}
-                </CTAButton>
-
-                <CTAButton
                 href={homeFinalCta.secondaryCta.href}
-                variant="ghost"
+                variant="dark"
                 size="lg"
                 icon={homeFinalCta.secondaryCta.icon}
-                iconPosition="left"
-                class="border-white/20 bg-white/10 text-white hover:border-white/35 hover:bg-white/16"
                 >
                 {homeFinalCta.secondaryCta.label}
                 </CTAButton>
-            </div>
 
-            <div class="mt-8 flex flex-wrap gap-3">
-                {
-                homeFinalCta.supportingPoints.map((point) => {
-                    const Icon = point.icon;
-
-                    return (
-                    <div class="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/10 px-4 py-2 backdrop-blur">
-                        <span class="flex h-7 w-7 items-center justify-center rounded-full bg-white/12 text-white">
-                        <Icon class="h-3.5 w-3.5" />
-                        </span>
-                        <span class="font-inter text-sm font-bold text-white/86">
-                        {point.label}
-                        </span>
-                    </div>
-                    );
-                })
-                }
-            </div>
-            </div>
-
-            <!-- Contact preview panel -->
-            <div class="relative">
-            <div class="rounded-[2rem] border border-white/18 bg-white/12 p-4 shadow-[0_28px_90px_rgba(0,0,0,0.18)] backdrop-blur-xl sm:p-5">
-                <div class="rounded-[1.6rem] border border-white/14 bg-white/12 p-5">
-                <div class="flex items-start justify-between gap-4">
-                    <div>
-                    <p class="font-inter text-xs font-extrabold uppercase tracking-[0.14em] text-white/70">
-                        Contact Preview
-                    </p>
-                    <h3 class="mt-2 font-inter text-2xl font-extrabold tracking-[-0.055em] text-white">
-                        Start with a simple message.
-                    </h3>
-                    </div>
-
-                    <span class="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-white/12 text-white">
-                    <MessageSquareText class="h-6 w-6" />
-                    </span>
-                </div>
-
-                <div class="mt-6 grid gap-3">
-                    <div class="rounded-2xl border border-white/12 bg-white/10 p-4">
-                    <p class="font-inter text-xs font-bold uppercase tracking-[0.12em] text-white/60">
-                        Service Needed
-                    </p>
-                    <p class="mt-1 font-inter text-sm font-extrabold text-white">
-                        Taxes · Bookkeeping · Payroll
-                    </p>
-                    </div>
-
-                    <div class="rounded-2xl border border-white/12 bg-white/10 p-4">
-                    <p class="font-inter text-xs font-bold uppercase tracking-[0.12em] text-white/60">
-                        Client Type
-                    </p>
-                    <p class="mt-1 font-inter text-sm font-extrabold text-white">
-                        Individual or Business
-                    </p>
-                    </div>
-
-                    <div class="rounded-2xl border border-white/12 bg-white/10 p-4">
-                    <p class="font-inter text-xs font-bold uppercase tracking-[0.12em] text-white/60">
-                        Next Step
-                    </p>
-                    <p class="mt-1 font-inter text-sm font-extrabold text-white">
-                        Office review and follow-up
-                    </p>
-                    </div>
-                </div>
-
-                <div class="mt-6 grid gap-3">
-                    {
-                    [
-                        "Contact form as the main CTA",
-                        "Phone and email as secondary options",
-                        "Bilingual support available",
-                    ].map((item) => (
-                        <div class="flex items-center gap-3">
-                        <span class="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-white/12 text-white">
-                            <CheckCircle2 class="h-3.5 w-3.5" />
-                        </span>
-
-                        <span class="text-sm font-bold leading-6 text-white/80">
-                            {item}
-                        </span>
-                        </div>
-                    ))
-                    }
-                </div>
-
-                <a
-                    href={`mailto:${siteConfig.contact.email}`}
-                    class="group mt-6 flex items-center justify-between gap-4 rounded-[1.35rem] border border-white/14 bg-white/10 p-4 transition hover:-translate-y-1 hover:bg-white/16"
+                <CTAButton
+                href={`mailto:${siteConfig.contact.email}`}
+                variant="ghost"
+                size="lg"
+                icon={homeFinalCta.tertiaryCta.icon}
+                iconPosition="left"
+                class="border-white/20 bg-white/10 text-white hover:border-white/35 hover:bg-white/16"
                 >
-                    <div class="flex items-center gap-3">
-                    <span class="flex h-10 w-10 items-center justify-center rounded-full bg-white text-[#0B2150]">
-                        <Mail class="h-5 w-5" />
-                    </span>
+                {homeFinalCta.tertiaryCta.label}
+                </CTAButton>
+            </div>
+            </div>
 
-                    <div>
-                        <p class="font-inter text-sm font-extrabold text-white">
-                        Prefer email?
-                        </p>
-                        <p class="text-xs text-white/68">
-                        {siteConfig.contact.email}
-                        </p>
-                    </div>
-                    </div>
+            <!-- Contact form panel -->
+            <div class="relative">
+                <div class="rounded-[2rem] border border-white/18 bg-white/12 p-4 shadow-[0_28px_90px_rgba(0,0,0,0.18)] backdrop-blur-xl sm:p-5">
+                    <form
+                        name="home-final-cta-contact"
+                        method="POST"
+                        data-netlify="true"
+                        netlify-honeypot="bot-field"
+                        action="/thank-you"
+                        class="rounded-[1.6rem] border border-white/14 bg-white/12 p-5"
+                    >
+                        <!-- Required by Netlify Forms -->
+                        <input type="hidden" name="form-name" value="home-final-cta-contact" />
 
-                    <ArrowUpRight class="h-5 w-5 text-white transition group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
-                </a>
+                        <!-- Honeypot -->
+                        <p class="hidden">
+                            <label>
+                                Don’t fill this out if you’re human:
+                                <input name="bot-field" />
+                            </label>
+                        </p>
+
+                        <div class="flex items-start justify-between gap-4">
+                            <div>
+                                <p class="font-inter text-xs font-extrabold uppercase tracking-[0.14em] !text-white/70">
+                                    Quick Contact
+                                </p>
+
+                                <h3 class="mt-2 font-inter text-2xl font-extrabold tracking-[-0.055em] !text-white">
+                                    Tell us what you need help with.
+                                </h3>
+
+                                <p class="mt-2 text-sm leading-6 !text-white/72">
+                                    Send a quick message and our Miami office will follow up.
+                                </p>
+                            </div>
+
+                            <span class="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-white/12 text-white">
+                                <MessageSquareText class="h-6 w-6" />
+                            </span>
+                        </div>
+
+                        <div class="mt-6 grid gap-3">
+                            <div class="grid gap-2">
+                                <label
+                                    for="final-cta-name"
+                                    class="font-inter text-xs font-extrabold uppercase tracking-[0.12em] !text-white/70"
+                                >
+                                    Full Name
+                                </label>
+
+                                <input
+                                    id="final-cta-name"
+                                    name="name"
+                                    type="text"
+                                    autocomplete="name"
+                                    required
+                                    placeholder="Your name"
+                                    class="w-full rounded-2xl border border-white/14 bg-white/12 px-4 py-3 font-inter text-sm font-bold !text-white outline-none backdrop-blur placeholder:text-white/45 focus:border-white/35 focus:bg-white/16"
+                                />
+                            </div>
+
+                            <div class="grid gap-3 sm:grid-cols-2">
+                                <div class="grid gap-2">
+                                    <label
+                                        for="final-cta-email"
+                                        class="font-inter text-xs font-extrabold uppercase tracking-[0.12em] !text-white/70"
+                                    >
+                                        Email
+                                    </label>
+
+                                    <input
+                                        id="final-cta-email"
+                                        name="email"
+                                        type="email"
+                                        autocomplete="email"
+                                        required
+                                        placeholder="you@email.com"
+                                        class="w-full rounded-2xl border border-white/14 bg-white/12 px-4 py-3 font-inter text-sm font-bold !text-white outline-none backdrop-blur placeholder:text-white/45 focus:border-white/35 focus:bg-white/16"
+                                    />
+                                </div>
+
+                                <div class="grid gap-2">
+                                    <label
+                                        for="final-cta-phone"
+                                        class="font-inter text-xs font-extrabold uppercase tracking-[0.12em] !text-white/70"
+                                    >
+                                        Phone
+                                    </label>
+
+                                    <input
+                                        id="final-cta-phone"
+                                        name="phone"
+                                        type="tel"
+                                        autocomplete="tel"
+                                        placeholder="(305) 000-0000"
+                                        class="w-full rounded-2xl border border-white/14 bg-white/12 px-4 py-3 font-inter text-sm font-bold !text-white outline-none backdrop-blur placeholder:text-white/45 focus:border-white/35 focus:bg-white/16"
+                                    />
+                                </div>
+                            </div>
+
+                            <div class="grid gap-3 sm:grid-cols-2">
+                                <div class="grid gap-2">
+                                    <label
+                                        for="final-cta-service"
+                                        class="font-inter text-xs font-extrabold uppercase tracking-[0.12em] !text-white/70"
+                                    >
+                                        Service Needed
+                                    </label>
+
+                                    <select
+                                        id="final-cta-service"
+                                        name="service"
+                                        required
+                                        class="w-full rounded-2xl border border-white/14 bg-white/12 px-4 py-3 font-inter text-sm font-bold !text-white outline-none backdrop-blur focus:border-white/35 focus:bg-white/16"
+                                    >
+                                        <option value="" class="text-[#0B2150]">Select a service</option>
+                                        <option value="Tax Preparation" class="text-[#0B2150]">Tax Preparation</option>
+                                        <option value="Bookkeeping" class="text-[#0B2150]">Bookkeeping</option>
+                                        <option value="Payroll" class="text-[#0B2150]">Payroll</option>
+                                        <option value="Business Tax Services" class="text-[#0B2150]">Business Tax Services</option>
+                                        <option value="Accounting Services" class="text-[#0B2150]">Accounting Services</option>
+                                        <option value="IRS Tax Help" class="text-[#0B2150]">IRS Tax Help</option>
+                                        <option value="Not Sure Yet" class="text-[#0B2150]">Not Sure Yet</option>
+                                    </select>
+                                </div>
+
+                                <div class="grid gap-2">
+                                    <label
+                                        for="final-cta-client-type"
+                                        class="font-inter text-xs font-extrabold uppercase tracking-[0.12em] !text-white/70"
+                                    >
+                                        Client Type
+                                    </label>
+
+                                    <select
+                                        id="final-cta-client-type"
+                                        name="client_type"
+                                        required
+                                        class="w-full rounded-2xl border border-white/14 bg-white/12 px-4 py-3 font-inter text-sm font-bold !text-white outline-none backdrop-blur focus:border-white/35 focus:bg-white/16"
+                                    >
+                                        <option value="" class="text-[#0B2150]">Select one</option>
+                                        <option value="Individual" class="text-[#0B2150]">Individual</option>
+                                        <option value="Business" class="text-[#0B2150]">Business</option>
+                                        <option value="Both" class="text-[#0B2150]">Both</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="grid gap-2">
+                                <label
+                                    for="final-cta-message"
+                                    class="font-inter text-xs font-extrabold uppercase tracking-[0.12em] !text-white/70"
+                                >
+                                    Message
+                                </label>
+
+                                <textarea
+                                    id="final-cta-message"
+                                    name="message"
+                                    rows="4"
+                                    required
+                                    placeholder="Tell us briefly how we can help..."
+                                    class="w-full resize-none rounded-2xl border border-white/14 bg-white/12 px-4 py-3 font-inter text-sm font-bold !text-white outline-none backdrop-blur placeholder:text-white/45 focus:border-white/35 focus:bg-white/16"
+                                ></textarea>
+                            </div>
+                        </div>
+
+                        <div class="mt-6 grid gap-3">
+                            <button
+                                type="submit"
+                                class="group inline-flex min-h-12 w-full items-center justify-center gap-2 rounded-full border border-white/25 bg-white px-5 py-3 font-inter text-sm font-extrabold text-[#0B2150] shadow-[0_22px_70px_rgb(255_255_255/0.2)] transition hover:-translate-y-1 hover:bg-white/92"
+                            >
+                                Send Message
+                                <ArrowUpRight class="h-4.5 w-4.5 transition group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+                            </button>
+
+                            <p class="text-center text-xs leading-5 !text-white/64">
+                                By submitting this form, you agree to be contacted by East Coast Accounting & Tax Services regarding your request.
+                            </p>
+                        </div>
+                    </form>
                 </div>
-            </div>
-
-            <!-- Floating mini badge -->
-            <div class="absolute -right-3 -top-4 hidden rounded-full border border-white/18 bg-white/14 px-4 py-3 shadow-[0_18px_50px_rgba(0,0,0,0.16)] backdrop-blur-xl xl:flex">
-                <span class="mr-2 flex h-7 w-7 items-center justify-center rounded-full bg-white/14 text-white">
-                <Sparkles class="h-3.5 w-3.5" />
-                </span>
-                <span class="font-inter text-xs font-extrabold uppercase tracking-[0.12em] text-white">
-                Ready to convert
-                </span>
-            </div>
             </div>
         </div>
         </div>

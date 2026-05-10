@@ -29,7 +29,6 @@ const year = new Date().getFullYear();
 const footerColumns = [
     footerNavigation.services,
     footerNavigation.company,
-    footerNavigation.locations,
     footerNavigation.legal,
 ];
 
@@ -66,7 +65,7 @@ const getLanguageHref = (code: string) =>
     </div>
 
     <div class="container-wide py-14 lg:py-18">
-        <div class="grid gap-10 lg:grid-cols-[1.2fr_1.8fr]">
+        <div class="grid gap-10 lg:grid-cols-2">
         <!-- Brand Block -->
         <div>
             <a
@@ -75,7 +74,7 @@ const getLanguageHref = (code: string) =>
             class="inline-flex items-center gap-4"
             >
             <span
-                class="flex h-14 w-14 items-center justify-center overflow-hidden rounded-2xl border border-[rgb(var(--color-border)/0.78)] bg-[rgb(var(--color-surface)/0.78)] p-2.5 shadow-soft"
+                class="flex h-18 w-18 items-center justify-center overflow-hidden rounded-2xl border border-[rgb(var(--color-border)/0.78)] bg-[rgb(var(--color-surface)/0.78)] p-2.5 shadow-soft"
             >
                 <img
                 src={siteConfig.logos.dark}
@@ -151,7 +150,6 @@ const getLanguageHref = (code: string) =>
                 </span>
                 <span>
                 {siteConfig.address.full}
-                <ArrowUpRight class="ml-1 inline h-3.5 w-3.5" />
                 </span>
             </a>
 
@@ -165,18 +163,6 @@ const getLanguageHref = (code: string) =>
                 </span>
                 {siteConfig.hours.label}
             </div>
-            </div>
-
-            <div class="mt-6 flex flex-wrap gap-2">
-            <span class="section-kicker normal-case tracking-normal">
-                <ShieldCheck class="h-3.5 w-3.5" />
-                {t.misc.miamiBased}
-            </span>
-
-            <span class="section-kicker normal-case tracking-normal">
-                <Languages class="h-3.5 w-3.5" />
-                {t.misc.bilingual}
-            </span>
             </div>
         </div>
 

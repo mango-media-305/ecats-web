@@ -21,18 +21,25 @@ import { siteConfig } from "../../data/site";
 <section class="accounting-grid relative isolate overflow-hidden py-16 sm:py-20 lg:min-h-[calc(100vh-76px)] lg:py-16">
     <!-- Ambient visual system -->
     <div class="pointer-events-none absolute inset-0 -z-10 overflow-hidden">
+        <!-- Ken Burns background image -->
+        <div class="hero-kenburns-bg absolute inset-0 overflow-hidden">
+            <img
+                src="/images/home/hero-accounting-miami.webp"
+                alt=""
+                width="2400"
+                height="1600"
+                class="absolute inset-0 h-full min-h-full w-full min-w-full object-cover object-center md:object-[center_center] lg:object-center"
+                loading="eager"
+                decoding="async"
+            />
+        </div>
+
+        <!-- Image readability overlays -->
+        <!-- <div class="absolute inset-0 bg-[radial-gradient(circle_at_24%_28%,rgb(var(--color-bg)/0.34),transparent_34rem),radial-gradient(circle_at_78%_34%,rgb(var(--color-secondary)/0.16),transparent_30rem)] opacity-20"></div> -->
+
+        <!-- <div class="absolute inset-0 bg-[linear-gradient(90deg,rgb(var(--color-bg)/0.92)_0%,rgb(var(--color-bg)/0.66)_46%,rgb(var(--color-bg)/0.42)_100%)] opacity-50"></div> -->
+
         <div class="financial-orb orb-blue left-[-8rem] top-24 h-72 w-72 animate-pulse-glow"></div>
-        <div class="financial-orb orb-navy right-[-7rem] top-10 h-80 w-80 animate-float-soft"></div>
-
-        <div
-            class="absolute left-1/2 top-10 h-[32rem] w-[32rem] -translate-x-1/2 rounded-full bg-[radial-gradient(circle,rgb(var(--color-secondary)/0.12),transparent_68%)] blur-2xl"
-        >
-        </div>
-
-        <div
-            class="absolute bottom-0 left-0 right-0 h-48 bg-[linear-gradient(to_top,rgb(var(--color-bg)),transparent)]"
-        >
-        </div>
     </div>
 
     <div class="container-wide flex min-h-full items-center">
@@ -108,7 +115,7 @@ import { siteConfig } from "../../data/site";
             </div>
 
             <!-- Right Visual Experience -->
-            <div class="relative mx-auto w-full max-w-2xl self-stretch lg:mx-0">
+            <div class="relative mx-auto hidden w-full max-w-2xl self-stretch md:block lg:mx-0">
                 <!-- Ambient shapes -->
                 
                 <div class="pointer-events-none absolute -right-6 bottom-16 hidden h-40 w-40 rounded-full bg-[rgb(var(--color-secondary)/0.16)] blur-3xl lg:block"></div>
@@ -370,26 +377,6 @@ import { siteConfig } from "../../data/site";
                             }
                         </div>
                     </div>
-                
-
-                <!-- Floating contact card -->
-                <a
-                    href="/contact"
-                    class="glass-panel group absolute -bottom-15 left-6 right-6 hidden items-center justify-between gap-4 rounded-[1.5rem] p-4 transition hover:-translate-y-1 hover:border-[rgb(var(--color-secondary)/0.42)] lg:flex"
-                >
-                    <div>
-                        <p class="font-inter text-sm font-extrabold text-[rgb(var(--color-heading))]">
-                            Ready to get organized?
-                        </p>
-                        <p class="text-sm text-[rgb(var(--color-text-soft))]">
-                            Start with the contact form.
-                        </p>
-                    </div>
-
-                    <span class="flex h-10 w-10 items-center justify-center rounded-full bg-[rgb(var(--color-secondary))] text-white transition group-hover:scale-105 dark:text-[rgb(3_11_29)]">
-                        <ArrowUpRight class="h-5 w-5" />
-                    </span>
-                </a>
             </div>
         </div>
     </div>
@@ -424,6 +411,58 @@ import { siteConfig } from "../../data/site";
             animation: none;
             opacity: 0.42;
             transform: none;
+        }
+    }
+
+    .hero-kenburns-bg {
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        opacity: 0.28;
+        transform: scale(1.08);
+        transform-origin: center center;
+        animation: hero-kenburns 18s ease-in-out infinite alternate;
+    }
+
+    .hero-kenburns-bg img {
+        object-fit: cover;
+        object-position: center center;
+    }
+
+    :root[data-theme="dark"] .hero-kenburns-bg {
+        opacity: 0.18;
+    }
+
+    @keyframes hero-kenburns {
+        0% {
+            transform: scale(1.08) translate3d(0, 0, 0);
+        }
+
+        100% {
+            transform: scale(1.18) translate3d(-1.5%, -1.2%, 0);
+        }
+    }
+
+    @media (max-width: 1023px) {
+        .hero-kenburns-bg img {
+            object-position: center top;
+        }
+    }
+
+    @media (max-width: 767px) {
+        .hero-kenburns-bg {
+            transform: scale(1.12);
+        }
+
+        .hero-kenburns-bg img {
+            object-position: center center;
+        }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        .hero-kenburns-bg {
+            animation: none;
+            transform: scale(1.1);
         }
     }
 </style>

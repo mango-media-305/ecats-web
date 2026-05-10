@@ -853,3 +853,19 @@ hr {
         background: rgb(var(--color-secondary) / 0.75);
     }
 }
+
+.theme-icon-light {
+    display: block;
+}
+
+.theme-icon-dark {
+    display: none;
+}
+
+:root[data-theme="dark"] .theme-icon-light {
+    display: none;
+}
+
+:root[data-theme="dark"] .theme-icon-dark {
+    display: block;
+}

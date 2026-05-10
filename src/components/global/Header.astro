@@ -73,21 +73,21 @@ const getHref = (href: string) =>
             class="group flex items-center gap-3"
         >
             <span
-            class="flex h-12 w-12 items-center justify-center overflow-hidden rounded-2xl border border-[rgb(var(--color-border)/0.78)] bg-[rgb(var(--color-surface)/0.78)] p-2 shadow-soft transition group-hover:-translate-y-0.5 group-hover:border-[rgb(var(--color-secondary)/0.45)]"
+            class="flex h-16 w-16 items-center justify-center overflow-hidden rounded-2xl border border-[rgb(var(--color-border)/0.78)] bg-[rgb(var(--color-surface)/0.78)] p-2 shadow-soft transition group-hover:-translate-y-0.5 group-hover:border-[rgb(var(--color-secondary)/0.45)]"
             >
             <img
                 src={siteConfig.logos.dark}
                 alt=""
-                width="96"
-                height="96"
+                width="108"
+                height="108"
                 class="logo-for-light h-full w-full object-contain"
                 loading="eager"
             />
             <img
                 src={siteConfig.logos.light}
                 alt=""
-                width="96"
-                height="96"
+                width="108"
+                height="108"
                 class="logo-for-dark h-full w-full object-contain"
                 loading="eager"
             />
@@ -134,7 +134,7 @@ const getHref = (href: string) =>
 
                     {hasChildren && (
                     <div class="pointer-events-none absolute left-1/2 top-full w-[760px] -translate-x-1/2 translate-y-4 opacity-0 transition duration-200 group-hover/nav:pointer-events-auto group-hover/nav:translate-y-3 group-hover/nav:opacity-100">
-                        <div class="glass-panel overflow-hidden p-3">
+                        <div class="overflow-hidden rounded-[1.5rem] border border-[rgb(var(--color-border)/0.78)] bg-[rgb(var(--color-surface)/0.96)] p-3 shadow-card backdrop-blur-xl">
                         <div class="grid grid-cols-2 gap-2">
                             {item.children.map((child) => {
                             const ChildIcon = child.icon;
@@ -142,7 +142,7 @@ const getHref = (href: string) =>
                             return (
                                 <a
                                 href={getHref(child.href)}
-                                class="group/item rounded-[1.25rem] border border-transparent p-4 transition hover:border-[rgb(var(--color-secondary)/0.32)] hover:bg-[rgb(var(--color-secondary)/0.08)]"
+                                class="group/item rounded-[1.25rem] border border-transparent bg-[rgb(var(--color-bg)/0.38)] p-4 transition hover:border-[rgb(var(--color-secondary)/0.32)] hover:bg-[rgb(var(--color-secondary)/0.1)]"
                                 >
                                 <span class="mb-3 flex h-10 w-10 items-center justify-center rounded-2xl bg-[rgb(var(--color-secondary)/0.1)] text-[rgb(var(--color-secondary))] transition group-hover/item:scale-105 group-hover/item:bg-[rgb(var(--color-secondary)/0.16)]">
                                     <ChildIcon class="h-5 w-5" />
@@ -177,9 +177,9 @@ const getHref = (href: string) =>
             aria-label={t.theme.toggle}
             data-theme-toggle
             >
-            <Sun data-theme-icon="light" class="h-4.5 w-4.5" />
-            <Moon data-theme-icon="dark" class="hidden h-4.5 w-4.5" />
-            <span class="sr-only" data-theme-label>{t.theme.light}</span>
+                <Sun data-theme-icon="light" class="theme-icon-light h-4.5 w-4.5" />
+                <Moon data-theme-icon="dark" class="theme-icon-dark h-4.5 w-4.5" />
+                <span class="sr-only" data-theme-label>{t.theme.light}</span>
             </button>
 
             <a

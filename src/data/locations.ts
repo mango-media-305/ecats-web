@@ -373,6 +373,8 @@ export const primaryServiceAreas = serviceAreas.filter((area) =>
         "kendall-fl",
         "hialeah-fl",
         "homestead-fl",
+        "brickell-fl",
+        "south-miami-fl"
     ].includes(area.id)
 );
 

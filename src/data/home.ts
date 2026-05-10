@@ -235,7 +235,7 @@ export const homeLocalSeoSection = {
     description:
         "East Coast Accounting & Tax Services is located in Miami, FL and serves individuals and businesses across Miami-Dade County, including nearby communities such as West Miami, Coral Gables, Doral, Kendall, Hialeah, Homestead, Brickell, South Miami, and surrounding South Florida areas.",
     officeCard: {
-        title: "Visit Our Miami Office",
+        title: "Visit Our Office in Miami",
         address: siteConfig.address.full,
         hours: siteConfig.hours.label,
         phone: siteConfig.contact.phone,
@@ -320,6 +320,11 @@ export const homeFinalCta = {
         label: "Call Now",
         href: siteConfig.contact.phoneHref,
         icon: Phone,
+    },
+    tertiaryCta: {  
+        label: "Email Us",
+        href: siteConfig.contact.emailHref,
+        icon: Mail,
     },
     supportingPoints: [
         {
