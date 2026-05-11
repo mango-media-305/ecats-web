@@ -1,0 +1,450 @@
+---
+import {
+    ArrowUpRight,
+    Building2,
+    CheckCircle2,
+    Clock3,
+    FileText,
+    Mail,
+    MapPin,
+    MessageSquareText,
+    Phone,
+    Send,
+    Sparkles,
+} from "@lucide/astro";
+
+import MainLayout from "../layouts/MainLayout.astro";
+import CTAButton from "../components/ui/CTAButton.astro";
+import Badge from "../components/ui/Badge.astro";
+import { siteConfig } from "../data/site";
+
+const title = "Contact East Coast Accounting & Tax Services";
+const description =
+    "Contact East Coast Accounting & Tax Services in Miami, FL for tax preparation, bookkeeping, payroll, accounting, and business tax support.";
+
+const contactPageSchema = {
+    "@context": "https://schema.org",
+    "@type": "ContactPage",
+    name: title,
+    description,
+    url: `${siteConfig.url}/contact`,
+    mainEntity: {
+        "@type": "LocalBusiness",
+        name: siteConfig.name,
+        telephone: siteConfig.contact.phone,
+        email: siteConfig.contact.email,
+        address: {
+            "@type": "PostalAddress",
+            streetAddress: siteConfig.address.street,
+            addressLocality: siteConfig.address.city,
+            addressRegion: siteConfig.address.state,
+            postalCode: siteConfig.address.postalCode,
+            addressCountry: "US",
+        },
+        openingHours: "Mo-Fr 09:00-17:00",
+        areaServed: [
+            "Miami",
+            "Miami-Dade County",
+            "South Florida",
+        ],
+    },
+};
+
+const serviceOptions = [
+    "Tax Preparation",
+    "Bookkeeping",
+    "Payroll",
+    "Business Tax Services",
+    "Accounting Services",
+    "IRS Tax Help",
+    "Not Sure Yet",
+];
+
+const clientTypes = ["Individual", "Business", "Both"];
+
+const quickInfo = [
+    {
+        label: "Call the office",
+        value: siteConfig.contact.phone,
+        href: siteConfig.contact.phoneHref,
+        icon: Phone,
+    },
+    {
+        label: "Email us",
+        value: siteConfig.contact.email,
+        href: siteConfig.contact.emailHref,
+        icon: Mail,
+    },
+    {
+        label: "Visit our Miami office",
+        value: siteConfig.address.full,
+        href: siteConfig.address.mapHref,
+        icon: MapPin,
+        external: true,
+    },
+];
+
+const supportHighlights = [
+    "English and Spanish support",
+    "Tax, bookkeeping, and payroll help",
+    "Individuals and businesses welcome",
+    "Miami-Dade and nearby South Florida communities",
+];
+---
+
+<MainLayout
+    title={title}
+    description={description}
+    schema={contactPageSchema}
+>
+    <section class="section-shell accounting-grid relative isolate overflow-hidden">
+        <!-- Background accents -->
+        <div class="pointer-events-none absolute inset-0 -z-10">
+            <div
+                class="absolute left-[-12rem] top-20 h-[32rem] w-[32rem] rounded-full bg-[rgb(var(--color-secondary)/0.14)] blur-3xl"
+            >
+            </div>
+
+            <div
+                class="absolute right-[-12rem] bottom-0 h-[34rem] w-[34rem] rounded-full bg-[rgb(var(--color-primary)/0.12)] blur-3xl"
+            >
+            </div>
+
+            <div
+                class="absolute inset-x-0 bottom-0 h-56 bg-[linear-gradient(to_top,rgb(var(--color-bg)),transparent)]"
+            >
+            </div>
+        </div>
+
+        <div class="container-wide">
+            <!-- Hero heading -->
+            <div class="mx-auto max-w-4xl text-center">
+                <Badge variant="blue" icon={Sparkles} glow>
+                    Contact Our Miami Office
+                </Badge>
+
+                <h1
+                    class="mt-6 text-balance font-inter text-4xl font-extrabold tracking-[-0.065em] text-[rgb(var(--color-heading))] sm:text-5xl lg:text-6xl"
+                >
+                    Get help with taxes, bookkeeping, payroll, and accounting.
+                </h1>
+
+                <p class="lead-text mx-auto mt-6 text-center">
+                    Send a message to East Coast Accounting & Tax Services and tell us what you need help with. Our Miami office will review your request and follow up.
+                </p>
+            </div>
+
+            <!-- Main contact grid -->
+            <div class="mt-14 grid gap-8 lg:grid-cols-[0.92fr_1.08fr] lg:items-start">
+                <!-- Left contact info -->
+                <aside class="grid gap-5">
+                    <div
+                        class="overflow-hidden rounded-[2.25rem] border border-[rgb(var(--color-border)/0.72)] bg-[linear-gradient(135deg,rgb(var(--color-primary))_0%,rgb(var(--color-secondary))_100%)] p-6 text-white shadow-blue"
+                    >
+                        <div
+                            class="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_18%_0%,rgba(255,255,255,0.26),transparent_34%),radial-gradient(circle_at_92%_100%,rgba(255,255,255,0.14),transparent_34%)]"
+                        >
+                        </div>
+
+                        <div class="relative">
+                            <Badge
+                                variant="outline"
+                                class="border-white/25 bg-white/10 !text-white"
+                                icon={Building2}
+                            >
+                                East Coast Accounting
+                            </Badge>
+
+                            <h2 class="mt-5 font-inter text-3xl font-extrabold tracking-[-0.055em] !text-white">
+                                Local support from a Miami-based accounting office.
+                            </h2>
+
+                            <p class="mt-4 text-sm leading-7 !text-white/78">
+                                Whether you are an individual preparing for tax season or a business that needs better financial organization, the first step is simple: send your information and let the office guide you.
+                            </p>
+
+                            <div class="mt-6 grid gap-3">
+                                {
+                                    supportHighlights.map((item) => (
+                                        <div class="flex items-start gap-3">
+                                            <span class="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-white/12 text-white">
+                                                <CheckCircle2 class="h-3.5 w-3.5" />
+                                            </span>
+
+                                            <span class="text-sm font-bold leading-6 !text-white/82">
+                                                {item}
+                                            </span>
+                                        </div>
+                                    ))
+                                }
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="grid gap-4">
+                        {
+                            quickInfo.map((item) => {
+                                const Icon = item.icon;
+
+                                return (
+                                    <a
+                                        href={item.href}
+                                        target={item.external ? "_blank" : undefined}
+                                        rel={item.external ? "noreferrer" : undefined}
+                                        class="group flex items-start gap-4 rounded-[1.6rem] border border-[rgb(var(--color-border)/0.72)] bg-[rgb(var(--color-surface)/0.72)] p-5 shadow-soft backdrop-blur transition hover:-translate-y-1 hover:border-[rgb(var(--color-secondary)/0.42)] hover:bg-[rgb(var(--color-secondary)/0.06)]"
+                                    >
+                                        <span class="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-[rgb(var(--color-secondary)/0.1)] text-[rgb(var(--color-secondary))] transition group-hover:scale-105">
+                                            <Icon class="h-5.5 w-5.5" />
+                                        </span>
+
+                                        <span>
+                                            <span class="block font-inter text-sm font-extrabold uppercase tracking-[0.12em] text-[rgb(var(--color-secondary))]">
+                                                {item.label}
+                                            </span>
+
+                                            <span class="mt-1 block text-sm font-bold leading-6 text-[rgb(var(--color-heading))]">
+                                                {item.value}
+                                            </span>
+                                        </span>
+                                    </a>
+                                );
+                            })
+                        }
+                    </div>
+
+                    <div
+                        class="rounded-[1.6rem] border border-[rgb(var(--color-border)/0.72)] bg-[rgb(var(--color-surface)/0.72)] p-5 shadow-soft backdrop-blur"
+                    >
+                        <div class="flex items-start gap-4">
+                            <span class="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-[rgb(var(--color-secondary)/0.1)] text-[rgb(var(--color-secondary))]">
+                                <Clock3 class="h-5.5 w-5.5" />
+                            </span>
+
+                            <div>
+                                <p class="font-inter text-sm font-extrabold uppercase tracking-[0.12em] text-[rgb(var(--color-secondary))]">
+                                    Office Hours
+                                </p>
+
+                                <p class="mt-1 font-inter text-lg font-extrabold tracking-[-0.04em] text-[rgb(var(--color-heading))]">
+                                    {siteConfig.hours.label}
+                                </p>
+
+                                <p class="mt-2 text-sm leading-6 text-[rgb(var(--color-text-soft))]">
+                                    If you submit the form outside business hours, the office can follow up during the next business day.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </aside>
+
+                <!-- Form panel -->
+                <div
+                    class="glass-panel relative overflow-hidden rounded-[2.5rem] p-4 shadow-card sm:p-6"
+                >
+                    <div
+                        class="pointer-events-none absolute inset-x-10 top-0 h-px bg-[linear-gradient(90deg,transparent,rgb(var(--color-secondary)/0.8),transparent)]"
+                    >
+                    </div>
+
+                    <div
+                        class="pointer-events-none absolute right-[-8rem] top-[-8rem] h-72 w-72 rounded-full bg-[rgb(var(--color-secondary)/0.12)] blur-3xl"
+                    >
+                    </div>
+
+                    <form
+                        name="contact-page"
+                        method="POST"
+                        data-netlify="true"
+                        netlify-honeypot="bot-field"
+                        action="/thank-you"
+                        class="relative rounded-[2rem] border border-[rgb(var(--color-border)/0.72)] bg-[rgb(var(--color-surface)/0.74)] p-5 shadow-soft backdrop-blur sm:p-6 lg:p-8"
+                    >
+                        <input type="hidden" name="form-name" value="contact-page" />
+
+                        <p class="hidden">
+                            <label>
+                                Don’t fill this out if you’re human:
+                                <input name="bot-field" />
+                            </label>
+                        </p>
+
+                        <div class="flex items-start justify-between gap-5">
+                            <div>
+                                <Badge variant="blue" icon={MessageSquareText}>
+                                    Contact Form
+                                </Badge>
+
+                                <h2 class="mt-5 font-inter text-3xl font-extrabold tracking-[-0.055em] text-[rgb(var(--color-heading))]">
+                                    Tell us how we can help.
+                                </h2>
+
+                                <p class="mt-3 text-sm leading-7 text-[rgb(var(--color-text-soft))]">
+                                    Fill out the form below with your contact information, service need, and a brief message.
+                                </p>
+                            </div>
+
+                            <span class="hidden h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-[rgb(var(--color-secondary)/0.1)] text-[rgb(var(--color-secondary))] sm:flex">
+                                <FileText class="h-7 w-7" />
+                            </span>
+                        </div>
+
+                        <div class="mt-7 grid gap-4">
+                            <div class="form-field">
+                                <label for="contact-name" class="form-label">
+                                    Full Name
+                                </label>
+
+                                <input
+                                    id="contact-name"
+                                    name="name"
+                                    type="text"
+                                    autocomplete="name"
+                                    required
+                                    placeholder="Your name"
+                                    class="form-input"
+                                />
+                            </div>
+
+                            <div class="form-row">
+                                <div class="form-field">
+                                    <label for="contact-email" class="form-label">
+                                        Email
+                                    </label>
+
+                                    <input
+                                        id="contact-email"
+                                        name="email"
+                                        type="email"
+                                        autocomplete="email"
+                                        required
+                                        placeholder="you@email.com"
+                                        class="form-input"
+                                    />
+                                </div>
+
+                                <div class="form-field">
+                                    <label for="contact-phone" class="form-label">
+                                        Phone
+                                    </label>
+
+                                    <input
+                                        id="contact-phone"
+                                        name="phone"
+                                        type="tel"
+                                        autocomplete="tel"
+                                        placeholder="(305) 000-0000"
+                                        class="form-input"
+                                    />
+                                </div>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="form-field">
+                                    <label for="contact-service" class="form-label">
+                                        Service Needed
+                                    </label>
+
+                                    <select
+                                        id="contact-service"
+                                        name="service"
+                                        required
+                                        class="form-select"
+                                    >
+                                        <option value="">Select a service</option>
+                                        {
+                                            serviceOptions.map((service) => (
+                                                <option value={service}>{service}</option>
+                                            ))
+                                        }
+                                    </select>
+                                </div>
+
+                                <div class="form-field">
+                                    <label for="contact-client-type" class="form-label">
+                                        Client Type
+                                    </label>
+
+                                    <select
+                                        id="contact-client-type"
+                                        name="client_type"
+                                        required
+                                        class="form-select"
+                                    >
+                                        <option value="">Select one</option>
+                                        {
+                                            clientTypes.map((type) => (
+                                                <option value={type}>{type}</option>
+                                            ))
+                                        }
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="form-field">
+                                <label for="contact-message" class="form-label">
+                                    Message
+                                </label>
+
+                                <textarea
+                                    id="contact-message"
+                                    name="message"
+                                    rows="6"
+                                    required
+                                    placeholder="Tell us briefly what you need help with..."
+                                    class="form-textarea"
+                                ></textarea>
+
+                                <p class="form-help">
+                                    Please do not include sensitive information like Social Security numbers or full tax IDs in this form.
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="mt-7 grid gap-4 sm:grid-cols-[1fr_auto] sm:items-center">
+                            <p class="text-xs leading-6 text-[rgb(var(--color-text-soft))]">
+                                By submitting this form, you agree to be contacted by East Coast Accounting & Tax Services regarding your request.
+                            </p>
+
+                            <button
+                                type="submit"
+                                class="btn btn-primary min-h-12 px-6"
+                            >
+                                <Send class="h-4.5 w-4.5" />
+                                Send Message
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Map / location strip -->
+            <div
+                class="mt-10 overflow-hidden rounded-[2.25rem] border border-[rgb(var(--color-border)/0.72)] bg-[rgb(var(--color-surface)/0.72)] p-5 shadow-soft backdrop-blur"
+            >
+                <div class="grid gap-6 lg:grid-cols-[1fr_auto] lg:items-center">
+                    <div>
+                        <Badge variant="blue" icon={MapPin}>
+                            Miami Location
+                        </Badge>
+
+                        <h2 class="mt-4 font-inter text-3xl font-extrabold tracking-[-0.055em] text-[rgb(var(--color-heading))]">
+                            Visit East Coast Accounting & Tax Services in Miami.
+                        </h2>
+
+                        <p class="mt-3 max-w-3xl text-sm leading-7 text-[rgb(var(--color-text-soft))]">
+                            The office is located at {siteConfig.address.full}. Use the map link for directions, or send a message first to explain what kind of tax or accounting support you need.
+                        </p>
+                    </div>
+
+                    <CTAButton
+                        href={siteConfig.address.mapHref}
+                        variant="secondary"
+                        icon={ArrowUpRight}
+                    >
+                        Open in Google Maps
+                    </CTAButton>
+                </div>
+            </div>
+        </div>
+    </section>
+</MainLayout>

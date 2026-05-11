@@ -204,73 +204,73 @@ const getHref = (href: string) =>
         </div>
         </div>
 
-        <!-- Mobile Menu -->
+        <!-- Mobile Menu Dropdown -->
         <div
-        class="hidden border-t border-[rgb(var(--color-border)/0.62)] pb-5 pt-3 xl:hidden"
-        data-mobile-menu
+            class="mobile-menu-dropdown hidden xl:hidden"
+            data-mobile-menu
         >
-        <nav class="grid gap-2" aria-label="Mobile navigation">
-            {
-            mainNavigation.map((item) => {
-                const Icon = item.icon;
-                const hasChildren = "children" in item && item.children?.length;
-
-                return (
-                <div class="rounded-[1.25rem] border border-[rgb(var(--color-border)/0.58)] bg-[rgb(var(--color-surface)/0.68)]">
-                    <a
-                    href={getHref(item.href)}
-                    class="flex items-center justify-between gap-3 px-4 py-3 font-inter text-sm font-extrabold text-[rgb(var(--color-heading))]"
-                    aria-current={isActive(item.href) ? "page" : undefined}
-                    >
-                    <span class="flex items-center gap-3">
-                        <span class="flex h-9 w-9 items-center justify-center rounded-2xl bg-[rgb(var(--color-secondary)/0.1)] text-[rgb(var(--color-secondary))]">
-                        <Icon class="h-4.5 w-4.5" />
-                        </span>
-                        {item.label}
-                    </span>
-                    </a>
-
-                    {hasChildren && (
-                    <div class="grid gap-1 px-4 pb-4">
-                        {item.children.map((child) => {
-                        const ChildIcon = child.icon;
+            <nav class="grid gap-2" aria-label="Mobile navigation">
+                {
+                    mainNavigation.map((item) => {
+                        const Icon = item.icon;
+                        const hasChildren = "children" in item && item.children?.length;
 
                         return (
-                            <a
-                            href={getHref(child.href)}
-                            class="flex gap-3 rounded-2xl px-3 py-2.5 transition hover:bg-[rgb(var(--color-secondary)/0.08)]"
-                            >
-                            <ChildIcon class="mt-1 h-4 w-4 shrink-0 text-[rgb(var(--color-secondary))]" />
-                            <span>
-                                <span class="block font-inter text-sm font-bold text-[rgb(var(--color-heading))]">
-                                {child.label}
-                                </span>
-                                <span class="block text-sm leading-5 text-[rgb(var(--color-text-soft))]">
-                                {child.description}
-                                </span>
-                            </span>
-                            </a>
+                            <div class="rounded-[1.25rem] border border-[rgb(var(--color-border)/0.58)] bg-[rgb(var(--color-surface)/0.68)]">
+                                <a
+                                    href={getHref(item.href)}
+                                    class="flex items-center justify-between gap-3 px-4 py-3 font-inter text-sm font-extrabold text-[rgb(var(--color-heading))]"
+                                    aria-current={isActive(item.href) ? "page" : undefined}
+                                >
+                                    <span class="flex items-center gap-3">
+                                        <span class="flex h-9 w-9 items-center justify-center rounded-2xl bg-[rgb(var(--color-secondary)/0.1)] text-[rgb(var(--color-secondary))]">
+                                            <Icon class="h-4.5 w-4.5" />
+                                        </span>
+                                        {item.label}
+                                    </span>
+                                </a>
+
+                                {hasChildren && (
+                                    <div class="grid gap-1 px-4 pb-4">
+                                        {item.children.map((child) => {
+                                            const ChildIcon = child.icon;
+
+                                            return (
+                                                <a
+                                                    href={getHref(child.href)}
+                                                    class="flex gap-3 rounded-2xl px-3 py-2.5 transition hover:bg-[rgb(var(--color-secondary)/0.08)]"
+                                                >
+                                                    <ChildIcon class="mt-1 h-4 w-4 shrink-0 text-[rgb(var(--color-secondary))]" />
+                                                    <span>
+                                                        <span class="block font-inter text-sm font-bold text-[rgb(var(--color-heading))]">
+                                                            {child.label}
+                                                        </span>
+                                                        <span class="block text-sm leading-5 text-[rgb(var(--color-text-soft))]">
+                                                            {child.description}
+                                                        </span>
+                                                    </span>
+                                                </a>
+                                            );
+                                        })}
+                                    </div>
+                                )}
+                            </div>
                         );
-                        })}
-                    </div>
-                    )}
-                </div>
-                );
-            })
-            }
-        </nav>
+                    })
+                }
+            </nav>
 
-        <div class="mt-4 grid gap-2 sm:grid-cols-2">
-            <a href={siteConfig.contact.phoneHref} class="btn btn-secondary">
-            <Phone class="h-4 w-4" />
-            {t.cta.callNow}
-            </a>
+            <div class="mt-4 grid gap-2 sm:grid-cols-2">
+                <a href={siteConfig.contact.phoneHref} class="btn btn-secondary">
+                    <Phone class="h-4 w-4" />
+                    {t.cta.callNow}
+                </a>
 
-            <a href={getHref("/contact")} class="btn btn-primary">
-            <Send class="h-4 w-4" />
-            {t.cta.contact}
-            </a>
-        </div>
+                <a href={getHref("/contact")} class="btn btn-primary">
+                    <Send class="h-4 w-4" />
+                    {t.cta.contact}
+                </a>
+            </div>
         </div>
     </div>
 </header>

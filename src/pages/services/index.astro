@@ -1,0 +1,731 @@
+---
+import {
+    ArrowUpRight,
+    BriefcaseBusiness,
+    Building2,
+    CheckCircle2,
+    FileText,
+    HelpCircle,
+    MessageSquareText,
+    Send,
+    Phone,
+    Sparkles,
+    UsersRound,
+} from "@lucide/astro";
+
+import MainLayout from "../../layouts/MainLayout.astro";
+import SectionHeading from "../../components/ui/SectionHeading.astro";
+import CTAButton from "../../components/ui/CTAButton.astro";
+import Badge from "../../components/ui/Badge.astro";
+
+import { homeServicesSection } from "../../data/home";
+import { siteConfig } from "../../data/site";
+
+const title = "Tax, Bookkeeping, Payroll & Accounting Services in Miami";
+const description =
+    "Explore tax preparation, bookkeeping, payroll, business tax services, IRS tax help, and accounting support from East Coast Accounting & Tax Services in Miami, FL.";
+
+const serviceSchema = {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    name: "Accounting and Tax Services",
+    description,
+    url: `${siteConfig.url}/services`,
+    itemListElement: homeServicesSection.services.map((service, index) => ({
+        "@type": "ListItem",
+        position: index + 1,
+        name: service.title,
+        url: `${siteConfig.url}${service.href}`,
+        description: service.summary,
+    })),
+};
+
+const supportTypes = [
+    {
+        title: "For Individuals",
+        description:
+            "Support for personal tax preparation, document organization, yearly filing needs, and questions that come up before or during tax season.",
+        icon: UsersRound,
+        items: [
+            "Personal tax preparation",
+            "Document review",
+            "Year-round questions",
+            "English and Spanish support",
+        ],
+    },
+    {
+        title: "For Businesses",
+        description:
+            "Support for business owners who need better organization around bookkeeping, payroll, tax preparation, and financial records.",
+        icon: BriefcaseBusiness,
+        items: [
+            "Small business bookkeeping",
+            "Payroll organization",
+            "Business tax support",
+            "Income and expense clarity",
+        ],
+    },
+];
+
+const processHighlights = [
+    {
+        title: "Start with a message",
+        description:
+            "Use the contact form to tell the office what kind of help you need.",
+        icon: MessageSquareText,
+    },
+    {
+        title: "Review the right service",
+        description:
+            "Your request is reviewed so you can be guided toward the best next step.",
+        icon: FileText,
+    },
+    {
+        title: "Get organized",
+        description:
+            "The goal is to help you prepare documents, records, payroll, or tax information with more clarity.",
+        icon: CheckCircle2,
+    },
+];
+
+const faqs = [
+    {
+        question: "What services does East Coast Accounting & Tax Services offer?",
+        answer:
+            "East Coast Accounting & Tax Services offers support with tax preparation, bookkeeping, payroll, accounting services, business tax services, and IRS-related questions for individuals and businesses.",
+    },
+    {
+        question: "Do you help both individuals and businesses?",
+        answer:
+            "Yes. The office serves both individual clients and business clients across Miami, Miami-Dade County, and nearby South Florida communities.",
+    },
+    {
+        question: "How do I know which service I need?",
+        answer:
+            "The easiest first step is to contact the office and briefly explain your situation. The team can help guide you toward tax, bookkeeping, payroll, accounting, or business tax support depending on your needs.",
+    },
+    {
+        question: "Do you offer services in English and Spanish?",
+        answer:
+            "Yes. East Coast Accounting & Tax Services supports clients in English and Spanish.",
+    },
+];
+
+const faqSchema = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: faqs.map((faq) => ({
+        "@type": "Question",
+        name: faq.question,
+        acceptedAnswer: {
+            "@type": "Answer",
+            text: faq.answer,
+        },
+    })),
+};
+
+const pageSchema = [serviceSchema, faqSchema];
+---
+
+<MainLayout
+    title={title}
+    description={description}
+    schema={pageSchema}
+>
+    <!-- Hero -->
+    <section class="services-hero-section accounting-grid relative isolate overflow-hidden py-16 sm:py-20 lg:py-24">
+        <div class="pointer-events-none absolute inset-0 -z-10 overflow-hidden">
+            <!-- Ken Burns background image -->
+            <div class="services-hero-kenburns-bg absolute inset-0 overflow-hidden">
+                <img
+                    src="/images/services/services-hero-accounting.webp"
+                    alt=""
+                    width="2400"
+                    height="1600"
+                    class="absolute inset-0 h-full min-h-full w-full min-w-full object-cover object-center md:object-[center_center] lg:object-center"
+                    loading="eager"
+                    decoding="async"
+                />
+            </div>
+
+            <!-- Readability overlays -->
+            <!-- <div class="absolute inset-0 bg-[rgb(var(--color-bg)/0.74)]"></div> -->
+
+            <!-- <div class="absolute inset-0 bg-[radial-gradient(circle_at_20%_25%,rgb(var(--color-bg)/0.42),transparent_34rem),radial-gradient(circle_at_78%_30%,rgb(var(--color-secondary)/0.16),transparent_32rem)]"></div> -->
+
+            <div class="absolute inset-0 bg-[linear-gradient(90deg,rgb(var(--color-bg)/0.94)_0%,rgb(var(--color-bg)/0.40)_50%,rgb(var(--color-bg)/0.5)_100%)]"></div>
+
+            <div
+                class="absolute left-[-12rem] top-20 h-[32rem] w-[32rem] rounded-full bg-[rgb(var(--color-secondary)/0.14)] blur-3xl"
+            >
+            </div>
+
+            <div
+                class="absolute right-[-12rem] bottom-[-8rem] h-[34rem] w-[34rem] rounded-full bg-[rgb(var(--color-primary)/0.13)] blur-3xl"
+            >
+            </div>
+
+            <div
+                class="absolute inset-x-0 bottom-0 h-56 bg-[linear-gradient(to_top,rgb(var(--color-bg)),transparent)]"
+            >
+            </div>
+        </div>
+
+        <div class="container-wide">
+            <div class="grid gap-10 lg:grid-cols-[0.95fr_0.75fr] lg:items-center">
+                <div>
+                    <Badge variant="blue" icon={Sparkles} glow>
+                        Services in Miami & South Florida
+                    </Badge>
+
+                    <h1
+                        class="mt-6 max-w-5xl text-balance font-inter text-4xl font-extrabold tracking-[-0.065em] text-[rgb(var(--color-heading))] sm:text-5xl lg:text-6xl"
+                    >
+                        Tax, bookkeeping, payroll, and accounting services built around clarity.
+                    </h1>
+
+                    <p class="lead-text mt-6">
+                        East Coast Accounting & Tax Services helps individuals and businesses stay organized, prepare for tax season, manage records, and understand the next financial step with confidence.
+                    </p>
+
+                    <div class="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
+                        <CTAButton href="/contact" icon={Send} size="lg">
+                            Contact Our Office
+                        </CTAButton>
+
+                        <CTAButton href={siteConfig.contact.phoneHref} variant="secondary" icon={Phone} size="lg">
+                            Call Now
+                        </CTAButton>
+                    </div>
+                </div>
+
+                <!-- Hero visual card -->
+                <div class="relative hidden md:block">
+                    <div
+                        class="pointer-events-none absolute inset-0 rounded-full bg-[radial-gradient(circle,rgb(var(--color-secondary)/0.18),transparent_62%)] blur-3xl"
+                    >
+                    </div>
+
+                    <div class="glass-panel relative overflow-hidden rounded-[2.25rem] p-5 shadow-card">
+                        <div
+                            class="pointer-events-none absolute inset-x-10 top-0 h-px bg-[linear-gradient(90deg,transparent,rgb(var(--color-secondary)/0.8),transparent)]"
+                        >
+                        </div>
+
+                        <div class="rounded-[1.85rem] border border-[rgb(var(--color-border)/0.68)] bg-[rgb(var(--color-surface)/0.72)] p-5">
+                            <div class="flex items-start justify-between gap-4">
+                                <div>
+                                    <p class="font-inter text-xs font-extrabold uppercase tracking-[0.14em] text-[rgb(var(--color-secondary))]">
+                                        Service Overview
+                                    </p>
+
+                                    <h2 class="mt-2 font-inter text-2xl font-extrabold tracking-[-0.055em] text-[rgb(var(--color-heading))]">
+                                        Choose the support that fits your needs.
+                                    </h2>
+                                </div>
+
+                                <span class="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-[rgb(var(--color-secondary)/0.1)] text-[rgb(var(--color-secondary))]">
+                                    <Building2 class="h-6 w-6" />
+                                </span>
+                            </div>
+
+                            <div class="mt-6 grid gap-3">
+                                {
+                                    homeServicesSection.services.slice(0, 4).map((service) => {
+                                        const Icon = service.icon;
+
+                                        return (
+                                            <a
+                                                href={service.href}
+                                                class="group flex items-center justify-between gap-4 rounded-[1.25rem] border border-[rgb(var(--color-border)/0.6)] bg-[rgb(var(--color-bg)/0.42)] p-4 transition hover:-translate-y-1 hover:border-[rgb(var(--color-secondary)/0.42)] hover:bg-[rgb(var(--color-secondary)/0.07)]"
+                                            >
+                                                <span class="flex items-center gap-3">
+                                                    <span class="flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl bg-[rgb(var(--color-secondary)/0.1)] text-[rgb(var(--color-secondary))]">
+                                                        <Icon class="h-5 w-5" />
+                                                    </span>
+
+                                                    <span>
+                                                        <span class="block font-inter text-sm font-extrabold text-[rgb(var(--color-heading))]">
+                                                            {service.title}
+                                                        </span>
+
+                                                        <span class="mt-0.5 block text-xs text-[rgb(var(--color-text-soft))]">
+                                                            {service.eyebrow}
+                                                        </span>
+                                                    </span>
+                                                </span>
+
+                                                <ArrowUpRight class="h-4.5 w-4.5 text-[rgb(var(--color-secondary))] transition group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+                                            </a>
+                                        );
+                                    })
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services grid -->
+    <section class="section-shell relative overflow-hidden bg-[rgb(var(--color-bg-soft)/0.5)]">
+        <div class="pointer-events-none absolute inset-0 -z-10">
+            <div
+                class="absolute left-1/2 top-0 h-px w-[min(92%,1180px)] -translate-x-1/2 bg-[linear-gradient(90deg,transparent,rgb(var(--color-secondary)/0.55),transparent)]"
+            >
+            </div>
+
+            <div
+                class="absolute left-[-12rem] top-20 h-[28rem] w-[28rem] rounded-full bg-[rgb(var(--color-secondary)/0.1)] blur-3xl"
+            >
+            </div>
+
+            <div
+                class="absolute right-[-12rem] bottom-0 h-[30rem] w-[30rem] rounded-full bg-[rgb(var(--color-primary)/0.1)] blur-3xl"
+            >
+            </div>
+        </div>
+
+        <div class="container-wide">
+            <!-- Heading + floating visual -->
+            <div class="grid gap-10 lg:grid-cols-[0.95fr_0.75fr] lg:items-center">
+                <SectionHeading
+                    eyebrow="Our Services"
+                    title="Accounting support for individuals, families, and businesses."
+                    highlight="individuals, families, and businesses"
+                    description="Explore the main services offered by East Coast Accounting & Tax Services. Each service is designed to help clients stay better organized, better prepared, and more confident about their next step."
+                />
+
+                <!-- Floating decorative image: tablet + desktop only -->
+                <div class="relative hidden min-h-[18rem] md:block lg:min-h-[22rem]">
+                    <div
+                        class="pointer-events-none absolute inset-0 rounded-full bg-[radial-gradient(circle,rgb(var(--color-secondary)/0.18),transparent_62%)] blur-3xl"
+                    >
+                    </div>
+
+                    <div
+                        class="pointer-events-none absolute left-1/2 top-1/2 h-56 w-56 -translate-x-1/2 -translate-y-1/2 rounded-full border border-[rgb(var(--color-secondary)/0.18)]"
+                    >
+                    </div>
+
+                    <div
+                        class="pointer-events-none absolute right-10 top-8 h-24 w-24 rounded-full bg-[rgb(var(--color-secondary)/0.12)] blur-2xl"
+                    >
+                    </div>
+
+                    <img
+                        src="/images/home/services-floating-documents.webp"
+                        alt=""
+                        width="900"
+                        height="700"
+                        loading="lazy"
+                        decoding="async"
+                        class="services-floating-image relative z-10 mx-auto w-full max-w-[30rem] object-contain drop-shadow-[0_34px_80px_rgb(5_162_236/0.22)]"
+                    />
+                </div>
+            </div>
+
+            <div class="mt-12 grid gap-5 md:grid-cols-2 xl:grid-cols-4">
+                {
+                    homeServicesSection.services.map((service) => {
+                        const Icon = service.icon;
+
+                        return (
+                            <article class="group glow-card card-hover relative overflow-hidden p-6">
+                                <div class="pointer-events-none absolute bottom-4 right-5 text-[rgb(var(--color-primary)/0.045)] transition group-hover:text-[rgb(var(--color-secondary)/0.075)] dark:text-white/5">
+                                    <Icon class="h-24 w-24" />
+                                </div>
+
+                                <div class="relative z-10 flex h-full flex-col">
+                                    <div class="flex items-start justify-between gap-4">
+                                        <span class="flex h-14 w-14 items-center justify-center rounded-[1.25rem] bg-[rgb(var(--color-secondary)/0.1)] text-[rgb(var(--color-secondary))] transition duration-300 group-hover:scale-105 group-hover:bg-[rgb(var(--color-secondary)/0.16)]">
+                                            <Icon class="h-7 w-7" />
+                                        </span>
+
+                                        <a
+                                            href={service.href}
+                                            aria-label={`Learn more about ${service.title}`}
+                                            class="flex h-10 w-10 items-center justify-center rounded-full border border-[rgb(var(--color-border)/0.72)] bg-[rgb(var(--color-surface)/0.72)] text-[rgb(var(--color-heading))] transition duration-300 group-hover:-translate-y-1 group-hover:translate-x-1 group-hover:border-[rgb(var(--color-secondary)/0.45)] group-hover:bg-[rgb(var(--color-secondary))] group-hover:text-white"
+                                        >
+                                            <ArrowUpRight class="h-4.5 w-4.5" />
+                                        </a>
+                                    </div>
+
+                                    <Badge variant="soft" size="sm" class="mt-7">
+                                        {service.eyebrow}
+                                    </Badge>
+
+                                    <h3 class="mt-4 font-inter text-2xl font-extrabold tracking-[-0.055em] text-[rgb(var(--color-heading))]">
+                                        {service.title}
+                                    </h3>
+
+                                    <p class="mt-3 text-sm leading-7 text-[rgb(var(--color-text-soft))]">
+                                        {service.summary}
+                                    </p>
+
+                                    <div class="mt-6 grid gap-3">
+                                        {
+                                            service.features.slice(0, 4).map((feature) => (
+                                                <div class="flex items-start gap-3">
+                                                    <CheckCircle2 class="mt-0.5 h-4.5 w-4.5 shrink-0 text-[rgb(var(--color-secondary))]" />
+                                                    <span class="text-sm font-bold leading-6 text-[rgb(var(--color-text))]">
+                                                        {feature}
+                                                    </span>
+                                                </div>
+                                            ))
+                                        }
+                                    </div>
+
+                                    <div class="mt-auto pt-7">
+                                        <a
+                                            href={service.href}
+                                            class="group/link inline-flex items-center gap-2 font-inter text-sm font-extrabold text-[rgb(var(--color-secondary))]"
+                                        >
+                                            Learn more
+                                            <ArrowUpRight class="h-4 w-4 transition group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5" />
+                                        </a>
+                                    </div>
+                                </div>
+                            </article>
+                        );
+                    })
+                }
+            </div>
+        </div>
+    </section>
+
+    <!-- Individual / Business support -->
+    <section class="section-shell relative overflow-hidden">
+        <!-- Background accents -->
+        <div class="pointer-events-none absolute inset-0 -z-10">
+            <div
+                class="absolute left-[-14rem] top-24 h-[28rem] w-[28rem] rounded-full bg-[rgb(var(--color-secondary)/0.1)] blur-3xl"
+            >
+            </div>
+
+            <div
+                class="absolute right-[-12rem] bottom-10 h-[30rem] w-[30rem] rounded-full bg-[rgb(var(--color-primary)/0.1)] blur-3xl"
+            >
+            </div>
+
+            <div
+                class="absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,rgb(var(--color-secondary)/0.05),transparent_34rem)]"
+            >
+            </div>
+        </div>
+
+        <div class="container-wide">
+            <!-- Heading + floating visual -->
+            <div class="grid gap-10 lg:grid-cols-[0.95fr_0.75fr] lg:items-center">
+                <SectionHeading
+                    eyebrow="Who We Help"
+                    title="Support for personal and business financial needs."
+                    highlight="personal and business"
+                    description="Whether the client is an individual preparing personal taxes or a business owner managing records and payroll, the website should make the next step feel clear."
+                />
+
+                <!-- Floating decorative image: tablet + desktop only -->
+                <div class="relative hidden min-h-[18rem] md:block lg:min-h-[22rem]">
+                    <div
+                        class="pointer-events-none absolute inset-0 rounded-full bg-[radial-gradient(circle,rgb(var(--color-secondary)/0.16),transparent_62%)] blur-3xl"
+                    >
+                    </div>
+
+                    <div
+                        class="pointer-events-none absolute left-1/2 top-1/2 h-60 w-60 -translate-x-1/2 -translate-y-1/2 rounded-full border border-[rgb(var(--color-secondary)/0.18)]"
+                    >
+                    </div>
+
+                    <div
+                        class="pointer-events-none absolute right-8 top-8 h-24 w-24 rounded-full bg-[rgb(var(--color-secondary)/0.12)] blur-2xl"
+                    >
+                    </div>
+
+                    <div
+                        class="pointer-events-none absolute left-6 bottom-8 h-24 w-24 rounded-full bg-[rgb(var(--color-primary)/0.12)] blur-2xl"
+                    >
+                    </div>
+
+                    <img
+                        src="/images/services/support-floating-clients.webp"
+                        alt=""
+                        width="900"
+                        height="700"
+                        loading="lazy"
+                        decoding="async"
+                        class="support-floating-image relative z-10 mx-auto w-full max-w-[30rem] object-contain drop-shadow-[0_34px_80px_rgb(5_162_236/0.22)]"
+                    />
+                </div>
+            </div>
+
+            <!-- Support cards -->
+            <div class="mt-12 grid gap-5 md:grid-cols-2">
+                {
+                    supportTypes.map((type) => {
+                        const Icon = type.icon;
+
+                        return (
+                            <article class="group glow-card card-hover relative overflow-hidden p-6">
+                                <div class="pointer-events-none absolute right-[-4rem] top-[-4rem] h-40 w-40 rounded-full bg-[rgb(var(--color-secondary)/0.1)] blur-2xl opacity-0 transition duration-300 group-hover:opacity-100"></div>
+
+                                <div class="pointer-events-none absolute bottom-4 right-5 text-[rgb(var(--color-primary)/0.045)] transition group-hover:text-[rgb(var(--color-secondary)/0.075)] dark:text-white/5">
+                                    <Icon class="h-28 w-28" />
+                                </div>
+
+                                <div class="relative z-10">
+                                    <span class="flex h-14 w-14 items-center justify-center rounded-[1.25rem] bg-[rgb(var(--color-secondary)/0.1)] text-[rgb(var(--color-secondary))] transition duration-300 group-hover:scale-105 group-hover:bg-[rgb(var(--color-secondary)/0.16)]">
+                                        <Icon class="h-7 w-7" />
+                                    </span>
+
+                                    <h3 class="mt-5 font-inter text-2xl font-extrabold tracking-[-0.055em] text-[rgb(var(--color-heading))]">
+                                        {type.title}
+                                    </h3>
+
+                                    <p class="mt-3 text-sm leading-7 text-[rgb(var(--color-text-soft))]">
+                                        {type.description}
+                                    </p>
+
+                                    <div class="mt-6 grid gap-3">
+                                        {
+                                            type.items.map((item) => (
+                                                <div class="flex items-start gap-3">
+                                                    <CheckCircle2 class="mt-0.5 h-4.5 w-4.5 shrink-0 text-[rgb(var(--color-secondary))]" />
+                                                    <span class="text-sm font-bold leading-6 text-[rgb(var(--color-text))]">
+                                                        {item}
+                                                    </span>
+                                                </div>
+                                            ))
+                                        }
+                                    </div>
+                                </div>
+                            </article>
+                        );
+                    })
+                }
+            </div>
+
+            <!-- Bottom CTA panel -->
+            <div
+                class="mt-14 overflow-hidden rounded-[2rem] border border-[rgb(var(--color-border)/0.72)] bg-[rgb(var(--color-surface)/0.74)] p-5 shadow-soft backdrop-blur md:p-6"
+            >
+                <div class="grid gap-6 lg:grid-cols-[1fr_auto] lg:items-center">
+                    <div>
+                        <Badge variant="blue" icon={Sparkles}>
+                            Personal & Business Support
+                        </Badge>
+
+                        <h3 class="mt-4 max-w-3xl font-inter text-3xl font-extrabold tracking-[-0.055em] text-[rgb(var(--color-heading))] md:text-4xl">
+                            Not sure where to start? Send a message and explain your situation.
+                        </h3>
+
+                        <p class="mt-3 max-w-4xl text-sm leading-7 text-[rgb(var(--color-text-soft))] md:text-base">
+                            East Coast Accounting & Tax Services works with both individuals and business owners, helping clients understand whether they need tax preparation, bookkeeping, payroll, or broader accounting support.
+                        </p>
+                    </div>
+
+                    <CTAButton href="/contact">
+                        Contact Our Office
+                    </CTAButton>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Process / clarity strip -->
+    <section class="section-shell relative overflow-hidden bg-[rgb(var(--color-bg-soft)/0.5)]">
+        <div class="container-wide">
+            <div
+                class="overflow-hidden rounded-[2.5rem] border border-[rgb(var(--color-border)/0.72)] bg-[linear-gradient(135deg,rgb(var(--color-primary))_0%,rgb(var(--color-secondary))_100%)] p-6 text-white shadow-blue sm:p-8 lg:p-10"
+            >
+                <div class="grid gap-10 lg:grid-cols-[0.85fr_1.15fr] lg:items-center">
+                    <div>
+                        <Badge variant="outline" class="border-white/25 bg-white/10 !text-white" icon={Sparkles}>
+                            Simple Next Step
+                        </Badge>
+
+                        <h2 class="mt-5 font-inter text-3xl font-extrabold tracking-[-0.06em] !text-white sm:text-4xl">
+                            Not sure which accounting service you need?
+                        </h2>
+
+                        <p class="mt-4 text-sm leading-7 !text-white/78 sm:text-base">
+                            Start with the contact form. Explain your situation briefly, and the office can help you understand whether tax preparation, bookkeeping, payroll, accounting, or business tax support is the right fit.
+                        </p>
+
+                        <div class="mt-7">
+                            <CTAButton href="/contact" variant="dark" icon={Send}>
+                                Contact Our Office
+                            </CTAButton>
+                        </div>
+                    </div>
+
+                    <div class="grid gap-4 md:grid-cols-3">
+                        {
+                            processHighlights.map((item) => {
+                                const Icon = item.icon;
+
+                                return (
+                                    <article class="rounded-[1.5rem] border border-white/15 bg-white/10 p-5 backdrop-blur">
+                                        <span class="flex h-11 w-11 items-center justify-center rounded-2xl bg-white/12 text-white">
+                                            <Icon class="h-5.5 w-5.5" />
+                                        </span>
+
+                                        <h3 class="mt-4 font-inter text-lg font-extrabold tracking-[-0.045em] !text-white">
+                                            {item.title}
+                                        </h3>
+
+                                        <p class="mt-2 text-sm leading-6 !text-white/72">
+                                            {item.description}
+                                        </p>
+                                    </article>
+                                );
+                            })
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQs -->
+    <section class="section-shell relative overflow-hidden">
+        <div class="container-wide">
+            <div class="grid gap-10 lg:grid-cols-[0.8fr_1.2fr] lg:items-start">
+                <div>
+                    <SectionHeading
+                        eyebrow="Service Questions"
+                        title="Common questions about tax and accounting services."
+                        highlight="Common questions"
+                        description="Quick answers for clients deciding which service to request."
+                    />
+
+                    <div class="mt-8">
+                        <CTAButton href="/contact" variant="secondary" icon={HelpCircle}>
+                            Ask a Question
+                        </CTAButton>
+                    </div>
+                </div>
+
+                <div class="grid gap-4">
+                    {
+                        faqs.map((faq, index) => (
+                            <article class="rounded-[1.6rem] border border-[rgb(var(--color-border)/0.72)] bg-[rgb(var(--color-surface)/0.72)] p-5 shadow-soft backdrop-blur">
+                                <div class="flex gap-4">
+                                    <span class="flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl bg-[rgb(var(--color-secondary)/0.1)] font-inter text-xs font-extrabold text-[rgb(var(--color-secondary))]">
+                                        {String(index + 1).padStart(2, "0")}
+                                    </span>
+
+                                    <div>
+                                        <h3 class="font-inter text-lg font-extrabold tracking-[-0.045em] text-[rgb(var(--color-heading))]">
+                                            {faq.question}
+                                        </h3>
+
+                                        <p class="mt-2 text-sm leading-7 text-[rgb(var(--color-text-soft))]">
+                                            {faq.answer}
+                                        </p>
+                                    </div>
+                                </div>
+                            </article>
+                        ))
+                    }
+                </div>
+            </div>
+        </div>
+    </section>
+</MainLayout>
+
+<style>
+    .services-hero-kenburns-bg {
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        opacity: 0.3;
+        transform: scale(1.08);
+        transform-origin: center center;
+        animation: services-hero-kenburns 18s ease-in-out infinite alternate;
+    }
+
+    .services-hero-kenburns-bg img {
+        object-fit: cover;
+        object-position: center center;
+    }
+
+    :root[data-theme="dark"] .services-hero-kenburns-bg {
+        opacity: 0.2;
+    }
+
+    @keyframes services-hero-kenburns {
+        0% {
+            transform: scale(1.08) translate3d(0, 0, 0);
+        }
+
+        100% {
+            transform: scale(1.18) translate3d(-1.5%, -1.2%, 0);
+        }
+    }
+
+    @media (max-width: 1023px) {
+        .services-hero-kenburns-bg img {
+            object-position: center top;
+        }
+    }
+
+    @media (max-width: 767px) {
+        .services-hero-kenburns-bg {
+            transform: scale(1.12);
+        }
+
+        .services-hero-kenburns-bg img {
+            object-position: center center;
+        }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        .services-hero-kenburns-bg {
+            animation: none;
+            transform: scale(1.1);
+        }
+    }
+
+    @keyframes services-float {
+        0%,
+        100% {
+            transform: translateY(0) rotate(-1deg) scale(1);
+        }
+
+        50% {
+            transform: translateY(-14px) rotate(1deg) scale(1.02);
+        }
+    }
+
+    .services-floating-image {
+        animation: services-float 7s ease-in-out infinite;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        .services-floating-image {
+            animation: none;
+        }
+    }
+
+    @keyframes support-float {
+        0%,
+        100% {
+            transform: translateY(0) rotate(1deg) scale(1);
+        }
+
+        50% {
+            transform: translateY(-14px) rotate(-1deg) scale(1.02);
+        }
+    }
+
+    .support-floating-image {
+        animation: support-float 7.4s ease-in-out infinite;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        .support-floating-image {
+            animation: none;
+        }
+    }
+</style>

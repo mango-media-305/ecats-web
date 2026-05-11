@@ -885,3 +885,28 @@ hr {
 .mobile-menu-toggle[aria-expanded="true"] [data-menu-icon="close"] {
     display: block;
 }
+
+/* ----------------------------- */
+/* Mobile menu dropdown          */
+/* ----------------------------- */
+
+.mobile-menu-dropdown {
+    position: absolute;
+    left: 1rem;
+    right: 1rem;
+    top: calc(100% + 0.75rem);
+    max-height: calc(100vh - 7.5rem);
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    border: 1px solid rgb(var(--color-border) / 0.72);
+    border-radius: 1.5rem;
+    background: rgb(var(--color-bg) / 0.96);
+    box-shadow: var(--shadow-card);
+    backdrop-filter: blur(22px);
+    -webkit-backdrop-filter: blur(22px);
+    padding: 0.85rem;
+}
+
+:root[data-theme="dark"] .mobile-menu-dropdown {
+    background: rgb(var(--color-bg-soft) / 0.96);
+}

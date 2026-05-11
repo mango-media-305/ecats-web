@@ -133,25 +133,47 @@ import { homeLocalSeoSection } from "../../data/home";
                     return (
                     <a
                         href={area.href}
-                        class="group relative overflow-hidden rounded-[1.5rem] border border-[rgb(var(--color-border)/0.68)] bg-[rgb(var(--color-surface)/0.68)] p-5 shadow-soft backdrop-blur transition duration-300 hover:-translate-y-1 hover:border-[rgb(var(--color-secondary)/0.42)] hover:bg-[rgb(var(--color-secondary)/0.065)]"
+                        class="group relative min-h-[15rem] overflow-hidden rounded-[1.5rem] border border-[rgb(var(--color-border)/0.68)] bg-[rgb(var(--color-surface)/0.68)] p-5 shadow-soft backdrop-blur transition duration-300 hover:-translate-y-1 hover:border-[rgb(var(--color-secondary)/0.42)]"
                     >
-                        <div class="pointer-events-none absolute right-[-2rem] top-[-2rem] h-24 w-24 rounded-full bg-[rgb(var(--color-secondary)/0.1)] blur-2xl opacity-0 transition group-hover:opacity-100" />
+                        <!-- Location image background -->
+                        <img
+                            src={area.image}
+                            alt=""
+                            width="1200"
+                            height="800"
+                            loading="lazy"
+                            decoding="async"
+                            class="absolute inset-0 h-full w-full object-cover opacity-35 blur-md scale-110 transition duration-500 group-hover:opacity-55 group-hover:blur-none group-hover:scale-105"
+                        />
 
-                        <div class="relative flex items-start justify-between gap-4">
-                        <span class="flex h-11 w-11 items-center justify-center rounded-2xl bg-[rgb(var(--color-secondary)/0.1)] text-[rgb(var(--color-secondary))] transition group-hover:scale-105">
-                            <Icon class="h-5 w-5" />
-                        </span>
+                        <!-- Readability overlays -->
+                        <div class="absolute inset-0 bg-[linear-gradient(180deg,rgb(var(--color-surface)/0.82)_0%,rgb(var(--color-surface)/0.72)_42%,rgb(var(--color-bg)/0.88)_100%)] transition duration-500 group-hover:bg-[linear-gradient(180deg,rgb(var(--color-surface)/0.72)_0%,rgb(var(--color-surface)/0.58)_42%,rgb(var(--color-bg)/0.84)_100%)]"></div>
 
-                        <ArrowUpRight class="h-4.5 w-4.5 text-[rgb(var(--color-text-soft))] transition group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-[rgb(var(--color-secondary))]" />
+                        <div class="absolute inset-0 bg-[radial-gradient(circle_at_85%_0%,rgb(var(--color-secondary)/0.22),transparent_45%)] opacity-70"></div>
+
+                        <div class="pointer-events-none absolute right-[-2rem] top-[-2rem] h-24 w-24 rounded-full bg-[rgb(var(--color-secondary)/0.1)] blur-2xl opacity-0 transition group-hover:opacity-100"></div>
+
+                        <div class="relative z-10 flex h-full flex-col justify-between">
+                            <div class="flex items-start justify-between gap-4">
+                                <span class="flex h-11 w-11 items-center justify-center rounded-2xl bg-[rgb(var(--color-secondary)/0.14)] text-[rgb(var(--color-secondary))] shadow-soft backdrop-blur transition group-hover:scale-105 group-hover:bg-[rgb(var(--color-secondary)/0.22)]">
+                                    <Icon class="h-5 w-5" />
+                                </span>
+
+                                <span class="flex h-10 w-10 items-center justify-center rounded-full border border-[rgb(var(--color-border)/0.72)] bg-[rgb(var(--color-surface)/0.72)] text-[rgb(var(--color-heading))] shadow-soft backdrop-blur transition group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:border-[rgb(var(--color-secondary)/0.42)] group-hover:bg-[rgb(var(--color-secondary))] group-hover:text-white">
+                                    <ArrowUpRight class="h-4.5 w-4.5" />
+                                </span>
+                            </div>
+
+                            <div class="mt-8">
+                                <h3 class="font-inter text-xl font-extrabold tracking-[-0.045em] text-[rgb(var(--color-heading))]">
+                                    {area.city}, {area.state}
+                                </h3>
+
+                                <p class="mt-2 line-clamp-3 text-sm font-semibold leading-6 text-[rgb(var(--color-text-soft))]">
+                                    {area.seoDescription}
+                                </p>
+                            </div>
                         </div>
-
-                        <h3 class="relative mt-4 font-inter text-lg font-extrabold tracking-[-0.045em] text-[rgb(var(--color-heading))]">
-                        {area.city}, {area.state}
-                        </h3>
-
-                        <p class="relative mt-2 line-clamp-3 text-sm leading-6 text-[rgb(var(--color-text-soft))]">
-                        {area.seoDescription}
-                        </p>
                     </a>
                     );
                 })

@@ -27,6 +27,7 @@ export const siteConfig = {
         postalCode: "33144",
         country: "US",
         full: "6874 SW 8th St, Miami, FL 33144",
+        mapHref: "https://www.google.com/maps/search/?api=1&query=6874%20SW%208th%20St%2C%20Miami%2C%20FL%2033144",
     },
 
     geo: {
