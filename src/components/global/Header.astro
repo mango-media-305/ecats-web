@@ -33,7 +33,7 @@ const getHref = (href: string) =>
     localizedPath(href, currentLanguage as LanguageCode);
 ---
 
-<header class="header-blur sticky top-0 z-50">
+<header class="header-blur sticky top-0 z-50 relative transition-transform duration-300 ease-out" data-site-header>
     <div class="container-wide">
         <!-- Top Utility Bar -->
         <div
@@ -276,13 +276,75 @@ const getHref = (href: string) =>
 </header>
 
 <script>
+    const siteHeader = document.querySelector("[data-site-header]");
     const mobileMenuButton = document.querySelector("[data-mobile-menu-button]");
     const mobileMenu = document.querySelector("[data-mobile-menu]");
+
+    let lastScrollY = window.scrollY;
+    let ticking = false;
+
+    const isMobileMenuOpen = () =>
+        mobileMenuButton?.getAttribute("aria-expanded") === "true";
+
+    const showHeader = () => {
+        siteHeader?.classList.remove("-translate-y-full");
+        siteHeader?.classList.add("translate-y-0");
+    };
+
+    const hideHeader = () => {
+        siteHeader?.classList.add("-translate-y-full");
+        siteHeader?.classList.remove("translate-y-0");
+    };
+
+    const handleHeaderScroll = () => {
+        const currentScrollY = window.scrollY;
+        const scrollingDown = currentScrollY > lastScrollY;
+        const pastThreshold = currentScrollY > 120;
+
+        if (isMobileMenuOpen()) {
+            showHeader();
+            lastScrollY = currentScrollY;
+            ticking = false;
+            return;
+        }
+
+        if (!pastThreshold) {
+            showHeader();
+        } else if (scrollingDown) {
+            hideHeader();
+        } else {
+            showHeader();
+        }
+
+        lastScrollY = currentScrollY;
+        ticking = false;
+    };
+
+    window.addEventListener(
+        "scroll",
+        () => {
+            if (!ticking) {
+                window.requestAnimationFrame(handleHeaderScroll);
+                ticking = true;
+            }
+        },
+        { passive: true },
+    );
 
     mobileMenuButton?.addEventListener("click", () => {
         const isOpen = mobileMenuButton.getAttribute("aria-expanded") === "true";
 
         mobileMenuButton.setAttribute("aria-expanded", String(!isOpen));
         mobileMenu?.classList.toggle("hidden", isOpen);
+
+        showHeader();
+    });
+
+    mobileMenu?.querySelectorAll("a").forEach((link) => {
+        link.addEventListener("click", () => {
+            mobileMenuButton?.setAttribute("aria-expanded", "false");
+            mobileMenu?.classList.add("hidden");
+            showHeader();
+        });
     });
 </script>
