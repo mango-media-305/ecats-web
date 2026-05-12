@@ -122,7 +122,7 @@ export const siteConfig = {
         titleTemplate: "%s | East Coast Accounting & Tax Services",
         defaultDescription:
             "Professional tax preparation, bookkeeping, payroll, and accounting services for individuals and businesses in Miami, FL and South Florida.",
-        defaultImage: "/images/og/og-home.webp",
+        defaultImage: "/images/home/hero-accounting-miami.webp",
         keywords: [
             "tax preparation Miami FL",
             "accounting services Miami",

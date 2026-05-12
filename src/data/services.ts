@@ -14,7 +14,37 @@ import {
     WalletCards,
 } from "@lucide/astro";
 
-export const services = [
+const defaultServiceHeroImage = "/images/services/services-hero-accounting.webp";
+
+export const services: Array<{
+    id: string;
+    title: string;
+    shortTitle: string;
+    slug: string;
+    href: string;
+    icon: any;
+    eyebrow?: string;
+    image?: string;
+    heroImage?: string;
+    summary?: string;
+    description?: string;
+    seoTitle?: string;
+    seoDescription?: string;
+    primaryKeyword?: string;
+    secondaryKeywords?: string[];
+    audiences?: string[];
+    features?: string[];
+    benefits?: Array<{
+        title: string;
+        description: string;
+    }> ;
+    process?: string[];
+    relatedServices?: string[];
+    faqs?: Array<{
+        question: string;
+        answer: string;
+    }>;
+}> = [
     {
         id: "tax-preparation",
         title: "Tax Preparation",
@@ -23,12 +53,13 @@ export const services = [
         href: "/services/tax-preparation",
         icon: ReceiptText,
         eyebrow: "Individual & Business Taxes",
+        image: "/images/services/tax-preparation-og.webp",
+        heroImage: "/images/services/tax-preparation-og.webp",
         summary:
             "Professional tax preparation support for individuals, families, self-employed professionals, and businesses in Miami and South Florida.",
         description:
             "East Coast Accounting & Tax Services helps clients prepare organized, accurate tax filings with a clear process and personalized support. Whether you are filing as an individual, managing business taxes, or need help understanding your tax documents, our Miami office is here to guide you.",
-        seoTitle:
-            "Tax Preparation Services in Miami, FL",
+        seoTitle: "Tax Preparation Services in Miami, FL",
         seoDescription:
             "Professional tax preparation services in Miami, FL for individuals, families, self-employed professionals, and businesses. Contact East Coast Accounting & Tax Services.",
         primaryKeyword: "tax preparation Miami FL",
@@ -53,17 +84,34 @@ export const services = [
             "Year-round Tax Guidance",
             "Bilingual English and Spanish Assistance",
         ],
-        benefits: [
-            "Stay organized before and during tax season",
-            "Reduce stress with professional guidance",
-            "Understand what documents are needed",
-            "Get support for personal and business tax needs",
+        benefits: [{
+            title: "Organized Tax Support",
+            description:
+                "Keep your tax documents, income, expenses, and business records better organized before deadlines arrive.",
+        }, {
+            title: "Reduced Tax Season Stress",
+            description:
+                "Prepare for tax season with professional support that helps you stay organized and understand the process.",
+        }, {
+            title: "Clear Document Requirements",
+            description:
+                "Know exactly what documents are needed for your tax preparation, reducing confusion and errors.",
+        }, {
+            title: "Comprehensive Support",
+            description:
+                "Get assistance for both personal and business tax needs, ensuring all aspects of your taxes are covered.",
+        }
         ],
         process: [
             "Contact our office and tell us what type of tax help you need.",
             "Gather and submit your tax documents for review.",
             "Our team reviews your information and prepares your return.",
             "We explain next steps clearly before final submission.",
+        ],
+        relatedServices: [
+            "business-tax-services",
+            "irs-tax-help",
+            "accounting",
         ],
         faqs: [
             {
@@ -92,12 +140,13 @@ export const services = [
         href: "/services/business-tax-services",
         icon: BriefcaseBusiness,
         eyebrow: "Tax Support for Businesses",
+        image: "/images/services/business-tax-services-og.webp",
+        heroImage: "/images/services/business-tax-services-og.webp",
         summary:
             "Business tax support for local companies, small businesses, contractors, entrepreneurs, and self-employed professionals.",
         description:
             "Business owners need more than seasonal tax preparation. They need organized records, clear tax guidance, and year-round support. East Coast Accounting & Tax Services helps Miami businesses prepare for tax obligations while staying focused on daily operations.",
-        seoTitle:
-            "Business Tax Services in Miami, FL",
+        seoTitle: "Business Tax Services in Miami, FL",
         seoDescription:
             "Business tax services in Miami, FL for small businesses, contractors, entrepreneurs, and local companies. Get organized tax support from East Coast Accounting & Tax Services.",
         primaryKeyword: "business tax services Miami",
@@ -125,16 +174,33 @@ export const services = [
             "Bilingual business support",
         ],
         benefits: [
-            "Keep business tax records better organized",
-            "Prepare for deadlines with less stress",
-            "Support smarter business decisions",
-            "Connect tax, bookkeeping, and payroll needs in one place",
+            {
+                title: "Keep business tax records better organized",
+                description: "Maintain organized records for easier tax preparation and compliance.",
+            },
+            {
+                title: "Prepare for deadlines with less stress",
+                description: "Receive guidance and support to meet tax deadlines efficiently.",
+            },
+            {
+                title: "Support smarter business decisions",
+                description: "Leverage accurate financial data to make informed business choices.",
+            },
+            {
+                title: "Connect tax, bookkeeping, and payroll needs in one place",
+                description: "Integrate various financial services for streamlined operations.",
+            },
         ],
         process: [
             "Tell us about your business structure and tax needs.",
             "Share your business records, reports, and tax documents.",
             "Our team reviews the information and identifies what is needed.",
             "We help prepare your business tax filing and explain next steps.",
+        ],
+        relatedServices: [
+            "bookkeeping",
+            "payroll",
+            "small-business-accounting",
         ],
         faqs: [
             {
@@ -163,12 +229,13 @@ export const services = [
         href: "/services/bookkeeping",
         icon: BookOpenCheck,
         eyebrow: "Clean Books & Better Records",
+        image: "/images/services/bookkeeping-og.webp",
+        heroImage: "/images/services/bookkeeping-og.webp",
         summary:
             "Bookkeeping support to help Miami businesses keep financial records organized, readable, and ready for better decisions.",
         description:
             "Good bookkeeping gives business owners a clearer understanding of money coming in, money going out, and what needs attention. East Coast Accounting & Tax Services helps local businesses organize financial records and maintain cleaner books throughout the year.",
-        seoTitle:
-            "Bookkeeping Services in Miami, FL",
+        seoTitle: "Bookkeeping Services in Miami, FL",
         seoDescription:
             "Bookkeeping services in Miami, FL for small businesses, contractors, restaurants, service companies, and local professionals. Keep your books organized with East Coast Accounting & Tax Services.",
         primaryKeyword: "bookkeeping services Miami",
@@ -196,16 +263,33 @@ export const services = [
             "Coordination with tax preparation",
         ],
         benefits: [
-            "Know where your business stands financially",
-            "Reduce last-minute tax season stress",
-            "Keep income and expenses better organized",
-            "Make business decisions with clearer numbers",
+            {
+                title: "Know where your business stands financially",
+                description: "Gain a clear understanding of your financial position to make informed decisions.",
+            },
+            {
+                title: "Reduce last-minute tax season stress",
+                description: "Stay organized throughout the year to minimize stress during tax season.",
+            },
+            {
+                title: "Keep income and expenses better organized",
+                description: "Maintain accurate records of income and expenses for better financial management.",
+            },
+            {
+                title: "Make business decisions with clearer numbers",
+                description: "Use accurate financial data to guide strategic business decisions.",
+            },
         ],
         process: [
             "We review your current bookkeeping situation.",
             "We identify what records, accounts, and reports are needed.",
             "We organize transactions and support monthly recordkeeping.",
             "You receive clearer financial information for taxes and planning.",
+        ],
+        relatedServices: [
+            "payroll",
+            "business-tax-services",
+            "small-business-accounting",
         ],
         faqs: [
             {
@@ -234,12 +318,13 @@ export const services = [
         href: "/services/payroll",
         icon: WalletCards,
         eyebrow: "Payroll Support",
+        image: "/images/services/payroll-og.webp",
+        heroImage: "/images/services/payroll-og.webp",
         summary:
             "Payroll support for businesses that need help staying organized with employee payments, records, and payroll-related responsibilities.",
         description:
             "Payroll can become time-consuming for business owners, especially as a company grows. East Coast Accounting & Tax Services supports Miami businesses with payroll organization and related accounting needs so owners can stay focused on operations.",
-        seoTitle:
-            "Payroll Services in Miami, FL",
+        seoTitle: "Payroll Services in Miami, FL",
         seoDescription:
             "Payroll services in Miami, FL for small businesses and local employers. Get payroll support from East Coast Accounting & Tax Services.",
         primaryKeyword: "payroll services Miami FL",
@@ -267,16 +352,33 @@ export const services = [
             "Bilingual payroll assistance",
         ],
         benefits: [
-            "Save time on recurring payroll tasks",
-            "Keep payroll records more organized",
-            "Connect payroll with bookkeeping and tax preparation",
-            "Support cleaner financial reporting",
+            {
+                title: "Save time on recurring payroll tasks",
+                description: "Automate and streamline payroll processes to free up time for other business activities.",
+            },
+            {
+                title: "Keep payroll records more organized",
+                description: "Maintain accurate and organized payroll records for compliance and reporting purposes.",
+            },
+            {
+                title: "Connect payroll with bookkeeping and tax preparation",
+                description: "Integrate payroll data with bookkeeping and tax preparation for a comprehensive financial overview.",
+            },
+            {
+                title: "Support cleaner financial reporting",
+                description: "Ensure accurate payroll data contributes to clearer and more reliable financial reports.",
+            },
         ],
         process: [
             "We learn about your business and payroll needs.",
             "We review your employee and payroll record structure.",
             "We help organize payroll-related information and reporting.",
             "We support ongoing payroll clarity for your business.",
+        ],
+        relatedServices: [
+            "bookkeeping",
+            "small-business-accounting",
+            "business-tax-services",
         ],
         faqs: [
             {
@@ -305,12 +407,13 @@ export const services = [
         href: "/services/accounting",
         icon: Calculator,
         eyebrow: "Financial Organization",
+        image: "/images/services/accounting-og.webp",
+        heroImage: "/images/services/accounting-og.webp",
         summary:
             "Accounting support for individuals and businesses that need clearer numbers, better organization, and reliable financial guidance.",
         description:
             "East Coast Accounting & Tax Services helps individuals and business owners bring more clarity to their financial information. From accounting support to financial record organization, our office helps clients stay better prepared throughout the year.",
-        seoTitle:
-            "Accounting Services in Miami, FL",
+        seoTitle: "Accounting Services in Miami, FL",
         seoDescription:
             "Accounting services in Miami, FL for individuals and businesses. Get tax, bookkeeping, payroll, and accounting support from East Coast Accounting & Tax Services.",
         primaryKeyword: "accounting services Miami FL",
@@ -338,16 +441,33 @@ export const services = [
             "Payroll coordination",
         ],
         benefits: [
-            "Understand your numbers more clearly",
-            "Prepare better for tax season",
-            "Keep business finances more organized",
-            "Get support from a local Miami accounting office",
+            {
+                title: "Understand your numbers more clearly",
+                description: "Gain a clear understanding of your financial position to make informed decisions.",
+            },
+            {
+                title: "Prepare better for tax season",
+                description: "Stay organized throughout the year to minimize stress during tax season.",
+            },
+            {
+                title: "Keep business finances more organized",
+                description: "Maintain accurate records of income and expenses for better financial management.",
+            },
+            {
+                title: "Get support from a local Miami accounting office",
+                description: "Receive personalized assistance from a trusted local accounting office.",
+            },
         ],
         process: [
             "We discuss your accounting needs and goals.",
             "We review the records or reports you currently have.",
             "We identify the best way to organize and support your financial information.",
             "We provide ongoing support based on your needs.",
+        ],
+        relatedServices: [
+            "tax-preparation",
+            "bookkeeping",
+            "small-business-accounting",
         ],
         faqs: [
             {
@@ -376,12 +496,13 @@ export const services = [
         href: "/services/irs-tax-help",
         icon: Landmark,
         eyebrow: "Tax Notice Support",
+        image: "/images/services/irs-tax-help-og.webp",
+        heroImage: "/images/services/irs-tax-help-og.webp",
         summary:
             "Guidance for clients who have IRS letters, tax questions, past filing concerns, or need help understanding next steps.",
         description:
             "Receiving a tax notice or having an unresolved tax question can feel stressful. East Coast Accounting & Tax Services helps Miami clients review tax-related concerns, understand documents, and identify practical next steps.",
-        seoTitle:
-            "IRS Tax Help in Miami, FL",
+        seoTitle: "IRS Tax Help in Miami, FL",
         seoDescription:
             "IRS tax help in Miami, FL for tax notices, tax questions, and filing concerns. Contact East Coast Accounting & Tax Services for guidance.",
         primaryKeyword: "IRS tax help Miami",
@@ -408,16 +529,33 @@ export const services = [
             "Bilingual English and Spanish assistance",
         ],
         benefits: [
-            "Understand tax letters more clearly",
-            "Reduce confusion around IRS-related documents",
-            "Know what information may be needed",
-            "Get local support from a Miami tax office",
+            {
+                title: "Understand tax letters more clearly",
+                description: "Gain a clear understanding of your tax letters and notices.",
+            },
+            {
+                title: "Reduce confusion around IRS-related documents",
+                description: "Minimize confusion by having a professional review and explain IRS documents.",
+            },
+            {
+                title: "Know what information may be needed",
+                description: "Identify the necessary information and documents required for your tax situation.",
+            },
+            {
+                title: "Get local support from a Miami tax office",
+                description: "Receive personalized assistance from a trusted local accounting office.",
+            },
         ],
         process: [
             "Contact our office and explain the tax concern.",
             "Bring or send the tax letter or document for review.",
             "We help you understand what the notice is requesting.",
             "We discuss next steps based on your situation.",
+        ],
+        relatedServices: [
+            "tax-preparation",
+            "business-tax-services",
+            "accounting",
         ],
         faqs: [
             {
@@ -437,7 +575,6 @@ export const services = [
             },
         ],
     },
-
     {
         id: "small-business-accounting",
         title: "Small Business Accounting",
@@ -446,12 +583,13 @@ export const services = [
         href: "/services/small-business-accounting",
         icon: TrendingUp,
         eyebrow: "Support for Local Businesses",
+        image: "/images/og/services/small-business-accounting-og.webp",
+        heroImage: defaultServiceHeroImage,
         summary:
             "Tax, bookkeeping, payroll, and accounting support designed for small businesses across Miami and South Florida.",
         description:
             "Small business owners need financial support that is practical, organized, and easy to understand. East Coast Accounting & Tax Services helps local businesses stay prepared with accounting, bookkeeping, payroll, and tax services in one place.",
-        seoTitle:
-            "Small Business Accounting in Miami, FL",
+        seoTitle: "Small Business Accounting in Miami, FL",
         seoDescription:
             "Small business accounting in Miami, FL including tax preparation, bookkeeping, payroll, and accounting support for local businesses.",
         primaryKeyword: "small business accounting Miami",
@@ -479,16 +617,33 @@ export const services = [
             "Bilingual support for business owners",
         ],
         benefits: [
-            "Keep your business finances better organized",
-            "Reduce tax season pressure",
-            "Save time on financial administration",
-            "Work with a Miami-based accounting office",
+            {
+                title: "Keep your business finances better organized",
+                description: "Maintain accurate records of income and expenses for better financial management.",
+            },
+            {
+                title: "Reduce tax season pressure",
+                description: "Stay organized throughout the year to minimize stress during tax season.",
+            },
+            {
+                title: "Save time on financial administration",
+                description: "Automate and streamline financial processes to free up time for other business activities.",
+            },
+            {
+                title: "Work with a Miami-based accounting office",
+                description: "Receive personalized assistance from a trusted local accounting office.",
+            },
         ],
         process: [
             "We learn about your business, services, and financial setup.",
             "We review your current tax, bookkeeping, and payroll needs.",
             "We organize a support plan based on your business priorities.",
             "We provide ongoing help so your numbers stay clearer year-round.",
+        ],
+        relatedServices: [
+            "bookkeeping",
+            "payroll",
+            "business-tax-services",
         ],
         faqs: [
             {
@@ -599,12 +754,26 @@ export function getServiceBySlug(slug: string) {
 
 export function getFeaturedServices() {
     return services.filter((service) =>
-        homeFeaturedServiceIds.includes(service.id as (typeof homeFeaturedServiceIds)[number])
+        homeFeaturedServiceIds.includes(
+            service.id as (typeof homeFeaturedServiceIds)[number],
+        ),
     );
 }
 
 export function getCoreServices() {
     return services.filter((service) =>
-        coreServiceIds.includes(service.id as (typeof coreServiceIds)[number])
+        coreServiceIds.includes(
+            service.id as (typeof coreServiceIds)[number],
+        ),
+    );
+}
+
+export function getRelatedServices(serviceId: string) {
+    const currentService = getServiceById(serviceId);
+
+    if (!currentService?.relatedServices?.length) return [];
+
+    return services.filter((service) =>
+        currentService.relatedServices?.includes(service.id as never),
     );
 }
