@@ -53,7 +53,7 @@ export const services: Array<{
         href: "/services/tax-preparation",
         icon: ReceiptText,
         eyebrow: "Individual & Business Taxes",
-        image: "/images/services/tax-preparation-og.webp",
+        image: "/images/og/tax-preparation-og.webp",
         heroImage: "/images/services/tax-preparation-og.webp",
         summary:
             "Professional tax preparation support for individuals, families, self-employed professionals, and businesses in Miami and South Florida.",
@@ -140,7 +140,7 @@ export const services: Array<{
         href: "/services/business-tax-services",
         icon: BriefcaseBusiness,
         eyebrow: "Tax Support for Businesses",
-        image: "/images/services/business-tax-services-og.webp",
+        image: "/images/og/business-tax-services-og.webp",
         heroImage: "/images/services/business-tax-services-og.webp",
         summary:
             "Business tax support for local companies, small businesses, contractors, entrepreneurs, and self-employed professionals.",
@@ -229,7 +229,7 @@ export const services: Array<{
         href: "/services/bookkeeping",
         icon: BookOpenCheck,
         eyebrow: "Clean Books & Better Records",
-        image: "/images/services/bookkeeping-og.webp",
+        image: "/images/og/bookkeeping-og.webp",
         heroImage: "/images/services/bookkeeping-og.webp",
         summary:
             "Bookkeeping support to help Miami businesses keep financial records organized, readable, and ready for better decisions.",
@@ -318,7 +318,7 @@ export const services: Array<{
         href: "/services/payroll",
         icon: WalletCards,
         eyebrow: "Payroll Support",
-        image: "/images/services/payroll-og.webp",
+        image: "/images/og/payroll-og.webp",
         heroImage: "/images/services/payroll-og.webp",
         summary:
             "Payroll support for businesses that need help staying organized with employee payments, records, and payroll-related responsibilities.",
@@ -407,7 +407,7 @@ export const services: Array<{
         href: "/services/accounting",
         icon: Calculator,
         eyebrow: "Financial Organization",
-        image: "/images/services/accounting-og.webp",
+        image: "/images/og/accounting-og.webp",
         heroImage: "/images/services/accounting-og.webp",
         summary:
             "Accounting support for individuals and businesses that need clearer numbers, better organization, and reliable financial guidance.",
@@ -496,7 +496,7 @@ export const services: Array<{
         href: "/services/irs-tax-help",
         icon: Landmark,
         eyebrow: "Tax Notice Support",
-        image: "/images/services/irs-tax-help-og.webp",
+        image: "/images/og/irs-tax-help-og.webp",
         heroImage: "/images/services/irs-tax-help-og.webp",
         summary:
             "Guidance for clients who have IRS letters, tax questions, past filing concerns, or need help understanding next steps.",
@@ -583,8 +583,8 @@ export const services: Array<{
         href: "/services/small-business-accounting",
         icon: TrendingUp,
         eyebrow: "Support for Local Businesses",
-        image: "/images/og/services/small-business-accounting-og.webp",
-        heroImage: defaultServiceHeroImage,
+        image: "/images/og/small-business-accounting-og.webp",
+        heroImage: "/images/services/small-business-accounting-og.webp",
         summary:
             "Tax, bookkeeping, payroll, and accounting support designed for small businesses across Miami and South Florida.",
         description:

@@ -18,6 +18,8 @@ import {
     Phone,
     ReceiptText,
     ShieldCheck,
+    Store,
+    TrendingUp,
     UsersRound,
     WalletCards,
 } from "@lucide/astro";
@@ -75,6 +77,13 @@ export const mainNavigation = [
                     "Guidance for tax notices, tax questions, and IRS-related concerns.",
                 icon: Landmark,
             },
+            {
+                label: "Small Business Accounting",
+                href: "/services/small-business-accounting",
+                description:
+                    "Comprehensive tax, bookkeeping, payroll, and accounting support for small businesses.",
+                icon: Store,
+            }
         ],
     },
     {
