@@ -244,38 +244,38 @@ const getLanguageHref = (code: string) =>
         </div>
 
         <!-- Language Switcher -->
-        <div class="flex flex-wrap items-center gap-3">
-            <span
-            class="font-inter text-xs font-extrabold uppercase tracking-[0.12em] text-[rgb(var(--color-text-soft))]"
-            >
-            {t.footer.languageSwitcherTitle}
-            </span>
+            <!-- <div class="flex flex-wrap items-center gap-3">
+                <span
+                class="font-inter text-xs font-extrabold uppercase tracking-[0.12em] text-[rgb(var(--color-text-soft))]"
+                >
+                {t.footer.languageSwitcherTitle}
+                </span>
 
-            <div
-            class="flex rounded-full border border-[rgb(var(--color-border)/0.78)] bg-[rgb(var(--color-surface)/0.72)] p-1 shadow-soft"
-            aria-label={t.language.switcherLabel}
-            >
-            {
-                languageNavigation.map((language) => {
-                const isCurrent = language.code === currentLanguage;
+                <div
+                class="flex rounded-full border border-[rgb(var(--color-border)/0.78)] bg-[rgb(var(--color-surface)/0.72)] p-1 shadow-soft"
+                aria-label={t.language.switcherLabel}
+                >
+                {
+                    languageNavigation.map((language) => {
+                    const isCurrent = language.code === currentLanguage;
 
-                return (
-                    <a
-                    href={getLanguageHref(language.code)}
-                    aria-current={isCurrent ? "true" : undefined}
-                    class={`rounded-full px-4 py-2 font-inter text-xs font-extrabold transition ${
-                        isCurrent
-                        ? "bg-[rgb(var(--color-secondary))] text-white"
-                        : "text-[rgb(var(--color-text-soft))] hover:bg-[rgb(var(--color-secondary)/0.08)] hover:text-[rgb(var(--color-heading))]"
-                    }`}
-                    >
-                    {language.label}
-                    </a>
-                );
-                })
-            }
-            </div>
-        </div>
+                    return (
+                        <a
+                        href={getLanguageHref(language.code)}
+                        aria-current={isCurrent ? "true" : undefined}
+                        class={`rounded-full px-4 py-2 font-inter text-xs font-extrabold transition ${
+                            isCurrent
+                            ? "bg-[rgb(var(--color-secondary))] text-white"
+                            : "text-[rgb(var(--color-text-soft))] hover:bg-[rgb(var(--color-secondary)/0.08)] hover:text-[rgb(var(--color-heading))]"
+                        }`}
+                        >
+                        {language.label}
+                        </a>
+                    );
+                    })
+                }
+                </div>
+            </div> -->
         </div>
     </div>
 </footer>
