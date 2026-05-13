@@ -3,15 +3,17 @@ import {
     ArrowLeft,
     CheckCircle2,
     Clock3,
-    FileText,
+    Eye,
+    Keyboard,
     Mail,
     MapPin,
+    MonitorSmartphone,
     Phone,
-    Scale,
     Send,
     ShieldCheck,
     Sparkles,
     UserCheck,
+    Volume2,
 } from "@lucide/astro";
 
 import MainLayout from "../layouts/MainLayout.astro";
@@ -19,116 +21,107 @@ import CTAButton from "../components/ui/CTAButton.astro";
 import Badge from "../components/ui/Badge.astro";
 import { siteConfig } from "../data/site";
 
-const title = "Terms of Service";
+const title = "Accessibility Statement";
 const description =
-    "Read the Terms of Service for using the East Coast Accounting & Tax Services website and contacting the office through online forms or communication channels.";
+    "Read the accessibility statement for the East Coast Accounting & Tax Services website, including our commitment to providing a usable experience for all visitors.";
 
 const effectiveDate = "May 2026";
 
-const termsHighlights = [
+const accessibilityHighlights = [
     {
-        title: "Website information",
+        title: "Usable design",
         description:
-            "The content on this website is provided for general informational purposes and should not be treated as tax, legal, or financial advice for your specific situation.",
-        icon: FileText,
+            "The website is designed with readability, contrast, responsive layouts, and clear navigation in mind.",
+        icon: MonitorSmartphone,
     },
     {
-        title: "No automatic client relationship",
+        title: "Keyboard awareness",
         description:
-            "Submitting a contact form, email, or phone inquiry does not automatically create a client relationship with East Coast Accounting & Tax Services.",
-        icon: UserCheck,
+            "Interactive website elements should be reasonably accessible to visitors using keyboard navigation.",
+        icon: Keyboard,
     },
     {
-        title: "Responsible website use",
+        title: "Clear content",
         description:
-            "Visitors agree to use the website responsibly and avoid actions that could interfere with website security, performance, or availability.",
-        icon: ShieldCheck,
+            "The website uses structured sections, headings, buttons, and links to help visitors find information more easily.",
+        icon: Eye,
     },
 ];
 
 const sections = [
     {
-        title: "1. Acceptance of These Terms",
+        title: "1. Our Accessibility Commitment",
         body: [
-            "By accessing or using this website, you agree to these Terms of Service. If you do not agree with these terms, you should not use this website.",
-            "These terms apply to website visitors, users who submit contact forms, and anyone who interacts with East Coast Accounting & Tax Services through this website.",
+            "East Coast Accounting & Tax Services is committed to providing a website experience that is accessible and usable for as many visitors as possible.",
+            "Our goal is to make information about tax preparation, bookkeeping, payroll, accounting services, locations, resources, and contact options easier to access across different devices and user needs.",
         ],
     },
     {
-        title: "2. Website Information",
+        title: "2. Accessibility Efforts",
         body: [
-            "The information on this website is provided for general informational purposes only. It may describe services such as tax preparation, bookkeeping, payroll, accounting support, business tax services, IRS tax help, and related financial organization services.",
-            "Website content should not be considered tax advice, legal advice, financial advice, or a substitute for professional guidance based on your specific facts and circumstances.",
+            "This website is designed with accessibility considerations such as readable typography, responsive layouts, sufficient visual contrast, descriptive links, structured headings, and clear call-to-action buttons.",
+            "We aim to support visitors using desktop computers, tablets, mobile devices, keyboards, screen readers, and other assistive technologies where reasonably possible.",
         ],
     },
     {
-        title: "3. No Client Relationship Created by Website Use",
+        title: "3. Ongoing Improvements",
         body: [
-            "Using this website, submitting a contact form, sending an email, or calling the office does not automatically create a client relationship with East Coast Accounting & Tax Services.",
-            "A client relationship may require additional communication, review, acceptance, documentation, engagement terms, or other steps determined by the office.",
+            "Accessibility is an ongoing effort. As the website grows, East Coast Accounting & Tax Services may continue improving page structure, navigation, content clarity, form usability, contrast, and compatibility with assistive tools.",
+            "Website content, design, and functionality may be reviewed and updated over time to improve usability for all visitors.",
         ],
     },
     {
-        title: "4. Contact Forms and Submissions",
+        title: "4. Third-Party Content and Tools",
         body: [
-            "Visitors may submit information through website forms to request contact, ask questions, or express interest in services. You agree that any information you submit should be accurate to the best of your knowledge.",
-            "Please avoid submitting highly sensitive tax, financial, identification, or confidential information through a general website contact form unless the office specifically instructs you to use a secure communication method.",
+            "This website may include links to third-party platforms, maps, embedded tools, scheduling systems, form processors, analytics tools, or other external services.",
+            "East Coast Accounting & Tax Services does not fully control the accessibility of third-party websites or tools, but we encourage visitors to contact us if they experience difficulty accessing important information connected to our services.",
         ],
     },
     {
-        title: "5. Services Described on the Website",
+        title: "5. Known Limitations",
         body: [
-            "The website may describe services offered by East Coast Accounting & Tax Services, including tax preparation, bookkeeping, payroll, accounting services, business tax support, small business accounting, and related services.",
-            "Service availability, scope, timelines, pricing, and requirements may vary depending on the client’s situation and the office’s review. Website descriptions do not guarantee that a particular service will be available or appropriate for every visitor.",
+            "Although we work to make the website accessible, some content or functionality may not always meet every accessibility need or assistive technology configuration.",
+            "If you encounter an issue, we welcome feedback so we can better understand the problem and work toward a reasonable improvement or alternative way to provide the information.",
         ],
     },
     {
-        title: "6. Visitor Responsibilities",
+        title: "6. Requesting Assistance",
         body: [
-            "Visitors agree not to misuse the website, attempt unauthorized access, interfere with website operation, introduce malicious code, copy content for improper purposes, or use the website in a way that violates applicable laws or regulations.",
-            "Visitors are responsible for ensuring that the information they provide is accurate, complete, and appropriate for the type of inquiry submitted.",
+            "If you have difficulty accessing any part of this website, need help using a form, or need information in another format, please contact East Coast Accounting & Tax Services.",
+            `You may contact the office by phone at ${siteConfig.contact.phone}, by email at ${siteConfig.contact.email}, or by using the contact page.`,
         ],
     },
     {
-        title: "7. Third-Party Links and Tools",
+        title: "7. Feedback",
         body: [
-            "This website may include links to third-party websites, maps, platforms, payment systems, scheduling tools, analytics tools, or other resources. These third-party services are not controlled by East Coast Accounting & Tax Services.",
-            "East Coast Accounting & Tax Services is not responsible for the content, availability, security, terms, or privacy practices of third-party websites or services.",
+            "When reporting an accessibility issue, it is helpful to include the page URL, a description of the problem, the device or browser you were using, and the assistive technology involved, if applicable.",
+            "We will make reasonable efforts to review accessibility feedback and respond as appropriate.",
         ],
     },
     {
-        title: "8. Intellectual Property",
+        title: "8. Contact Information",
         body: [
-            "Website content, including text, layout, visual design, graphics, logos, service descriptions, and other materials, may be owned by or licensed to East Coast Accounting & Tax Services unless otherwise stated.",
-            "Visitors may not copy, reproduce, distribute, modify, or use website content for commercial purposes without permission, except as permitted by law.",
+            `For accessibility questions or support, contact East Coast Accounting & Tax Services at ${siteConfig.contact.email} or ${siteConfig.contact.phone}.`,
         ],
     },
+];
+
+const featureList = [
     {
-        title: "9. Disclaimer of Warranties",
-        body: [
-            "This website is provided on an informational basis. East Coast Accounting & Tax Services makes reasonable efforts to keep information accurate and useful, but does not guarantee that all website content will be complete, current, error-free, or suitable for every situation.",
-            "The website may be updated, changed, interrupted, or unavailable from time to time.",
-        ],
+        label: "Responsive layouts",
+        icon: MonitorSmartphone,
     },
     {
-        title: "10. Limitation of Liability",
-        body: [
-            "To the extent permitted by law, East Coast Accounting & Tax Services is not responsible for damages arising from website use, reliance on general website information, website interruptions, third-party links, or unauthorized access beyond the office’s reasonable control.",
-            "Visitors should contact the office directly for guidance related to their specific tax, bookkeeping, payroll, or accounting needs.",
-        ],
+        label: "Readable content",
+        icon: Eye,
     },
     {
-        title: "11. Changes to These Terms",
-        body: [
-            "East Coast Accounting & Tax Services may update these Terms of Service from time to time. The effective date above reflects the latest version of this page.",
-            "Continued use of the website after updates are posted means you accept the updated terms.",
-        ],
+        label: "Keyboard-friendly intent",
+        icon: Keyboard,
     },
     {
-        title: "12. Contact Information",
-        body: [
-            `If you have questions about these Terms of Service, you may contact East Coast Accounting & Tax Services at ${siteConfig.contact.email} or ${siteConfig.contact.phone}.`,
-        ],
+        label: "Clear contact options",
+        icon: Phone,
     },
 ];
 
@@ -137,7 +130,7 @@ const pageSchema = {
     "@type": "WebPage",
     name: title,
     description,
-    url: `${siteConfig.url.replace(/\/$/, "")}/terms-of-service`,
+    url: `${siteConfig.url.replace(/\/$/, "")}/accessibility`,
 };
 ---
 
@@ -172,16 +165,16 @@ const pageSchema = {
                 <div class="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,rgb(var(--color-secondary)/0.1),transparent_34rem)]"></div>
 
                 <div class="relative">
-                    <Badge variant="blue" icon={Scale} glow>
-                        Website Terms
+                    <Badge variant="blue" icon={ShieldCheck} glow>
+                        Website Accessibility
                     </Badge>
 
                     <h1 class="mt-6 text-balance font-inter text-4xl font-extrabold tracking-[-0.065em] text-[rgb(var(--color-heading))] sm:text-5xl lg:text-6xl">
-                        Terms of Service
+                        Accessibility Statement
                     </h1>
 
                     <p class="lead-text mt-6">
-                        These Terms of Service explain general conditions for using the East Coast Accounting & Tax Services website and contacting the office online.
+                        East Coast Accounting & Tax Services is committed to making this website easier to use, read, and navigate for all visitors.
                     </p>
 
                     <div class="mt-8 flex flex-wrap gap-3">
@@ -202,7 +195,7 @@ const pageSchema = {
 
                     <div class="mt-10 grid gap-4 md:grid-cols-3">
                         {
-                            termsHighlights.map((item) => {
+                            accessibilityHighlights.map((item) => {
                                 const Icon = item.icon;
 
                                 return (
@@ -226,11 +219,34 @@ const pageSchema = {
                 </div>
             </div>
 
-            <!-- Terms Content -->
+            <!-- Accessibility Features Strip -->
+            <div class="mt-8 overflow-hidden rounded-[2rem] border border-[rgb(var(--color-border)/0.72)] bg-[rgb(var(--color-surface)/0.74)] p-5 shadow-soft backdrop-blur sm:p-6">
+                <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+                    {
+                        featureList.map((feature) => {
+                            const Icon = feature.icon;
+
+                            return (
+                                <div class="rounded-[1.35rem] border border-[rgb(var(--color-border)/0.64)] bg-[rgb(var(--color-bg)/0.36)] p-4">
+                                    <span class="flex h-11 w-11 items-center justify-center rounded-2xl bg-[rgb(var(--color-secondary)/0.1)] text-[rgb(var(--color-secondary))]">
+                                        <Icon class="h-5 w-5" />
+                                    </span>
+
+                                    <p class="mt-3 font-inter text-sm font-extrabold text-[rgb(var(--color-heading))]">
+                                        {feature.label}
+                                    </p>
+                                </div>
+                            );
+                        })
+                    }
+                </div>
+            </div>
+
+            <!-- Statement Content -->
             <div class="mt-8 rounded-[2.25rem] border border-[rgb(var(--color-border)/0.72)] bg-[rgb(var(--color-surface)/0.74)] p-5 shadow-soft backdrop-blur sm:p-8">
                 <p class="rounded-[1.5rem] border border-[rgb(var(--color-border)/0.72)] bg-[rgb(var(--color-bg)/0.42)] p-4 text-sm leading-7 text-[rgb(var(--color-text-soft))]">
                     <strong class="text-[rgb(var(--color-heading))]">Important:</strong>
-                    These terms are provided for general website use information and should not be considered legal advice. Service-specific terms may be provided separately if East Coast Accounting & Tax Services accepts a client engagement.
+                    This Accessibility Statement describes the website’s accessibility commitment and feedback process. If you need assistance accessing information, please contact the office directly.
                 </p>
 
                 <div class="mt-8 grid gap-6">
@@ -265,11 +281,11 @@ const pageSchema = {
                             class="border-white/25 bg-white/10 !text-white"
                             icon={Sparkles}
                         >
-                            Questions About These Terms?
+                            Need Accessibility Help?
                         </Badge>
 
                         <h2 class="mt-5 max-w-3xl font-inter text-3xl font-extrabold tracking-[-0.055em] !text-white md:text-4xl">
-                            Contact our Miami office if you need more information.
+                            Contact our Miami office if you need help accessing website information.
                         </h2>
 
                         <div class="mt-5 grid gap-3 text-sm font-bold !text-white/82">
@@ -323,10 +339,10 @@ const pageSchema = {
                                 "Read how website information may be collected, used, and protected.",
                         },
                         {
-                            label: "Accessibility",
-                            href: "/accessibility",
+                            label: "Terms of Service",
+                            href: "/terms-of-service",
                             description:
-                                "Learn about the website accessibility commitment and how to report issues.",
+                                "Review general terms for using this website and requesting information.",
                         },
                     ].map((item) => (
                         <a

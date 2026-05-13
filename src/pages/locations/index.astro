@@ -1,0 +1,535 @@
+---
+import {
+    ArrowUpRight,
+    Building2,
+    CheckCircle2,
+    Clock3,
+    Languages,
+    Mail,
+    MapPin,
+    MessageSquareText,
+    Phone,
+    Send,
+    Sparkles,
+} from "@lucide/astro";
+
+import MainLayout from "../../layouts/MainLayout.astro";
+import SectionHeading from "../../components/ui/SectionHeading.astro";
+import CTAButton from "../../components/ui/CTAButton.astro";
+import Badge from "../../components/ui/Badge.astro";
+
+import { homeLocalSeoSection } from "../../data/home";
+import { siteConfig } from "../../data/site";
+
+const title = "Tax & Accounting Services Near Miami, FL";
+const description =
+    "East Coast Accounting & Tax Services provides tax preparation, bookkeeping, payroll, and accounting support for individuals and businesses in Miami, Miami-Dade County, and nearby South Florida communities.";
+
+const siteUrl = siteConfig.url.replace(/\/$/, "");
+
+const locationSchema = {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    name: title,
+    description,
+    url: `${siteUrl}/locations`,
+    mainEntity: {
+        "@type": "ItemList",
+        itemListElement: homeLocalSeoSection.serviceAreas.map((area, index) => ({
+            "@type": "ListItem",
+            position: index + 1,
+            name: `${area.city}, ${area.state}`,
+            url: `${siteUrl}${area.href}`,
+        })),
+    },
+};
+---
+
+<MainLayout
+    title={title}
+    description={description}
+    image="/images/og/locations-og.webp"
+    schema={locationSchema}
+>
+    <!-- Locations Hero -->
+    <section class="locations-hero accounting-grid relative isolate overflow-hidden py-16 sm:py-20 lg:py-24">
+        <div class="pointer-events-none absolute inset-0 -z-10 overflow-hidden">
+            <!-- Ken Burns background image -->
+            <div class="locations-kenburns-bg absolute inset-0 overflow-hidden">
+                <img
+                    src="/images/locations/locations-hero-miami.webp"
+                    alt=""
+                    width="2400"
+                    height="1600"
+                    class="absolute inset-0 h-full min-h-full w-full min-w-full object-cover object-center"
+                    loading="eager"
+                    decoding="async"
+                />
+            </div>
+
+            <!-- Readability overlays -->
+            <!-- <div class="absolute inset-0 bg-[rgb(var(--color-bg)/0.8)]"></div> -->
+
+            <!-- <div class="absolute inset-0 bg-[linear-gradient(90deg,rgb(var(--color-bg)/0.96)_0%,rgb(var(--color-bg)/0.74)_54%,rgb(var(--color-bg)/0.5)_100%)]"></div> -->
+
+            <div class="absolute inset-0 bg-[radial-gradient(circle_at_20%_25%,rgb(var(--color-secondary)/0.12),transparent_34rem),radial-gradient(circle_at_80%_30%,rgb(var(--color-primary)/0.1),transparent_32rem)]"></div>
+
+            <div class="absolute left-[-12rem] top-20 h-[32rem] w-[32rem] rounded-full bg-[rgb(var(--color-secondary)/0.14)] blur-3xl"></div>
+
+            <div class="absolute right-[-12rem] bottom-[-8rem] h-[34rem] w-[34rem] rounded-full bg-[rgb(var(--color-primary)/0.13)] blur-3xl"></div>
+
+            <div class="absolute inset-x-0 bottom-0 h-56 bg-[linear-gradient(to_top,rgb(var(--color-bg)),transparent)]"></div>
+        </div>
+
+        <div class="container-wide">
+            <div class="grid gap-12 lg:grid-cols-[0.95fr_0.75fr] lg:items-center">
+                <div class="relative z-10 max-w-3xl">
+                    <Badge variant="blue" icon={MapPin} glow>
+                        Miami & South Florida Accounting Support
+                    </Badge>
+
+                    <h1 class="mt-6 text-balance font-inter text-4xl font-extrabold tracking-[-0.065em] text-[rgb(var(--color-heading))] sm:text-5xl lg:text-6xl">
+                        Tax and accounting services near
+                        <span class="gradient-text block">Miami, FL.</span>
+                    </h1>
+
+                    <p class="lead-text mt-6">
+                        East Coast Accounting & Tax Services helps individuals, families, self-employed professionals, and businesses across Miami-Dade County with tax preparation, bookkeeping, payroll, and accounting support.
+                    </p>
+
+                    <div class="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
+                        <CTAButton href="/contact" icon={Send} size="lg">
+                            Contact Our Office
+                        </CTAButton>
+
+                        <CTAButton
+                            href={siteConfig.contact.phoneHref}
+                            variant="secondary"
+                            icon={Phone}
+                            size="lg"
+                        >
+                            Call Now
+                        </CTAButton>
+                    </div>
+
+                    <div class="mt-8 grid gap-3 sm:grid-cols-3">
+                        {
+                            [
+                                {
+                                    label: "Miami Office",
+                                    detail: siteConfig.address.full,
+                                    icon: Building2,
+                                },
+                                {
+                                    label: "Bilingual Help",
+                                    detail: "English & Spanish",
+                                    icon: Languages,
+                                },
+                                {
+                                    label: "Office Hours",
+                                    detail: siteConfig.hours.label,
+                                    icon: Clock3,
+                                },
+                            ].map((item) => {
+                                const Icon = item.icon;
+
+                                return (
+                                    <div class="glass-panel rounded-[1.35rem] p-4">
+                                        <span class="flex h-10 w-10 items-center justify-center rounded-2xl bg-[rgb(var(--color-secondary)/0.1)] text-[rgb(var(--color-secondary))]">
+                                            <Icon class="h-5 w-5" />
+                                        </span>
+
+                                        <p class="mt-3 font-inter text-sm font-extrabold text-[rgb(var(--color-heading))]">
+                                            {item.label}
+                                        </p>
+
+                                        <p class="mt-1 text-xs leading-5 text-[rgb(var(--color-text-soft))]">
+                                            {item.detail}
+                                        </p>
+                                    </div>
+                                );
+                            })
+                        }
+                    </div>
+                </div>
+
+                <!-- Floating visual -->
+                <div class="relative hidden md:block">
+                    <div class="pointer-events-none absolute inset-0 rounded-full bg-[radial-gradient(circle,rgb(var(--color-secondary)/0.18),transparent_62%)] blur-3xl"></div>
+
+                    <div class="pointer-events-none absolute left-1/2 top-1/2 h-64 w-64 -translate-x-1/2 -translate-y-1/2 rounded-full border border-[rgb(var(--color-secondary)/0.18)]"></div>
+
+                    <img
+                        src="/images/locations/locations-floating-map.webp"
+                        alt=""
+                        width="900"
+                        height="700"
+                        loading="eager"
+                        decoding="async"
+                        class="locations-floating-image relative z-10 mx-auto w-full max-w-[32rem] object-contain drop-shadow-[0_34px_80px_rgb(5_162_236/0.24)]"
+                    />
+
+                    <div class="absolute right-6 top-8 z-20 rounded-full border border-[rgb(var(--color-border)/0.72)] bg-[rgb(var(--color-surface)/0.82)] px-4 py-2 shadow-soft backdrop-blur">
+                        <span class="font-inter text-xs font-extrabold uppercase tracking-[0.12em] text-[rgb(var(--color-secondary))]">
+                            Miami-Dade County
+                        </span>
+                    </div>
+
+                    <div class="absolute bottom-8 left-4 z-20 rounded-full border border-[rgb(var(--color-border)/0.72)] bg-[rgb(var(--color-surface)/0.82)] px-4 py-2 shadow-soft backdrop-blur">
+                        <span class="font-inter text-xs font-extrabold uppercase tracking-[0.12em] text-[rgb(var(--color-heading))]">
+                            Taxes · Books · Payroll
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Location Cards -->
+    <section class="section-shell relative overflow-hidden bg-[rgb(var(--color-bg-soft)/0.5)]">
+        <div class="pointer-events-none absolute inset-0 -z-10">
+            <div class="absolute left-1/2 top-0 h-px w-[min(92%,1180px)] -translate-x-1/2 bg-[linear-gradient(90deg,transparent,rgb(var(--color-secondary)/0.55),transparent)]"></div>
+
+            <div class="absolute left-[-14rem] top-24 h-[28rem] w-[28rem] rounded-full bg-[rgb(var(--color-secondary)/0.1)] blur-3xl"></div>
+
+            <div class="absolute right-[-12rem] bottom-10 h-[30rem] w-[30rem] rounded-full bg-[rgb(var(--color-primary)/0.1)] blur-3xl"></div>
+        </div>
+
+        <div class="container-wide">
+            <SectionHeading
+                eyebrow="Service Areas"
+                title="Accounting support for Miami-Dade communities."
+                highlight="Miami-Dade communities"
+                description="Explore local service area pages for tax preparation, bookkeeping, payroll, and accounting support near Miami and nearby South Florida communities."
+            />
+
+            <div class="mt-12 grid gap-5 md:grid-cols-2 xl:grid-cols-3">
+                {
+                    homeLocalSeoSection.serviceAreas.map((area) => {
+                        const Icon = area.icon;
+
+                        return (
+                            <article class="group glow-card card-hover relative overflow-hidden p-6">
+                                <div class="pointer-events-none absolute right-[-4rem] top-[-4rem] h-40 w-40 rounded-full bg-[rgb(var(--color-secondary)/0.1)] blur-2xl opacity-0 transition duration-300 group-hover:opacity-100"></div>
+
+                                <div class="pointer-events-none absolute bottom-4 right-5 text-[rgb(var(--color-primary)/0.045)] transition group-hover:text-[rgb(var(--color-secondary)/0.075)] dark:text-white/5">
+                                    <Icon class="h-24 w-24" />
+                                </div>
+
+                                <div class="relative z-10 flex h-full flex-col">
+                                    <div class="flex items-start justify-between gap-4">
+                                        <span class="flex h-14 w-14 items-center justify-center rounded-[1.25rem] bg-[rgb(var(--color-secondary)/0.1)] text-[rgb(var(--color-secondary))] transition duration-300 group-hover:scale-105 group-hover:bg-[rgb(var(--color-secondary)/0.16)]">
+                                            <Icon class="h-7 w-7" />
+                                        </span>
+
+                                        <a
+                                            href={area.href}
+                                            aria-label={`Learn more about accounting services in ${area.city}, ${area.state}`}
+                                            class="flex h-10 w-10 items-center justify-center rounded-full border border-[rgb(var(--color-border)/0.72)] bg-[rgb(var(--color-surface)/0.72)] text-[rgb(var(--color-heading))] transition duration-300 group-hover:-translate-y-1 group-hover:translate-x-1 group-hover:border-[rgb(var(--color-secondary)/0.45)] group-hover:bg-[rgb(var(--color-secondary))] group-hover:text-white dark:group-hover:text-[rgb(3_11_29)]"
+                                        >
+                                            <ArrowUpRight class="h-4.5 w-4.5" />
+                                        </a>
+                                    </div>
+
+                                    <Badge variant="soft" size="sm" class="mt-7">
+                                        Service Area
+                                    </Badge>
+
+                                    <h2 class="mt-4 font-inter text-2xl font-extrabold tracking-[-0.055em] text-[rgb(var(--color-heading))]">
+                                        {area.city}, {area.state}
+                                    </h2>
+
+                                    <p class="mt-3 text-sm leading-7 text-[rgb(var(--color-text-soft))]">
+                                        {area.seoDescription}
+                                    </p>
+
+                                    <div class="mt-6 grid gap-3">
+                                        {
+                                            [
+                                                "Tax preparation support",
+                                                "Bookkeeping and payroll help",
+                                                "Accounting guidance for individuals and businesses",
+                                            ].map((item) => (
+                                                <div class="flex items-start gap-3">
+                                                    <CheckCircle2 class="mt-0.5 h-4.5 w-4.5 shrink-0 text-[rgb(var(--color-secondary))]" />
+                                                    <span class="text-sm font-bold leading-6 text-[rgb(var(--color-text))]">
+                                                        {item}
+                                                    </span>
+                                                </div>
+                                            ))
+                                        }
+                                    </div>
+
+                                    <div class="mt-auto pt-7">
+                                        <a
+                                            href={area.href}
+                                            class="group/link inline-flex items-center gap-2 font-inter text-sm font-extrabold text-[rgb(var(--color-secondary))]"
+                                        >
+                                            View location support
+                                            <ArrowUpRight class="h-4 w-4 transition group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5" />
+                                        </a>
+                                    </div>
+                                </div>
+                            </article>
+                        );
+                    })
+                }
+            </div>
+        </div>
+    </section>
+
+    <!-- Office Info -->
+    <section class="section-shell accounting-grid relative isolate overflow-hidden">
+        <div class="pointer-events-none absolute inset-0 -z-10">
+            <div class="absolute left-[-12rem] top-20 h-[28rem] w-[28rem] rounded-full bg-[rgb(var(--color-secondary)/0.1)] blur-3xl"></div>
+
+            <div class="absolute right-[-12rem] bottom-10 h-[30rem] w-[30rem] rounded-full bg-[rgb(var(--color-primary)/0.11)] blur-3xl"></div>
+        </div>
+
+        <div class="container-wide">
+            <div class="grid gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
+                <SectionHeading
+                    eyebrow="Visit or Contact Our Office"
+                    title="Local accounting support from our Miami office."
+                    highlight="Miami office"
+                    description="East Coast Accounting & Tax Services is based in Miami and supports individuals and businesses across Miami-Dade County and surrounding South Florida communities."
+                />
+
+                <div class="glass-panel overflow-hidden rounded-[2.25rem] p-5 shadow-card">
+                    <div class="rounded-[1.85rem] bg-[linear-gradient(135deg,rgb(var(--color-primary))_0%,rgb(var(--color-secondary))_100%)] p-6 text-white shadow-blue">
+                        <Badge
+                            variant="outline"
+                            class="border-white/25 bg-white/10 !text-white"
+                            icon={MapPin}
+                        >
+                            Miami Office
+                        </Badge>
+
+                        <h2 class="mt-5 font-inter text-3xl font-extrabold tracking-[-0.055em] !text-white md:text-4xl">
+                            {siteConfig.name}
+                        </h2>
+
+                        <div class="mt-6 grid gap-4">
+                            <a
+                                href="https://www.google.com/maps/search/?api=1&query=6874%20SW%208th%20St%2C%20Miami%2C%20FL%2033144"
+                                target="_blank"
+                                rel="noreferrer"
+                                class="flex items-start gap-3 text-sm font-bold leading-6 !text-white/82 transition hover:!text-white"
+                            >
+                                <MapPin class="mt-0.5 h-4.5 w-4.5 shrink-0" />
+                                <span>{siteConfig.address.full}</span>
+                            </a>
+
+                            <a
+                                href={siteConfig.contact.phoneHref}
+                                class="flex items-center gap-3 text-sm font-bold !text-white/82 transition hover:!text-white"
+                            >
+                                <Phone class="h-4.5 w-4.5 shrink-0" />
+                                {siteConfig.contact.phone}
+                            </a>
+
+                            <a
+                                href={siteConfig.contact.emailHref}
+                                class="flex items-center gap-3 text-sm font-bold !text-white/82 transition hover:!text-white"
+                            >
+                                <Mail class="h-4.5 w-4.5 shrink-0" />
+                                {siteConfig.contact.email}
+                            </a>
+
+                            <div class="flex items-center gap-3 text-sm font-bold !text-white/82">
+                                <Clock3 class="h-4.5 w-4.5 shrink-0" />
+                                {siteConfig.hours.label}
+                            </div>
+                        </div>
+
+                        <div class="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
+                            <CTAButton href="/contact" variant="dark" icon={Send}>
+                                Contact Our Office
+                            </CTAButton>
+
+                            <CTAButton
+                                href="https://www.google.com/maps/search/?api=1&query=6874%20SW%208th%20St%2C%20Miami%2C%20FL%2033144"
+                                variant="ghost"
+                                icon={ArrowUpRight}
+                                class="border-white/20 bg-white/10 text-white hover:border-white/35 hover:bg-white/16"
+                            >
+                                Open Map
+                            </CTAButton>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Helpful Questions -->
+    <section class="section-shell relative overflow-hidden bg-[rgb(var(--color-bg-soft)/0.5)]">
+        <div class="container-wide">
+            <div class="grid gap-10 lg:grid-cols-[0.8fr_1.2fr] lg:items-start">
+                <SectionHeading
+                    eyebrow="Helpful Questions"
+                    title="Questions about our Miami service areas."
+                    highlight="Questions"
+                    description="Simple answers for clients looking for nearby tax, bookkeeping, payroll, and accounting support."
+                />
+
+                <div class="grid gap-4">
+                    {
+                        [
+                            {
+                                question: "Do you only serve clients in Miami?",
+                                answer:
+                                    "East Coast Accounting & Tax Services is based in Miami and serves Miami-Dade County, while also supporting nearby South Florida communities when relevant.",
+                            },
+                            {
+                                question: "Can businesses outside Miami-Dade contact your office?",
+                                answer:
+                                    "Yes. Businesses and individuals in nearby communities can contact the office to ask whether their tax, bookkeeping, payroll, or accounting needs can be supported.",
+                            },
+                            {
+                                question: "Do you offer support in English and Spanish?",
+                                answer:
+                                    "Yes. East Coast Accounting & Tax Services provides bilingual support in English and Spanish.",
+                            },
+                        ].map((faq, index) => (
+                            <article class="rounded-[1.6rem] border border-[rgb(var(--color-border)/0.72)] bg-[rgb(var(--color-surface)/0.72)] p-5 shadow-soft backdrop-blur">
+                                <div class="flex gap-4">
+                                    <span class="flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl bg-[rgb(var(--color-secondary)/0.1)] font-inter text-xs font-extrabold text-[rgb(var(--color-secondary))]">
+                                        {String(index + 1).padStart(2, "0")}
+                                    </span>
+
+                                    <div>
+                                        <h3 class="font-inter text-lg font-extrabold tracking-[-0.045em] text-[rgb(var(--color-heading))]">
+                                            {faq.question}
+                                        </h3>
+
+                                        <p class="mt-2 text-sm leading-7 text-[rgb(var(--color-text-soft))]">
+                                            {faq.answer}
+                                        </p>
+                                    </div>
+                                </div>
+                            </article>
+                        ))
+                    }
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Final CTA -->
+    <section class="section-shell relative isolate overflow-hidden">
+        <div class="container-wide">
+            <div class="relative overflow-hidden rounded-[2.5rem] border border-[rgb(var(--color-border)/0.72)] bg-[linear-gradient(135deg,rgb(var(--color-primary))_0%,rgb(var(--color-secondary))_100%)] p-6 text-white shadow-blue sm:p-8 lg:p-10">
+                <div class="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_18%_0%,rgba(255,255,255,0.3),transparent_34%),radial-gradient(circle_at_92%_100%,rgba(255,255,255,0.16),transparent_34%)]"></div>
+
+                <div class="relative grid gap-8 lg:grid-cols-[1fr_auto] lg:items-center">
+                    <div>
+                        <Badge
+                            variant="outline"
+                            class="border-white/25 bg-white/10 !text-white"
+                            icon={MessageSquareText}
+                        >
+                            Need Local Accounting Support?
+                        </Badge>
+
+                        <h2 class="mt-5 max-w-4xl font-inter text-3xl font-extrabold tracking-[-0.055em] !text-white md:text-4xl">
+                            Contact our Miami office for tax, bookkeeping, payroll, or accounting help.
+                        </h2>
+
+                        <p class="mt-4 max-w-3xl text-sm leading-7 !text-white/78 md:text-base">
+                            Tell us where you are located and what type of support you need. Our office will review your request and help guide you toward the right next step.
+                        </p>
+                    </div>
+
+                    <div class="flex flex-col gap-3 sm:flex-row lg:flex-col">
+                        <CTAButton href="/contact" variant="dark" icon={Send}>
+                            Contact Our Office
+                        </CTAButton>
+
+                        <CTAButton
+                            href={siteConfig.contact.phoneHref}
+                            variant="ghost"
+                            icon={Phone}
+                            class="border-white/20 bg-white/10 text-white hover:border-white/35 hover:bg-white/16"
+                        >
+                            {siteConfig.contact.phone}
+                        </CTAButton>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</MainLayout>
+
+<style>
+    .locations-kenburns-bg {
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        opacity: 0.26;
+        transform: scale(1.08);
+        transform-origin: center center;
+        animation: locations-kenburns 18s ease-in-out infinite alternate;
+    }
+
+    .locations-kenburns-bg img {
+        object-fit: cover;
+        object-position: center center;
+    }
+
+    :root[data-theme="dark"] .locations-kenburns-bg {
+        opacity: 0.17;
+    }
+
+    @keyframes locations-kenburns {
+        0% {
+            transform: scale(1.08) translate3d(0, 0, 0);
+        }
+
+        100% {
+            transform: scale(1.18) translate3d(-1.5%, -1.2%, 0);
+        }
+    }
+
+    @keyframes locations-float {
+        0%,
+        100% {
+            transform: translateY(0) rotate(1deg) scale(1);
+        }
+
+        50% {
+            transform: translateY(-14px) rotate(-1deg) scale(1.02);
+        }
+    }
+
+    .locations-floating-image {
+        animation: locations-float 7.4s ease-in-out infinite;
+    }
+
+    @media (max-width: 1023px) {
+        .locations-kenburns-bg img {
+            object-position: center top;
+        }
+    }
+
+    @media (max-width: 767px) {
+        .locations-kenburns-bg {
+            transform: scale(1.12);
+        }
+
+        .locations-kenburns-bg img {
+            object-position: center center;
+        }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        .locations-kenburns-bg,
+        .locations-floating-image {
+            animation: none;
+        }
+
+        .locations-kenburns-bg {
+            transform: scale(1.1);
+        }
+    }
+</style>

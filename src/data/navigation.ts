@@ -133,6 +133,13 @@ export const mainNavigation = [
                     "Accounting support for local healthcare, dental, and wellness practices.",
                 icon: ShieldCheck,
             },
+            {
+                label: "Local Service Businesses",
+                href: "/industries/local-service-businesses",
+                description:
+                    "Accounting and tax support for local service businesses in Miami.",
+                icon: Home,
+            }
         ],
     },
     {
@@ -149,7 +156,7 @@ export const mainNavigation = [
             },
             {
                 label: "FAQ",
-                href: "/faq",
+                href: "/resources/faq",
                 description:
                     "Common questions about tax preparation, bookkeeping, payroll, and working with our office.",
                 icon: CircleHelp,

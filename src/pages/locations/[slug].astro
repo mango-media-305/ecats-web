@@ -1,0 +1,715 @@
+---
+import {
+    ArrowLeft,
+    ArrowUpRight,
+    Building2,
+    CheckCircle2,
+    ClipboardCheck,
+    Clock3,
+    HelpCircle,
+    Languages,
+    Mail,
+    MapPin,
+    MessageSquareText,
+    Phone,
+    Send,
+    Sparkles,
+} from "@lucide/astro";
+
+import MainLayout from "../../layouts/MainLayout.astro";
+import SectionHeading from "../../components/ui/SectionHeading.astro";
+import CTAButton from "../../components/ui/CTAButton.astro";
+import Badge from "../../components/ui/Badge.astro";
+
+import {
+    serviceAreas,
+    getLocationBreadcrumbSchema,
+    getLocationFaqSchema,
+    getLocationPageSchema,
+    getRelatedServiceAreas,
+    getServiceAreaBreadcrumbs,
+    locationPageCta,
+    localBusinessLocationSchema,
+} from "../../data/locations";
+
+import { getServiceById } from "../../data/services";
+import { siteConfig } from "../../data/site";
+
+export function getStaticPaths() {
+    return serviceAreas.map((area) => ({
+        params: { slug: area.slug },
+        props: { area },
+    }));
+}
+
+const { area } = Astro.props;
+
+const Icon = area.icon;
+
+const title = area.seoTitle ?? area.title;
+
+const description =
+    area.seoDescription ??
+    `Tax preparation, bookkeeping, payroll, and accounting services in ${area.city}, ${area.state}.`;
+
+const breadcrumbs = getServiceAreaBreadcrumbs(area);
+
+const relatedServices =
+    area.serviceIds?.map((id) => getServiceById(id)).filter(Boolean) ?? [];
+
+const relatedLocations = getRelatedServiceAreas(area);
+
+const pageSchema = [
+    getLocationPageSchema(area),
+    getLocationBreadcrumbSchema(area),
+    getLocationFaqSchema(area),
+    localBusinessLocationSchema,
+];
+
+const mapHref =
+    "https://www.google.com/maps/search/?api=1&query=6874%20SW%208th%20St%2C%20Miami%2C%20FL%2033144";
+---
+
+<MainLayout
+    title={title}
+    description={description}
+    image={area.image}
+    schema={pageSchema}
+>
+    <!-- Location Hero -->
+    <section class="location-detail-hero accounting-grid relative isolate overflow-hidden py-16 sm:py-20 lg:py-24">
+        <div class="pointer-events-none absolute inset-0 -z-10 overflow-hidden">
+            <!-- Ken Burns background image -->
+            <div class="location-detail-kenburns-bg absolute inset-0 overflow-hidden">
+                <img
+                    src={area.hero}
+                    alt=""
+                    width="2400"
+                    height="1600"
+                    class="absolute inset-0 h-full min-h-full w-full min-w-full object-cover object-center"
+                    loading="eager"
+                    decoding="async"
+                />
+            </div>
+
+            <!-- Readability overlays -->
+            <!-- <div class="absolute inset-0 bg-[rgb(var(--color-bg)/0.78)]"></div> -->
+
+            <!-- <div class="absolute inset-0 bg-[linear-gradient(90deg,rgb(var(--color-bg)/0.97)_0%,rgb(var(--color-bg)/0.76)_54%,rgb(var(--color-bg)/0.5)_100%)]"></div> -->
+
+            <div class="absolute inset-0 bg-[radial-gradient(circle_at_20%_25%,rgb(var(--color-secondary)/0.12),transparent_34rem),radial-gradient(circle_at_80%_30%,rgb(var(--color-primary)/0.1),transparent_32rem)]"></div>
+
+            <div class="absolute left-[-12rem] top-20 h-[32rem] w-[32rem] rounded-full bg-[rgb(var(--color-secondary)/0.14)] blur-3xl"></div>
+
+            <div class="absolute right-[-12rem] bottom-[-8rem] h-[34rem] w-[34rem] rounded-full bg-[rgb(var(--color-primary)/0.13)] blur-3xl"></div>
+
+            <div class="absolute inset-x-0 bottom-0 h-56 bg-[linear-gradient(to_top,rgb(var(--color-bg)),transparent)]"></div>
+        </div>
+
+        <div class="container-wide">
+            <div class="grid gap-10 lg:grid-cols-[0.95fr_0.75fr] lg:items-center">
+                <div class="relative z-10 max-w-3xl">
+
+                    <Badge variant="blue" icon={MapPin} glow>
+                        {area.city}, {area.state} Service Area
+                    </Badge>
+
+                    <h1 class="mt-6 text-balance font-inter text-4xl font-extrabold tracking-[-0.065em] text-[rgb(var(--color-heading))] sm:text-5xl lg:text-6xl">
+                        {area.title}
+                    </h1>
+
+                    <p class="lead-text mt-6">
+                        {area.description}
+                    </p>
+
+                    <div class="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
+                        <CTAButton href="/contact" icon={Send} size="lg">
+                            Contact Our Office
+                        </CTAButton>
+
+                        <CTAButton
+                            href={siteConfig.contact.phoneHref}
+                            variant="secondary"
+                            icon={Phone}
+                            size="lg"
+                        >
+                            Call Now
+                        </CTAButton>
+                    </div>
+
+                    <div class="mt-8 grid gap-3 sm:grid-cols-3">
+                        {
+                            [
+                                {
+                                    label: area.county,
+                                    detail: "Local service area",
+                                    icon: MapPin,
+                                },
+                                {
+                                    label: "EN / ES",
+                                    detail: "Bilingual support",
+                                    icon: Languages,
+                                },
+                                {
+                                    label: siteConfig.hours.label,
+                                    detail: "Office hours",
+                                    icon: Clock3,
+                                },
+                            ].map((item) => {
+                                const ItemIcon = item.icon;
+
+                                return (
+                                    <div class="glass-panel rounded-[1.35rem] p-4">
+                                        <span class="flex h-10 w-10 items-center justify-center rounded-2xl bg-[rgb(var(--color-secondary)/0.1)] text-[rgb(var(--color-secondary))]">
+                                            <ItemIcon class="h-5 w-5" />
+                                        </span>
+
+                                        <p class="mt-3 font-inter text-sm font-extrabold text-[rgb(var(--color-heading))]">
+                                            {item.label}
+                                        </p>
+
+                                        <p class="mt-1 text-xs leading-5 text-[rgb(var(--color-text-soft))]">
+                                            {item.detail}
+                                        </p>
+                                    </div>
+                                );
+                            })
+                        }
+                    </div>
+                </div>
+
+                <!-- Hero location card -->
+                <div class="relative hidden md:block">
+                    <div class="pointer-events-none absolute inset-0 rounded-full bg-[radial-gradient(circle,rgb(var(--color-secondary)/0.18),transparent_62%)] blur-3xl"></div>
+
+                    <div class="glass-panel relative overflow-hidden rounded-[2.25rem] p-5 shadow-card">
+                        <div class="pointer-events-none absolute inset-x-10 top-0 h-px bg-[linear-gradient(90deg,transparent,rgb(var(--color-secondary)/0.8),transparent)]"></div>
+
+                        <div class="relative overflow-hidden rounded-[1.85rem] border border-[rgb(var(--color-border)/0.68)] bg-[rgb(var(--color-surface)/0.76)] p-6">
+                            <div class="pointer-events-none absolute bottom-4 right-5 text-[rgb(var(--color-primary)/0.045)] dark:text-white/5">
+                                <Icon class="h-40 w-40" />
+                            </div>
+
+                            <div class="relative z-10">
+                                <span class="flex h-16 w-16 items-center justify-center rounded-[1.35rem] bg-[rgb(var(--color-secondary)/0.1)] text-[rgb(var(--color-secondary))]">
+                                    <Icon class="h-8 w-8" />
+                                </span>
+
+                                <p class="mt-6 font-inter text-xs font-extrabold uppercase tracking-[0.14em] text-[rgb(var(--color-secondary))]">
+                                    Local Support
+                                </p>
+
+                                <h2 class="mt-2 font-inter text-3xl font-extrabold tracking-[-0.055em] text-[rgb(var(--color-heading))]">
+                                    Serving clients in {area.city} and nearby communities.
+                                </h2>
+
+                                <p class="mt-3 text-sm leading-7 text-[rgb(var(--color-text-soft))]">
+                                    {area.intro}
+                                </p>
+
+                                <div class="mt-6 grid gap-3">
+                                    {
+                                        area.highlights.slice(0, 3).map((highlight) => (
+                                            <div class="flex items-start gap-3 rounded-2xl border border-[rgb(var(--color-border)/0.58)] bg-[rgb(var(--color-bg)/0.42)] p-3">
+                                                <CheckCircle2 class="mt-0.5 h-4.5 w-4.5 shrink-0 text-[rgb(var(--color-secondary))]" />
+                                                <span class="text-sm font-bold leading-6 text-[rgb(var(--color-text))]">
+                                                    {highlight}
+                                                </span>
+                                            </div>
+                                        ))
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Local Overview -->
+    <section class="section-shell relative overflow-hidden bg-[rgb(var(--color-bg-soft)/0.5)]">
+        <div class="pointer-events-none absolute inset-0 -z-10">
+            <div class="absolute left-1/2 top-0 h-px w-[min(92%,1180px)] -translate-x-1/2 bg-[linear-gradient(90deg,transparent,rgb(var(--color-secondary)/0.55),transparent)]"></div>
+
+            <div class="absolute left-[-12rem] top-20 h-[28rem] w-[28rem] rounded-full bg-[rgb(var(--color-secondary)/0.1)] blur-3xl"></div>
+
+            <div class="absolute right-[-12rem] bottom-0 h-[30rem] w-[30rem] rounded-full bg-[rgb(var(--color-primary)/0.1)] blur-3xl"></div>
+        </div>
+
+        <div class="container-wide">
+            <div class="grid gap-10 lg:items-start">
+
+                <!-- Details -->
+                <div class="grid gap-8">
+                    <div class="rounded-[2.25rem] border border-[rgb(var(--color-border)/0.72)] bg-[rgb(var(--color-surface)/0.72)] p-6 shadow-soft backdrop-blur md:p-8">
+                        <Badge variant="blue" icon={ClipboardCheck}>
+                            Local Accounting Help
+                        </Badge>
+
+                        <h2 class="mt-5 font-inter text-3xl font-extrabold tracking-[-0.055em] text-[rgb(var(--color-heading))] md:text-4xl">
+                            Tax, bookkeeping, payroll, and accounting support near {area.city}.
+                        </h2>
+
+                        <p class="mt-3 max-w-3xl text-sm leading-7 text-[rgb(var(--color-text-soft))] md:text-base">
+                            {area.intro}
+                        </p>
+
+                        <div class="mt-8 grid gap-4 md:grid-cols-2">
+                            {
+                                area.highlights.map((highlight) => (
+                                    <div class="flex items-start gap-3 rounded-[1.35rem] border border-[rgb(var(--color-border)/0.58)] bg-[rgb(var(--color-bg)/0.42)] p-4">
+                                        <CheckCircle2 class="mt-0.5 h-4.5 w-4.5 shrink-0 text-[rgb(var(--color-secondary))]" />
+                                        <span class="text-sm font-bold leading-6 text-[rgb(var(--color-text))]">
+                                            {highlight}
+                                        </span>
+                                    </div>
+                                ))
+                            }
+                        </div>
+                    </div>
+
+                    <!-- Nearby Areas -->
+                    <div class="rounded-[2.25rem] border border-[rgb(var(--color-border)/0.72)] bg-[rgb(var(--color-surface)/0.72)] p-6 shadow-soft backdrop-blur md:p-8">
+                        <Badge variant="soft" icon={MapPin}>
+                            Nearby Areas
+                        </Badge>
+
+                        <h2 class="mt-5 font-inter text-3xl font-extrabold tracking-[-0.055em] text-[rgb(var(--color-heading))] md:text-4xl">
+                            Also serving nearby {area.city} communities.
+                        </h2>
+
+                        <p class="mt-3 max-w-3xl text-sm leading-7 text-[rgb(var(--color-text-soft))] md:text-base">
+                            Clients near {area.city} can contact our Miami office for support with taxes, bookkeeping, payroll, and accounting services.
+                        </p>
+
+                        <div class="mt-8 flex flex-wrap gap-3">
+                            {
+                                area.nearbyAreas.map((nearbyArea) => (
+                                    <span class="inline-flex items-center gap-2 rounded-full border border-[rgb(var(--color-border)/0.72)] bg-[rgb(var(--color-bg)/0.42)] px-4 py-2 font-inter text-sm font-extrabold text-[rgb(var(--color-heading))]">
+                                        <MapPin class="h-4 w-4 text-[rgb(var(--color-secondary))]" />
+                                        {nearbyArea}
+                                    </span>
+                                ))
+                            }
+                        </div>
+                    </div>
+
+                    <!-- Benefits -->
+                    <div class="rounded-[2.25rem] border border-[rgb(var(--color-border)/0.72)] bg-[rgb(var(--color-surface)/0.72)] p-6 shadow-soft backdrop-blur md:p-8">
+                        <SectionHeading
+                            eyebrow="Benefits"
+                            title={`Why clients in ${area.city} choose organized accounting support`}
+                            highlight={area.city}
+                            description="Clearer records, better preparation, and connected financial support can make tax season and year-round accounting easier to manage."
+                        />
+
+                        <div class="mt-8 grid gap-5 md:grid-cols-2">
+                            {
+                                area.benefits.map((benefit) => (
+                                    <article class="glow-card card-hover p-5">
+                                        <div class="relative z-10">
+                                            <CheckCircle2 class="h-6 w-6 text-[rgb(var(--color-secondary))]" />
+
+                                            <h3 class="mt-4 font-inter text-xl font-extrabold tracking-[-0.045em] text-[rgb(var(--color-heading))]">
+                                                {benefit}
+                                            </h3>
+                                        </div>
+                                    </article>
+                                ))
+                            }
+                        </div>
+                    </div>
+
+                    <!-- Process -->
+                    <div class="rounded-[2.25rem] border border-[rgb(var(--color-border)/0.72)] bg-[linear-gradient(135deg,rgb(var(--color-primary))_0%,rgb(var(--color-secondary))_100%)] p-6 text-white shadow-blue md:p-8">
+                        <Badge
+                            variant="outline"
+                            class="border-white/25 bg-white/10 !text-white"
+                            icon={Sparkles}
+                        >
+                            How It Works
+                        </Badge>
+
+                        <h2 class="mt-5 font-inter text-3xl font-extrabold tracking-[-0.055em] !text-white md:text-4xl">
+                            A simple process for getting local tax and accounting support.
+                        </h2>
+
+                        <div class="mt-8 grid gap-4 md:grid-cols-2">
+                            {
+                                area.process.map((step, index) => (
+                                    <div class="rounded-[1.35rem] border border-white/15 bg-white/10 p-4 backdrop-blur">
+                                        <span class="font-inter text-xs font-extrabold uppercase tracking-[0.14em] !text-white/64">
+                                            Step {String(index + 1).padStart(2, "0")}
+                                        </span>
+
+                                        <p class="mt-3 text-sm font-bold leading-7 !text-white/84">
+                                            {step}
+                                        </p>
+                                    </div>
+                                ))
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Related Services -->
+    {
+        relatedServices.length > 0 && (
+            <section class="section-shell relative overflow-hidden">
+                <div class="pointer-events-none absolute inset-0 -z-10">
+                    <div class="absolute left-[-12rem] top-20 h-[28rem] w-[28rem] rounded-full bg-[rgb(var(--color-secondary)/0.09)] blur-3xl"></div>
+
+                    <div class="absolute right-[-12rem] bottom-10 h-[30rem] w-[30rem] rounded-full bg-[rgb(var(--color-primary)/0.09)] blur-3xl"></div>
+                </div>
+
+                <div class="container-wide">
+                    <div class="grid gap-10 lg:items-start">
+                        <SectionHeading
+                            eyebrow="Recommended Services"
+                            title={`Services available for ${area.city} clients.`}
+                            highlight="Services"
+                            description="These services help individuals, families, self-employed professionals, and businesses stay organized throughout the year."
+                        />
+
+                        <div class="grid gap-5 md:grid-cols-2">
+                            {relatedServices.map((service) => {
+                                const ServiceIcon = service?.icon;
+
+                                return (
+                                    <article class="group glow-card card-hover p-6">
+                                        <div class="relative z-10 flex h-full flex-col">
+                                            <div class="flex items-start justify-between gap-4">
+                                                {ServiceIcon && (
+                                                    <span class="flex h-14 w-14 items-center justify-center rounded-[1.25rem] bg-[rgb(var(--color-secondary)/0.1)] text-[rgb(var(--color-secondary))] transition duration-300 group-hover:scale-105 group-hover:bg-[rgb(var(--color-secondary)/0.16)]">
+                                                        <ServiceIcon class="h-7 w-7" />
+                                                    </span>
+                                                )}
+
+                                                <a
+                                                    href={service?.href}
+                                                    aria-label={`Learn more about ${service?.title}`}
+                                                    class="flex h-10 w-10 items-center justify-center rounded-full border border-[rgb(var(--color-border)/0.72)] bg-[rgb(var(--color-surface)/0.72)] text-[rgb(var(--color-heading))] transition duration-300 group-hover:-translate-y-1 group-hover:translate-x-1 group-hover:border-[rgb(var(--color-secondary)/0.45)] group-hover:bg-[rgb(var(--color-secondary))] group-hover:text-white dark:group-hover:text-[rgb(3_11_29)]"
+                                                >
+                                                    <ArrowUpRight class="h-4.5 w-4.5" />
+                                                </a>
+                                            </div>
+
+                                            <Badge variant="soft" size="sm" class="mt-7">
+                                                {service?.eyebrow}
+                                            </Badge>
+
+                                            <h3 class="mt-4 font-inter text-2xl font-extrabold tracking-[-0.055em] text-[rgb(var(--color-heading))]">
+                                                {service?.title}
+                                            </h3>
+
+                                            <p class="mt-3 text-sm leading-7 text-[rgb(var(--color-text-soft))]">
+                                                {service?.summary}
+                                            </p>
+
+                                            <div class="mt-auto pt-7">
+                                                <a
+                                                    href={service?.href}
+                                                    class="group/link inline-flex items-center gap-2 font-inter text-sm font-extrabold text-[rgb(var(--color-secondary))]"
+                                                >
+                                                    Learn more
+                                                    <ArrowUpRight class="h-4 w-4 transition group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5" />
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </article>
+                                );
+                            })}
+                        </div>
+                    </div>
+                </div>
+            </section>
+        )
+    }
+
+    <!-- Office Information -->
+    <section class="section-shell accounting-grid relative isolate overflow-hidden bg-[rgb(var(--color-bg-soft)/0.5)]">
+        <div class="pointer-events-none absolute inset-0 -z-10">
+            <div class="absolute left-[-12rem] top-20 h-[28rem] w-[28rem] rounded-full bg-[rgb(var(--color-secondary)/0.1)] blur-3xl"></div>
+
+            <div class="absolute right-[-12rem] bottom-10 h-[30rem] w-[30rem] rounded-full bg-[rgb(var(--color-primary)/0.11)] blur-3xl"></div>
+        </div>
+
+        <div class="container-wide">
+            <div class="grid gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
+                <SectionHeading
+                    eyebrow="Visit or Contact Our Office"
+                    title={`Local accounting support for ${area.city} clients.`}
+                    highlight={area.city}
+                    description={`East Coast Accounting & Tax Services is based in Miami and supports clients in ${area.city}, ${area.state}, and nearby Miami-Dade communities.`}
+                />
+
+                <div class="glass-panel overflow-hidden rounded-[2.25rem] p-5 shadow-card">
+                    <div class="rounded-[1.85rem] bg-[linear-gradient(135deg,rgb(var(--color-primary))_0%,rgb(var(--color-secondary))_100%)] p-6 text-white shadow-blue">
+                        <Badge
+                            variant="outline"
+                            class="border-white/25 bg-white/10 !text-white"
+                            icon={Building2}
+                        >
+                            Miami Office
+                        </Badge>
+
+                        <h2 class="mt-5 font-inter text-3xl font-extrabold tracking-[-0.055em] !text-white md:text-4xl">
+                            {siteConfig.name}
+                        </h2>
+
+                        <div class="mt-6 grid gap-4">
+                            <a
+                                href={mapHref}
+                                target="_blank"
+                                rel="noreferrer"
+                                class="flex items-start gap-3 text-sm font-bold leading-6 !text-white/82 transition hover:!text-white"
+                            >
+                                <MapPin class="mt-0.5 h-4.5 w-4.5 shrink-0" />
+                                <span>{siteConfig.address.full}</span>
+                            </a>
+
+                            <a
+                                href={siteConfig.contact.phoneHref}
+                                class="flex items-center gap-3 text-sm font-bold !text-white/82 transition hover:!text-white"
+                            >
+                                <Phone class="h-4.5 w-4.5 shrink-0" />
+                                {siteConfig.contact.phone}
+                            </a>
+
+                            <a
+                                href={siteConfig.contact.emailHref}
+                                class="flex items-center gap-3 text-sm font-bold !text-white/82 transition hover:!text-white"
+                            >
+                                <Mail class="h-4.5 w-4.5 shrink-0" />
+                                {siteConfig.contact.email}
+                            </a>
+
+                            <div class="flex items-center gap-3 text-sm font-bold !text-white/82">
+                                <Clock3 class="h-4.5 w-4.5 shrink-0" />
+                                {siteConfig.hours.label}
+                            </div>
+                        </div>
+
+                        <div class="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
+                            <CTAButton href="/contact" variant="dark" icon={Send}>
+                                Contact Our Office
+                            </CTAButton>
+
+                            <CTAButton
+                                href={mapHref}
+                                variant="ghost"
+                                icon={ArrowUpRight}
+                                class="border-white/20 bg-white/10 text-white hover:border-white/35 hover:bg-white/16"
+                            >
+                                Open Map
+                            </CTAButton>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQs -->
+    <section class="section-shell relative overflow-hidden">
+        <div class="container-wide">
+            <div class="grid gap-10 lg:items-start">
+                <div>
+                    <SectionHeading
+                        eyebrow="Local Questions"
+                        title={`Questions about tax and accounting services in ${area.city}.`}
+                        highlight="Questions"
+                        description="Helpful answers for nearby clients looking for tax preparation, bookkeeping, payroll, or accounting support."
+                    />
+
+                    <div class="mt-8">
+                        <CTAButton href="/contact" variant="secondary" icon={HelpCircle}>
+                            Ask a Question
+                        </CTAButton>
+                    </div>
+                </div>
+
+                <div class="grid gap-4">
+                    {
+                        area.faqs.map((faq, index) => (
+                            <article class="rounded-[1.6rem] border border-[rgb(var(--color-border)/0.72)] bg-[rgb(var(--color-surface)/0.72)] p-5 shadow-soft backdrop-blur">
+                                <div class="flex gap-4">
+                                    <span class="flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl bg-[rgb(var(--color-secondary)/0.1)] font-inter text-xs font-extrabold text-[rgb(var(--color-secondary))]">
+                                        {String(index + 1).padStart(2, "0")}
+                                    </span>
+
+                                    <div>
+                                        <h3 class="font-inter text-lg font-extrabold tracking-[-0.045em] text-[rgb(var(--color-heading))]">
+                                            {faq.question}
+                                        </h3>
+
+                                        <p class="mt-2 text-sm leading-7 text-[rgb(var(--color-text-soft))]">
+                                            {faq.answer}
+                                        </p>
+                                    </div>
+                                </div>
+                            </article>
+                        ))
+                    }
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Related Locations -->
+    {
+        relatedLocations.length > 0 && (
+            <section class="section-shell relative overflow-hidden bg-[rgb(var(--color-bg-soft)/0.5)]">
+                <div class="container-wide">
+                    <div class="grid gap-10 lg:items-start">
+                        <SectionHeading
+                            eyebrow="Nearby Service Areas"
+                            title="Explore accounting support in nearby communities."
+                            highlight="nearby communities"
+                            description="East Coast Accounting & Tax Services serves Miami-Dade clients across multiple nearby locations."
+                        />
+
+                        <div class="grid gap-5 md:grid-cols-2">
+                            {relatedLocations.map((related) => {
+                                const RelatedIcon = related?.icon;
+
+                                return (
+                                    <a
+                                        href={related?.href}
+                                        class="group glow-card card-hover p-6"
+                                    >
+                                        <div class="relative z-10">
+                                            <div class="flex items-start justify-between gap-4">
+                                                {RelatedIcon && (
+                                                    <span class="flex h-14 w-14 items-center justify-center rounded-[1.25rem] bg-[rgb(var(--color-secondary)/0.1)] text-[rgb(var(--color-secondary))] transition duration-300 group-hover:scale-105 group-hover:bg-[rgb(var(--color-secondary)/0.16)]">
+                                                        <RelatedIcon class="h-7 w-7" />
+                                                    </span>
+                                                )}
+
+                                                <ArrowUpRight class="h-5 w-5 text-[rgb(var(--color-secondary))] transition group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+                                            </div>
+
+                                            <Badge variant="soft" size="sm" class="mt-7">
+                                                Service Area
+                                            </Badge>
+
+                                            <h3 class="mt-4 font-inter text-2xl font-extrabold tracking-[-0.055em] text-[rgb(var(--color-heading))]">
+                                                {related?.city}, {related?.state}
+                                            </h3>
+
+                                            <p class="mt-3 text-sm leading-7 text-[rgb(var(--color-text-soft))]">
+                                                {related?.summary}
+                                            </p>
+                                        </div>
+                                    </a>
+                                );
+                            })}
+                        </div>
+                    </div>
+                </div>
+            </section>
+        )
+    }
+
+    <!-- Final CTA -->
+    <section class="section-shell relative isolate overflow-hidden">
+        <div class="container-wide">
+            <div class="relative overflow-hidden rounded-[2.5rem] border border-[rgb(var(--color-border)/0.72)] bg-[linear-gradient(135deg,rgb(var(--color-primary))_0%,rgb(var(--color-secondary))_100%)] p-6 text-white shadow-blue sm:p-8 lg:p-10">
+                <div class="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_18%_0%,rgba(255,255,255,0.3),transparent_34%),radial-gradient(circle_at_92%_100%,rgba(255,255,255,0.16),transparent_34%)]"></div>
+
+                <div class="relative grid gap-8 lg:grid-cols-[1fr_auto] lg:items-center">
+                    <div>
+                        <Badge
+                            variant="outline"
+                            class="border-white/25 bg-white/10 !text-white"
+                            icon={MessageSquareText}
+                        >
+                            {locationPageCta.eyebrow}
+                        </Badge>
+
+                        <h2 class="mt-5 max-w-4xl font-inter text-3xl font-extrabold tracking-[-0.055em] !text-white md:text-4xl">
+                            Need tax or accounting support near {area.city}?
+                        </h2>
+
+                        <p class="mt-4 max-w-3xl text-sm leading-7 !text-white/78 md:text-base">
+                            {locationPageCta.description}
+                        </p>
+                    </div>
+
+                    <div class="flex flex-col gap-3 sm:flex-row lg:flex-col">
+                        <CTAButton href={locationPageCta.primaryCta.href} variant="dark" icon={Send}>
+                            {locationPageCta.primaryCta.label}
+                        </CTAButton>
+
+                        <CTAButton
+                            href={locationPageCta.secondaryCta.href}
+                            variant="ghost"
+                            icon={Phone}
+                            class="border-white/20 bg-white/10 text-white hover:border-white/35 hover:bg-white/16"
+                        >
+                            {locationPageCta.secondaryCta.label}
+                        </CTAButton>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</MainLayout>
+
+<style>
+    .location-detail-kenburns-bg {
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        opacity: 0.28;
+        transform: scale(1.08);
+        transform-origin: center center;
+        animation: location-detail-kenburns 18s ease-in-out infinite alternate;
+    }
+
+    .location-detail-kenburns-bg img {
+        object-fit: cover;
+        object-position: center center;
+    }
+
+    :root[data-theme="dark"] .location-detail-kenburns-bg {
+        opacity: 0.18;
+    }
+
+    @keyframes location-detail-kenburns {
+        0% {
+            transform: scale(1.08) translate3d(0, 0, 0);
+        }
+
+        100% {
+            transform: scale(1.18) translate3d(-1.5%, -1.2%, 0);
+        }
+    }
+
+    @media (max-width: 1023px) {
+        .location-detail-kenburns-bg img {
+            object-position: center top;
+        }
+    }
+
+    @media (max-width: 767px) {
+        .location-detail-kenburns-bg {
+            transform: scale(1.12);
+        }
+
+        .location-detail-kenburns-bg img {
+            object-position: center center;
+        }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        .location-detail-kenburns-bg {
+            animation: none;
+            transform: scale(1.1);
+        }
+    }
+</style>

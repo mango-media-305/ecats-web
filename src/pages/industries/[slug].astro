@@ -1,0 +1,594 @@
+---
+import {
+    ArrowLeft,
+    ArrowUpRight,
+    BriefcaseBusiness,
+    CheckCircle2,
+    ClipboardCheck,
+    HelpCircle,
+    MapPin,
+    MessageSquareText,
+    Send,
+    Sparkles,
+} from "@lucide/astro";
+
+import MainLayout from "../../layouts/MainLayout.astro";
+import SectionHeading from "../../components/ui/SectionHeading.astro";
+import CTAButton from "../../components/ui/CTAButton.astro";
+import Badge from "../../components/ui/Badge.astro";
+
+import {
+    industries,
+    getIndustryPageSchema,
+    getIndustryBreadcrumbs,
+    getIndustryById,
+    industryPageCta,
+} from "../../data/industries";
+
+import { getServiceById } from "../../data/services";
+import { siteConfig } from "../../data/site";
+
+export function getStaticPaths() {
+    return industries.map((industry) => ({
+        params: { slug: industry.slug },
+        props: { industry },
+    }));
+}
+
+const { industry } = Astro.props;
+
+const Icon = industry.icon;
+
+const title = industry.seoTitle ?? `${industry.title} Accounting Services in Miami, FL`;
+
+const description =
+    industry.seoDescription ??
+    `${industry.title} accounting, bookkeeping, payroll, and tax services in Miami, FL from East Coast Accounting & Tax Services.`;
+
+const breadcrumbs = getIndustryBreadcrumbs(industry);
+
+const relatedServices =
+    industry.serviceIds?.map((id) => getServiceById(id)).filter(Boolean) ?? [];
+
+const relatedIndustries =
+    industry.relatedIndustries?.map((id) => getIndustryById(id)).filter(Boolean) ?? [];
+
+const industrySchema = getIndustryPageSchema(industry);
+
+const faqSchema = industry.faqs?.length
+    ? {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        mainEntity: industry.faqs.map((faq) => ({
+            "@type": "Question",
+            name: faq.question,
+            acceptedAnswer: {
+                "@type": "Answer",
+                text: faq.answer,
+            },
+        })),
+    }
+    : null;
+
+const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: breadcrumbs.map((item, index) => ({
+        "@type": "ListItem",
+        position: index + 1,
+        name: item.label,
+        item: `${siteConfig.url.replace(/\/$/, "")}${item.href === "/" ? "" : item.href}`,
+    })),
+};
+
+const pageSchema = faqSchema
+    ? [industrySchema, faqSchema, breadcrumbSchema]
+    : [industrySchema, breadcrumbSchema];
+---
+
+<MainLayout
+    title={title}
+    description={description}
+    image={industry.image ?? "/images/og/industries-og.webp"}
+    schema={pageSchema}
+>
+    <!-- Industry Hero -->
+    <section class="industry-detail-hero accounting-grid relative isolate overflow-hidden py-16 sm:py-20 lg:py-24">
+        <div class="pointer-events-none absolute inset-0 -z-10 overflow-hidden">
+            <!-- Ken Burns background image -->
+            <div class="industry-detail-kenburns-bg absolute inset-0 overflow-hidden">
+                <img
+                    src={industry.hero ?? "/images/industries/industries-hero-miami-businesses.webp"}
+                    alt=""
+                    width="2400"
+                    height="1600"
+                    class="absolute inset-0 h-full min-h-full w-full min-w-full object-cover object-center"
+                    loading="eager"
+                    decoding="async"
+                />
+            </div>
+
+            <!-- Readability overlays -->
+            <!-- <div class="absolute inset-0 bg-[rgb(var(--color-bg)/0.78)]"></div> -->
+
+            <!-- <div class="absolute inset-0 bg-[linear-gradient(90deg,rgb(var(--color-bg)/0.96)_0%,rgb(var(--color-bg)/0.74)_54%,rgb(var(--color-bg)/0.48)_100%)]"></div> -->
+
+            <div class="absolute inset-0 bg-[radial-gradient(circle_at_20%_25%,rgb(var(--color-secondary)/0.12),transparent_34rem),radial-gradient(circle_at_80%_30%,rgb(var(--color-primary)/0.1),transparent_32rem)]"></div>
+
+            <div class="absolute left-[-12rem] top-20 h-[32rem] w-[32rem] rounded-full bg-[rgb(var(--color-secondary)/0.14)] blur-3xl"></div>
+
+            <div class="absolute right-[-12rem] bottom-[-8rem] h-[34rem] w-[34rem] rounded-full bg-[rgb(var(--color-primary)/0.13)] blur-3xl"></div>
+
+            <div class="absolute inset-x-0 bottom-0 h-56 bg-[linear-gradient(to_top,rgb(var(--color-bg)),transparent)]"></div>
+        </div>
+
+        <div class="container-wide">
+            <div class="grid gap-10 lg:grid-cols-[0.95fr_0.75fr] lg:items-center">
+                <div class="relative z-10 max-w-3xl">
+
+                    <Badge variant="blue" icon={Sparkles} glow>
+                        {industry.eyebrow}
+                    </Badge>
+
+                    <h1 class="mt-6 text-balance font-inter text-4xl font-extrabold tracking-[-0.065em] text-[rgb(var(--color-heading))] sm:text-5xl lg:text-6xl">
+                        {industry.title} accounting support in
+                        <span class="gradient-text block">Miami, FL.</span>
+                    </h1>
+
+                    <p class="lead-text mt-6">
+                        {industry.description}
+                    </p>
+
+                    <div class="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
+                        <CTAButton href="/contact" icon={Send} size="lg">
+                            Contact Our Office
+                        </CTAButton>
+
+                        <CTAButton
+                            href="/services"
+                            variant="secondary"
+                            icon={ArrowUpRight}
+                            size="lg"
+                        >
+                            View Services
+                        </CTAButton>
+                    </div>
+
+                    <div class="mt-8 flex items-start gap-3 rounded-[1.5rem] border border-[rgb(var(--color-border)/0.72)] bg-[rgb(var(--color-surface)/0.66)] p-4 shadow-soft backdrop-blur">
+                        <span class="mt-1 flex h-9 w-9 shrink-0 items-center justify-center rounded-2xl bg-[rgb(var(--color-secondary)/0.1)] text-[rgb(var(--color-secondary))]">
+                            <MapPin class="h-4.5 w-4.5" />
+                        </span>
+
+                        <p class="text-sm leading-6 text-[rgb(var(--color-text-soft))]">
+                            {industry.nearbyAreas}
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Hero visual card -->
+                <div class="relative hidden md:block">
+                    <div class="pointer-events-none absolute inset-0 rounded-full bg-[radial-gradient(circle,rgb(var(--color-secondary)/0.18),transparent_62%)] blur-3xl"></div>
+
+                    <div class="glass-panel relative overflow-hidden rounded-[2.25rem] p-5 shadow-card">
+                        <div class="pointer-events-none absolute inset-x-10 top-0 h-px bg-[linear-gradient(90deg,transparent,rgb(var(--color-secondary)/0.8),transparent)]"></div>
+
+                        <div class="relative rounded-[1.85rem] border border-[rgb(var(--color-border)/0.68)] bg-[rgb(var(--color-surface)/0.72)] p-6">
+                            <div class="pointer-events-none absolute bottom-4 right-5 text-[rgb(var(--color-primary)/0.045)] dark:text-white/5">
+                                <Icon class="h-40 w-40" />
+                            </div>
+
+                            <div class="relative z-10">
+                                <span class="flex h-16 w-16 items-center justify-center rounded-[1.35rem] bg-[rgb(var(--color-secondary)/0.1)] text-[rgb(var(--color-secondary))]">
+                                    <Icon class="h-8 w-8" />
+                                </span>
+
+                                <p class="mt-6 font-inter text-xs font-extrabold uppercase tracking-[0.14em] text-[rgb(var(--color-secondary))]">
+                                    Industry Overview
+                                </p>
+
+                                <h2 class="mt-2 font-inter text-3xl font-extrabold tracking-[-0.055em] text-[rgb(var(--color-heading))]">
+                                    Built around the needs of {industry.shortTitle.toLowerCase()}.
+                                </h2>
+
+                                <p class="mt-3 text-sm leading-7 text-[rgb(var(--color-text-soft))]">
+                                    East Coast Accounting & Tax Services helps Miami clients organize financial records, prepare for tax needs, and keep related accounting tasks easier to manage.
+                                </p>
+
+                                <div class="mt-6 grid gap-3">
+                                    {
+                                        industry.commonNeeds.slice(0, 3).map((need) => (
+                                            <div class="flex items-start gap-3 rounded-2xl border border-[rgb(var(--color-border)/0.58)] bg-[rgb(var(--color-bg)/0.42)] p-3">
+                                                <CheckCircle2 class="mt-0.5 h-4.5 w-4.5 shrink-0 text-[rgb(var(--color-secondary))]" />
+                                                <span class="text-sm font-bold leading-6 text-[rgb(var(--color-text))]">
+                                                    {need}
+                                                </span>
+                                            </div>
+                                        ))
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Common Needs -->
+    <section class="section-shell relative overflow-hidden bg-[rgb(var(--color-bg-soft)/0.5)]">
+        <div class="pointer-events-none absolute inset-0 -z-10">
+            <div class="absolute left-1/2 top-0 h-px w-[min(92%,1180px)] -translate-x-1/2 bg-[linear-gradient(90deg,transparent,rgb(var(--color-secondary)/0.55),transparent)]"></div>
+
+            <div class="absolute left-[-12rem] top-20 h-[28rem] w-[28rem] rounded-full bg-[rgb(var(--color-secondary)/0.1)] blur-3xl"></div>
+
+            <div class="absolute right-[-12rem] bottom-0 h-[30rem] w-[30rem] rounded-full bg-[rgb(var(--color-primary)/0.1)] blur-3xl"></div>
+        </div>
+
+        <div class="container-wide">
+            <div class="grid gap-10 lg:items-start">
+
+                <!-- Details -->
+                <div class="grid gap-8">
+                    <div class="rounded-[2.25rem] border border-[rgb(var(--color-border)/0.72)] bg-[rgb(var(--color-surface)/0.72)] p-6 shadow-soft backdrop-blur md:p-8">
+                        <Badge variant="blue" icon={ClipboardCheck}>
+                            Common Needs
+                        </Badge>
+
+                        <h2 class="mt-5 font-inter text-3xl font-extrabold tracking-[-0.055em] text-[rgb(var(--color-heading))] md:text-4xl">
+                            Financial organization designed around your industry.
+                        </h2>
+
+                        <p class="mt-3 max-w-3xl text-sm leading-7 text-[rgb(var(--color-text-soft))] md:text-base">
+                            {industry.title} often need help with records, tax preparation, bookkeeping, payroll, and accounting details that match how their business or profession operates.
+                        </p>
+
+                        <div class="mt-8 grid gap-4 md:grid-cols-2">
+                            {
+                                industry.commonNeeds.map((need) => (
+                                    <div class="flex items-start gap-3 rounded-[1.35rem] border border-[rgb(var(--color-border)/0.58)] bg-[rgb(var(--color-bg)/0.42)] p-4">
+                                        <CheckCircle2 class="mt-0.5 h-4.5 w-4.5 shrink-0 text-[rgb(var(--color-secondary))]" />
+                                        <span class="text-sm font-bold leading-6 text-[rgb(var(--color-text))]">
+                                            {need}
+                                        </span>
+                                    </div>
+                                ))
+                            }
+                        </div>
+                    </div>
+
+                    <!-- Benefits -->
+                    <div class="rounded-[2.25rem] border border-[rgb(var(--color-border)/0.72)] bg-[rgb(var(--color-surface)/0.72)] p-6 shadow-soft backdrop-blur md:p-8">
+                        <SectionHeading
+                            eyebrow="Benefits"
+                            title={`Why ${industry.shortTitle.toLowerCase()} need organized accounting support`}
+                            highlight={industry.shortTitle}
+                            description="Cleaner records and connected financial support can help owners and professionals stay more prepared throughout the year."
+                        />
+
+                        <div class="mt-8 grid gap-5 md:grid-cols-2">
+                            {
+                                industry.benefits.map((benefit) => (
+                                    <article class="glow-card card-hover p-5">
+                                        <div class="relative z-10">
+                                            <CheckCircle2 class="h-6 w-6 text-[rgb(var(--color-secondary))]" />
+
+                                            <h3 class="mt-4 font-inter text-xl font-extrabold tracking-[-0.045em] text-[rgb(var(--color-heading))]">
+                                                {benefit}
+                                            </h3>
+                                        </div>
+                                    </article>
+                                ))
+                            }
+                        </div>
+                    </div>
+
+                    <!-- Process -->
+                    {
+                        industry.process?.length && (
+                            <div class="rounded-[2.25rem] border border-[rgb(var(--color-border)/0.72)] bg-[linear-gradient(135deg,rgb(var(--color-primary))_0%,rgb(var(--color-secondary))_100%)] p-6 text-white shadow-blue md:p-8">
+                                <Badge
+                                    variant="outline"
+                                    class="border-white/25 bg-white/10 !text-white"
+                                    icon={Sparkles}
+                                >
+                                    How It Works
+                                </Badge>
+
+                                <h2 class="mt-5 font-inter text-3xl font-extrabold tracking-[-0.055em] !text-white md:text-4xl">
+                                    A clear process for getting your financial information organized.
+                                </h2>
+
+                                <div class="mt-8 grid gap-4 md:grid-cols-2">
+                                    {industry.process.map((step, index) => (
+                                        <div class="rounded-[1.35rem] border border-white/15 bg-white/10 p-4 backdrop-blur">
+                                            <span class="font-inter text-xs font-extrabold uppercase tracking-[0.14em] !text-white/64">
+                                                Step {String(index + 1).padStart(2, "0")}
+                                            </span>
+
+                                            <p class="mt-3 text-sm font-bold leading-7 !text-white/84">
+                                                {step}
+                                            </p>
+                                        </div>
+                                    ))}
+                                </div>
+                            </div>
+                        )
+                    }
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Related Services -->
+    {
+        relatedServices.length > 0 && (
+            <section class="section-shell relative overflow-hidden">
+                <div class="pointer-events-none absolute inset-0 -z-10">
+                    <div class="absolute left-[-12rem] top-20 h-[28rem] w-[28rem] rounded-full bg-[rgb(var(--color-secondary)/0.09)] blur-3xl"></div>
+
+                    <div class="absolute right-[-12rem] bottom-10 h-[30rem] w-[30rem] rounded-full bg-[rgb(var(--color-primary)/0.09)] blur-3xl"></div>
+                </div>
+
+                <div class="container-wide">
+                    <div class="grid gap-10 lg:items-start">
+                        <SectionHeading
+                            eyebrow="Recommended Services"
+                            title={`Services that support ${industry.shortTitle.toLowerCase()}.`}
+                            highlight="Services"
+                            description="These related services can help connect tax preparation, bookkeeping, payroll, and accounting needs in one place."
+                        />
+
+                        <div class="grid gap-5 md:grid-cols-2">
+                            {relatedServices.map((service) => {
+                                if (!service) return null;
+                                const ServiceIcon = service.icon;
+
+                                return (
+                                    <article class="group glow-card card-hover p-6">
+                                        <div class="relative z-10 flex h-full flex-col">
+                                            <div class="flex items-start justify-between gap-4">
+                                                <span class="flex h-14 w-14 items-center justify-center rounded-[1.25rem] bg-[rgb(var(--color-secondary)/0.1)] text-[rgb(var(--color-secondary))] transition duration-300 group-hover:scale-105 group-hover:bg-[rgb(var(--color-secondary)/0.16)]">
+                                                    <ServiceIcon class="h-7 w-7" />
+                                                </span>
+
+                                                <a
+                                                    href={service.href}
+                                                    aria-label={`Learn more about ${service.title}`}
+                                                    class="flex h-10 w-10 items-center justify-center rounded-full border border-[rgb(var(--color-border)/0.72)] bg-[rgb(var(--color-surface)/0.72)] text-[rgb(var(--color-heading))] transition duration-300 group-hover:-translate-y-1 group-hover:translate-x-1 group-hover:border-[rgb(var(--color-secondary)/0.45)] group-hover:bg-[rgb(var(--color-secondary))] group-hover:text-white dark:group-hover:text-[rgb(3_11_29)]"
+                                                >
+                                                    <ArrowUpRight class="h-4.5 w-4.5" />
+                                                </a>
+                                            </div>
+
+                                            <Badge variant="soft" size="sm" class="mt-7">
+                                                {service.eyebrow}
+                                            </Badge>
+
+                                            <h3 class="mt-4 font-inter text-2xl font-extrabold tracking-[-0.055em] text-[rgb(var(--color-heading))]">
+                                                {service.title}
+                                            </h3>
+
+                                            <p class="mt-3 text-sm leading-7 text-[rgb(var(--color-text-soft))]">
+                                                {service.summary}
+                                            </p>
+
+                                            <div class="mt-auto pt-7">
+                                                <a
+                                                    href={service.href}
+                                                    class="group/link inline-flex items-center gap-2 font-inter text-sm font-extrabold text-[rgb(var(--color-secondary))]"
+                                                >
+                                                    Learn more
+                                                    <ArrowUpRight class="h-4 w-4 transition group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5" />
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </article>
+                                );
+                            })}
+                        </div>
+                    </div>
+                </div>
+            </section>
+        )
+    }
+
+    <!-- FAQs -->
+    {
+        industry.faqs?.length && (
+            <section class="section-shell relative overflow-hidden bg-[rgb(var(--color-bg-soft)/0.5)]">
+                <div class="container-wide">
+                    <div class="grid gap-10 lg:grid-cols-[0.8fr_1.2fr] lg:items-start">
+                        <div>
+                            <SectionHeading
+                                eyebrow="Industry Questions"
+                                title={`Questions about accounting for ${industry.shortTitle.toLowerCase()}.`}
+                                highlight="Questions"
+                                description="Helpful answers for clients considering tax, bookkeeping, payroll, or accounting support."
+                            />
+
+                            <div class="mt-8">
+                                <CTAButton href="/contact" variant="secondary" icon={HelpCircle}>
+                                    Ask a Question
+                                </CTAButton>
+                            </div>
+                        </div>
+
+                        <div class="grid gap-4">
+                            {industry.faqs.map((faq, index) => (
+                                <article class="rounded-[1.6rem] border border-[rgb(var(--color-border)/0.72)] bg-[rgb(var(--color-surface)/0.72)] p-5 shadow-soft backdrop-blur">
+                                    <div class="flex gap-4">
+                                        <span class="flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl bg-[rgb(var(--color-secondary)/0.1)] font-inter text-xs font-extrabold text-[rgb(var(--color-secondary))]">
+                                            {String(index + 1).padStart(2, "0")}
+                                        </span>
+
+                                        <div>
+                                            <h3 class="font-inter text-lg font-extrabold tracking-[-0.045em] text-[rgb(var(--color-heading))]">
+                                                {faq.question}
+                                            </h3>
+
+                                            <p class="mt-2 text-sm leading-7 text-[rgb(var(--color-text-soft))]">
+                                                {faq.answer}
+                                            </p>
+                                        </div>
+                                    </div>
+                                </article>
+                            ))}
+                        </div>
+                    </div>
+                </div>
+            </section>
+        )
+    }
+
+    <!-- Related Industries -->
+    {
+        relatedIndustries.length > 0 && (
+            <section class="section-shell relative overflow-hidden">
+                <div class="container-wide">
+                    <div class="grid gap-10 lg:items-start">
+                        <SectionHeading
+                            eyebrow="Related Industries"
+                            title="Explore more industry-specific support."
+                            highlight="industry-specific"
+                            description="Different businesses have different financial needs. Explore other industry pages to see how East Coast Accounting supports local Miami clients."
+                        />
+
+                        <div class="grid gap-5 md:grid-cols-1">
+                            {relatedIndustries.map((related) => {
+                                if (!related) return null;
+                                const RelatedIcon = related.icon;
+
+                                return (
+                                    <a
+                                        href={related.href}
+                                        class="group glow-card card-hover p-6"
+                                    >
+                                        <div class="relative z-10">
+                                            <div class="flex items-start justify-between gap-4">
+                                                <span class="flex h-14 w-14 items-center justify-center rounded-[1.25rem] bg-[rgb(var(--color-secondary)/0.1)] text-[rgb(var(--color-secondary))] transition duration-300 group-hover:scale-105 group-hover:bg-[rgb(var(--color-secondary)/0.16)]">
+                                                    {RelatedIcon && <RelatedIcon class="h-7 w-7" />}
+                                                </span>
+
+                                                <ArrowUpRight class="h-5 w-5 text-[rgb(var(--color-secondary))] transition group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+                                            </div>
+
+                                            <Badge variant="soft" size="sm" class="mt-7">
+                                                {related.eyebrow}
+                                            </Badge>
+
+                                            <h3 class="mt-4 font-inter text-2xl font-extrabold tracking-[-0.055em] text-[rgb(var(--color-heading))]">
+                                                {related.title}
+                                            </h3>
+
+                                            <p class="mt-3 text-sm leading-7 text-[rgb(var(--color-text-soft))]">
+                                                {related.summary}
+                                            </p>
+                                        </div>
+                                    </a>
+                                );
+                            })}
+                        </div>
+                    </div>
+                </div>
+            </section>
+        )
+    }
+
+    <!-- Final CTA -->
+    <section class="section-shell relative isolate overflow-hidden">
+        <div class="container-wide">
+            <div class="relative overflow-hidden rounded-[2.5rem] border border-[rgb(var(--color-border)/0.72)] bg-[linear-gradient(135deg,rgb(var(--color-primary))_0%,rgb(var(--color-secondary))_100%)] p-6 text-white shadow-blue sm:p-8 lg:p-10">
+                <div class="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_18%_0%,rgba(255,255,255,0.3),transparent_34%),radial-gradient(circle_at_92%_100%,rgba(255,255,255,0.16),transparent_34%)]"></div>
+
+                <div class="relative grid gap-8 lg:grid-cols-[1fr_auto] lg:items-center">
+                    <div>
+                        <Badge
+                            variant="outline"
+                            class="border-white/25 bg-white/10 !text-white"
+                            icon={MessageSquareText}
+                        >
+                            {industryPageCta.eyebrow}
+                        </Badge>
+
+                        <h2 class="mt-5 max-w-4xl font-inter text-3xl font-extrabold tracking-[-0.055em] !text-white md:text-4xl">
+                            Need accounting support for {industry.shortTitle.toLowerCase()}?
+                        </h2>
+
+                        <p class="mt-4 max-w-3xl text-sm leading-7 !text-white/78 md:text-base">
+                            {industryPageCta.description}
+                        </p>
+                    </div>
+
+                    <div class="flex flex-col gap-3 sm:flex-row lg:flex-col">
+                        <CTAButton href={industryPageCta.primaryCta.href} variant="dark" icon={Send}>
+                            {industryPageCta.primaryCta.label}
+                        </CTAButton>
+
+                        <CTAButton
+                            href={industryPageCta.secondaryCta.href}
+                            variant="ghost"
+                            icon={ArrowUpRight}
+                            class="border-white/20 bg-white/10 text-white hover:border-white/35 hover:bg-white/16"
+                        >
+                            {industryPageCta.secondaryCta.label}
+                        </CTAButton>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</MainLayout>
+
+<style>
+    .industry-detail-kenburns-bg {
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        opacity: 0.28;
+        transform: scale(1.08);
+        transform-origin: center center;
+        animation: industry-detail-kenburns 18s ease-in-out infinite alternate;
+    }
+
+    .industry-detail-kenburns-bg img {
+        object-fit: cover;
+        object-position: center center;
+    }
+
+    :root[data-theme="dark"] .industry-detail-kenburns-bg {
+        opacity: 0.18;
+    }
+
+    @keyframes industry-detail-kenburns {
+        0% {
+            transform: scale(1.08) translate3d(0, 0, 0);
+        }
+
+        100% {
+            transform: scale(1.18) translate3d(-1.5%, -1.2%, 0);
+        }
+    }
+
+    @media (max-width: 1023px) {
+        .industry-detail-kenburns-bg img {
+            object-position: center top;
+        }
+    }
+
+    @media (max-width: 767px) {
+        .industry-detail-kenburns-bg {
+            transform: scale(1.12);
+        }
+
+        .industry-detail-kenburns-bg img {
+            object-position: center center;
+        }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        .industry-detail-kenburns-bg {
+            animation: none;
+            transform: scale(1.1);
+        }
+    }
+</style>
